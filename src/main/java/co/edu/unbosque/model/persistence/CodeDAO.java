@@ -77,7 +77,7 @@ public class CodeDAO implements CRUDOperation<Code> {
 			Code selected = em.find(Code.class, id);
 
 			selected.setId(obj.getId());
-			selected.setTypeContent(obj.getTypeContent());
+			selected.setLanguage(obj.getLanguage());
 			selected.setContent(obj.getContent());
 		
 			em.persist(selected);

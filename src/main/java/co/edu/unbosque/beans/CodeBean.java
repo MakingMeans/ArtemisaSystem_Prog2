@@ -15,17 +15,16 @@ import jakarta.faces.context.FacesContext;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
 
+@Named("codeBean")
+@SessionScoped
 public class CodeBean implements Serializable {
-
 	/**
-	 * 
+	 * Corresponde al serialVersionUID
 	 */
-	@Named("codeBean")
-	@SessionScoped
 	private static final long serialVersionUID = 1L;
 	
     @Inject
-    private CodeService CodeService;
+    private CodeService codeService;
 
     /**
      * Lista de codigos mostrados en la tabla.
@@ -48,7 +47,7 @@ public class CodeBean implements Serializable {
     @PostConstruct
     public void init() {
         this.codesInTable = new ArrayList<>();
-        this.codesInTable = CodeService.getCodes();
+        this.codesInTable = codeService.getCodes();
         this.selectedCodesVarious = new ArrayList<CodeDTO>();
     }
 
@@ -65,13 +64,13 @@ public class CodeBean implements Serializable {
     public void saveCode() {
         if (this.selectedCodes.getId() == 0) {
             this.selectedCodes.setId(0);
-            CodeService.create(selectedCodes);
+            codeService.create(selectedCodes);
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Codigo agregado"));
         } else {
-            CodeService.update(selectedCodes.getId(), selectedCodes);
+            codeService.update(selectedCodes.getId(), selectedCodes);
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Codigo actualizado"));
         }
-        this.codesInTable = CodeService.getCodes();
+        this.codesInTable = codeService.getCodes();
         PrimeFaces.current().executeScript("PF('manageCodeDialog').hide()");
         PrimeFaces.current().ajax().update("form:messages", "form:dt-Codes");
     }
@@ -80,10 +79,10 @@ public class CodeBean implements Serializable {
      * Elimina un codigo seleccionado.
      */
     public void deleteCode() {
-        CodeService.delete(this.selectedCodes.getId());
+        codeService.delete(this.selectedCodes.getId());
         this.selectedCodesVarious.remove(this.selectedCodes);
         this.selectedCodes = null;
-        this.codesInTable = CodeService.getCodes();
+        this.codesInTable = codeService.getCodes();
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Codigo eliminado"));
         PrimeFaces.current().ajax().update("form:messages", "form:dt-Codes");
         PrimeFaces.current().executeScript("PF('dtCodes').clearFilters()");
@@ -112,10 +111,10 @@ public class CodeBean implements Serializable {
      */
     public void deleteSelectedCodes() {
         for (CodeDTO p : selectedCodesVarious) {
-            CodeService.delete(p.getId());
+            codeService.delete(p.getId());
         }
         this.selectedCodesVarious = null;
-        this.codesInTable = CodeService.getCodes();
+        this.codesInTable = codeService.getCodes();
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Codigos eliminados"));
         PrimeFaces.current().ajax().update("form:messages", "form:dt-Codes");
         PrimeFaces.current().executeScript("PF('dtCodes').clearFilters()");
@@ -169,7 +168,4 @@ public class CodeBean implements Serializable {
     public static long getSerialversionuid() {
         return serialVersionUID;
     }
-	
-	
-
 }

@@ -22,7 +22,7 @@ public class SubjectBean implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Inject
-    private SubjectService SubjectService;
+    private SubjectService subjectService;
 
     private List<SubjectDTO> temasEnTabla;
 
@@ -33,7 +33,7 @@ public class SubjectBean implements Serializable {
     @PostConstruct
     public void init() {
         this.temasEnTabla = new ArrayList<>();
-        this.temasEnTabla = SubjectService.getSubjects();
+        this.temasEnTabla = subjectService.getSubjects();
         this.temasSeleccionadosVarios = new ArrayList<SubjectDTO>();
     }
 
@@ -44,22 +44,22 @@ public class SubjectBean implements Serializable {
     public void saveSubject() {
         if (this.temaSeleccionado.getId() == 0) {
             this.temaSeleccionado.setId(0);
-            SubjectService.create(temaSeleccionado);
+            subjectService.create(temaSeleccionado);
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Tema agregado"));
         } else {
-            SubjectService.update(temaSeleccionado.getId(), temaSeleccionado);
+            subjectService.update(temaSeleccionado.getId(), temaSeleccionado);
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Tema actualizado"));
         }
-        this.temasEnTabla = SubjectService.getSubjects();
+        this.temasEnTabla = subjectService.getSubjects();
         PrimeFaces.current().executeScript("PF('manageSubjectDialog').hide()");
         PrimeFaces.current().ajax().update("form:messages", "form:dt-Subjects");
     }
 
     public void deleteSubject() {
-        SubjectService.delete(this.temaSeleccionado.getId());
+        subjectService.delete(this.temaSeleccionado.getId());
         this.temasSeleccionadosVarios.remove(this.temaSeleccionado);
         this.temaSeleccionado = null;
-        this.temasEnTabla = SubjectService.getSubjects();
+        this.temasEnTabla = subjectService.getSubjects();
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Tema eliminado"));
         PrimeFaces.current().ajax().update("form:messages", "form:dt-Subjects");
         PrimeFaces.current().executeScript("PF('dtSubjects').clearFilters()");
@@ -68,7 +68,7 @@ public class SubjectBean implements Serializable {
     public String getDeleteButtonMessage() {
         if (hasSelectedSubjects()) {
             int size = this.temasSeleccionadosVarios.size();
-            return size > 1 ? size + " Temas seleccionados" : "1 Tema seleccionado";
+            return size > 1 ? size + " temas seleccionados" : "1 Tema seleccionado";
         }
         return "Eliminado";
     }
@@ -79,10 +79,10 @@ public class SubjectBean implements Serializable {
 
     public void deleteSelectedSubjects() {
         for (SubjectDTO p : temasSeleccionadosVarios) {
-            SubjectService.delete(p.getId());
+            subjectService.delete(p.getId());
         }
         this.temasSeleccionadosVarios = null;
-        this.temasEnTabla = SubjectService.getSubjects();
+        this.temasEnTabla = subjectService.getSubjects();
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Temas eliminados"));
         PrimeFaces.current().ajax().update("form:messages", "form:dt-Subjects");
         PrimeFaces.current().executeScript("PF('dtSubjects').clearFilters()");

@@ -15,31 +15,31 @@ import jakarta.inject.Named;
 public class CodeService implements ServiceOperation<CodeDTO> {
 	
 	private List<CodeDTO> codes;
-	private CodeDAO cdao = new CodeDAO();
+	private CodeDAO codeDAO = new CodeDAO();
 	
 	@PostConstruct
 	public void init() {
-		cdao = new CodeDAO();
+		codeDAO = new CodeDAO();
 		codes=new ArrayList<>();
 		codes = readAll();
 	}
 	
 	// mappeando de entity a dto
-	public CodeDTO toDto(Code Code) {
+	public CodeDTO toDto(Code code) {
 		CodeDTO dto = new CodeDTO();
-		dto.setId(Code.getId());
-		dto.setTypeCode(Code.getTypeContent());
-		dto.setContent(Code.getContent());
+		dto.setId(code.getId());
+		dto.setLanguage(code.getLanguage());
+		dto.setContent(code.getContent());
 	
 		return dto;
 	}
 
 	// mappeando de entity a dto
-	public Code toEntity(CodeDTO CodeDto) {
+	public Code toEntity(CodeDTO codeDTO) {
 		Code entity = new Code();
-		entity.setId(CodeDto.getId());
-		entity.setTypeContent(CodeDto.getTypeCode());
-		entity.setContent(CodeDto.getContent());
+		entity.setId(codeDTO.getId());
+		entity.setLanguage(codeDTO.getLanguage());
+		entity.setContent(codeDTO.getContent());
 		
 		return entity;
 	}
@@ -64,21 +64,21 @@ public class CodeService implements ServiceOperation<CodeDTO> {
 
 	@Override
 	public void create(CodeDTO obj) {
-		cdao.create(toEntity(obj));
+		codeDAO.create(toEntity(obj));
 		codes=readAll();
 
 	}
 
 	@Override
 	public boolean delete(long id) {
-		boolean result = cdao.delete(id);
+		boolean result = codeDAO.delete(id);
 		codes=readAll();
 		return result;
 	}
 
 	@Override
 	public boolean update(long id, CodeDTO obj) {
-		boolean result = cdao.update(id, toEntity(obj));
+		boolean result = codeDAO.update(id, toEntity(obj));
 		codes=readAll();
 		return result;
 	}
@@ -86,7 +86,7 @@ public class CodeService implements ServiceOperation<CodeDTO> {
 	@Override
 	public List<CodeDTO> readAll() {
 		codes.clear();
-		ArrayList<Code> entities = cdao.readAll();
+		ArrayList<Code> entities = codeDAO.readAll();
 		for (Code Code : entities) {
 			codes.add(toDto(Code));
 		}
@@ -95,7 +95,7 @@ public class CodeService implements ServiceOperation<CodeDTO> {
 
 	@Override
 	public CodeDTO findOne(long id) {
-		CodeDTO find = toDto(cdao.findOne(id));
+		CodeDTO find = toDto(codeDAO.findOne(id));
 		return find;
 	}
 
@@ -107,14 +107,11 @@ public class CodeService implements ServiceOperation<CodeDTO> {
 		this.codes = codes;
 	}
 
-	public CodeDAO getCdao() {
-		return cdao;
+	public CodeDAO getCodeDAO() {
+		return codeDAO;
 	}
 
-	public void setCdao(CodeDAO cdao) {
-		this.cdao = cdao;
+	public void setCodeDAO(CodeDAO codeDAO) {
+		this.codeDAO = codeDAO;
 	}
-	
-	
-
 }

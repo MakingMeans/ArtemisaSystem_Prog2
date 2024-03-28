@@ -1,5 +1,5 @@
 package co.edu.unbosque.beans;
-//target\m2e-wtp\web-resources\META-INF\maven\co.edu.unbosque\ArtemisaSystem_Prog2\pom.properties
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;

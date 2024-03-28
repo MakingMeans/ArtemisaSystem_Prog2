@@ -3,17 +3,17 @@ package co.edu.unbosque.model;
 public class CodeDTO {
 	
 	private long id;
-	private String typeCode;
+	private String language;
 	private String content;
 	
 	public CodeDTO() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public CodeDTO(long id, String typeCode, String content) {
+	public CodeDTO(long id, String language, String content) {
 		super();
 		this.id = id;
-		this.typeCode = typeCode;
+		this.language = language;
 		this.content = content;
 	}
 
@@ -25,12 +25,12 @@ public class CodeDTO {
 		this.id = id;
 	}
 
-	public String getTypeCode() {
-		return typeCode;
+	public String getLanguage() {
+		return language;
 	}
 
-	public void setTypeCode(String typeCode) {
-		this.typeCode = typeCode;
+	public void setLanguage(String language) {
+		this.language = language;
 	}
 
 	public String getContent() {
@@ -43,10 +43,6 @@ public class CodeDTO {
 
 	@Override
 	public String toString() {
-		return "CodeDTO [id=" + id + ", typeCode=" + typeCode + ", content=" + content + "]";
+		return "CodeDTO [id=" + id + ", language=" + language + ", content=" + content + "]";
 	}
-	
-	
-	
-
 }

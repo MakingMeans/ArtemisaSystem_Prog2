@@ -1,17 +1,20 @@
 package co.edu.unbosque.model;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
+@Entity
+@Table(name="code")
 public class Code {
-	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-	@Column(name = "Tipo de Lenguaje", nullable=false)
-	private String typeContent;
+	@Column(name = "Lenguaje De Programacion", nullable=false)
+	private String language;
 	@Column(name = "Contenido", nullable=false)
 	private String content;
 	
@@ -19,10 +22,10 @@ public class Code {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Code(long id, String typeContent, String content) {
+	public Code(long id, String language, String content) {
 		super();
 		this.id = id;
-		this.typeContent = typeContent;
+		this.language = language;
 		this.content = content;
 	}
 
@@ -34,12 +37,12 @@ public class Code {
 		this.id = id;
 	}
 
-	public String getTypeContent() {
-		return typeContent;
+	public String getLanguage() {
+		return language;
 	}
 
-	public void setTypeContent(String typeContent) {
-		this.typeContent = typeContent;
+	public void setLanguage(String language) {
+		this.language = language;
 	}
 
 	public String getContent() {
@@ -52,10 +55,6 @@ public class Code {
 
 	@Override
 	public String toString() {
-		return "Code [id=" + id + ", typeContent=" + typeContent + ", content=" + content + "]";
+		return "Code [id=" + id + ", language=" + language + ", content=" + content + "]";
 	}
-	
-	
-
-
 }

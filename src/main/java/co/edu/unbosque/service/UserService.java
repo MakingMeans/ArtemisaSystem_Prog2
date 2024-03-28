@@ -15,11 +15,11 @@ import jakarta.inject.Named;
 public class UserService implements ServiceOperation<UserDTO> {
 
 	private List<UserDTO> users;
-	private UserDAO pdao = new UserDAO();
+	private UserDAO userDAO = new UserDAO();
 
 	@PostConstruct
 	public void init() {
-		pdao = new UserDAO();
+		userDAO = new UserDAO();
 		users=new ArrayList<>();
 		users = readAll();
 	}
@@ -38,15 +38,15 @@ public class UserService implements ServiceOperation<UserDTO> {
 	}
 
 	// mappeando de entity a dto
-	public User toEntity(UserDTO userDto) {
+	public User toEntity(UserDTO userDTO) {
 		User entity = new User();
-		entity.setId(userDto.getId());
-		entity.setUsername(userDto.getUsername());
-		entity.setPassword(userDto.getPassword());
-		entity.setEmail(userDto.getEmail());
-		entity.setSemester(userDto.getSemester());
-		entity.setCareer(userDto.getCareer());
-		entity.setHasAdmin(userDto.isHasAdmin());
+		entity.setId(userDTO.getId());
+		entity.setUsername(userDTO.getUsername());
+		entity.setPassword(userDTO.getPassword());
+		entity.setEmail(userDTO.getEmail());
+		entity.setSemester(userDTO.getSemester());
+		entity.setCareer(userDTO.getCareer());
+		entity.setHasAdmin(userDTO.isHasAdmin());
 		return entity;
 	}
 
@@ -70,21 +70,21 @@ public class UserService implements ServiceOperation<UserDTO> {
 
 	@Override
 	public void create(UserDTO obj) {
-		pdao.create(toEntity(obj));
+		userDAO.create(toEntity(obj));
 		users=readAll();
 
 	}
 
 	@Override
 	public boolean delete(long id) {
-		boolean result = pdao.delete(id);
+		boolean result = userDAO.delete(id);
 		users=readAll();
 		return result;
 	}
 
 	@Override
 	public boolean update(long id, UserDTO obj) {
-		boolean result = pdao.update(id, toEntity(obj));
+		boolean result = userDAO.update(id, toEntity(obj));
 		users=readAll();
 		return result;
 	}
@@ -92,7 +92,7 @@ public class UserService implements ServiceOperation<UserDTO> {
 	@Override
 	public List<UserDTO> readAll() {
 		users.clear();
-		ArrayList<User> entities = pdao.readAll();
+		ArrayList<User> entities = userDAO.readAll();
 		for (User user : entities) {
 			users.add(toDto(user));
 		}
@@ -101,7 +101,7 @@ public class UserService implements ServiceOperation<UserDTO> {
 
 	@Override
 	public UserDTO findOne(long id) {
-		UserDTO find = toDto(pdao.findOne(id));
+		UserDTO find = toDto(userDAO.findOne(id));
 		return find;
 	}
 
@@ -113,14 +113,11 @@ public class UserService implements ServiceOperation<UserDTO> {
 		this.users = users;
 	}
 
-	public UserDAO getPdao() {
-		return pdao;
+	public UserDAO getUserDAO() {
+		return userDAO;
 	}
 
-	public void setPdao(UserDAO pdao) {
-		this.pdao = pdao;
+	public void setUserDAO(UserDAO userDAO) {
+		this.userDAO = userDAO;
 	}
-	
-	
-
 }

@@ -15,32 +15,32 @@ import jakarta.inject.Named;
 public class SubjectService implements ServiceOperation<SubjectDTO> {
 
 	private List<SubjectDTO> subjects;
-	private SubjectDAO pdao = new SubjectDAO();
+	private SubjectDAO subjectDAO = new SubjectDAO();
 
 	@PostConstruct
 	public void init() {
-		pdao = new SubjectDAO();
+		subjectDAO = new SubjectDAO();
 		subjects=new ArrayList<>();
 		subjects = readAll();
 	}
 
 	// mappeando de entity a dto
-	public SubjectDTO toDto(Subject Subject) {
+	public SubjectDTO toDto(Subject subject) {
 		SubjectDTO dto = new SubjectDTO();
-		dto.setId(Subject.getId());
-		dto.setName(Subject.getName());
-		dto.setDesc(Subject.getDesc());
-		dto.setCodes(Subject.getCodes());
+		dto.setId(subject.getId());
+		dto.setName(subject.getName());
+		dto.setDesc(subject.getDesc());
+		dto.setCodes(subject.getCodes());
 		return dto;
 	}
 
 	// mappeando de entity a dto
-	public Subject toEntity(SubjectDTO SubjectDto) {
+	public Subject toEntity(SubjectDTO subjectDTO) {
 		Subject entity = new Subject();
-		entity.setId(SubjectDto.getId());
-		entity.setName(SubjectDto.getName());
-		entity.setDesc(SubjectDto.getDesc());
-		entity.setCodes(SubjectDto.getCodes());
+		entity.setId(subjectDTO.getId());
+		entity.setName(subjectDTO.getName());
+		entity.setDesc(subjectDTO.getDesc());
+		entity.setCodes(subjectDTO.getCodes());
 		return entity;
 	}
 
@@ -64,21 +64,21 @@ public class SubjectService implements ServiceOperation<SubjectDTO> {
 
 	@Override
 	public void create(SubjectDTO obj) {
-		pdao.create(toEntity(obj));
+		subjectDAO.create(toEntity(obj));
 		subjects=readAll();
 
 	}
 
 	@Override
 	public boolean delete(long id) {
-		boolean result = pdao.delete(id);
+		boolean result = subjectDAO.delete(id);
 		subjects=readAll();
 		return result;
 	}
 
 	@Override
 	public boolean update(long id, SubjectDTO obj) {
-		boolean result = pdao.update(id, toEntity(obj));
+		boolean result = subjectDAO.update(id, toEntity(obj));
 		subjects=readAll();
 		return result;
 	}
@@ -86,7 +86,7 @@ public class SubjectService implements ServiceOperation<SubjectDTO> {
 	@Override
 	public List<SubjectDTO> readAll() {
 		subjects.clear();
-		ArrayList<Subject> entities = pdao.readAll();
+		ArrayList<Subject> entities = subjectDAO.readAll();
 		for (Subject subject : entities) {
 			subjects.add(toDto(subject));
 		}
@@ -95,7 +95,7 @@ public class SubjectService implements ServiceOperation<SubjectDTO> {
 
 	@Override
 	public SubjectDTO findOne(long id) {
-		SubjectDTO find = toDto(pdao.findOne(id));
+		SubjectDTO find = toDto(subjectDAO.findOne(id));
 		return find;
 	}
 
@@ -107,14 +107,11 @@ public class SubjectService implements ServiceOperation<SubjectDTO> {
 		this.subjects = Subjects;
 	}
 
-	public SubjectDAO getPdao() {
-		return pdao;
+	public SubjectDAO getSubjectDAO() {
+		return subjectDAO;
 	}
 
-	public void setPdao(SubjectDAO pdao) {
-		this.pdao = pdao;
+	public void setSubjectDAO(SubjectDAO subjectDAO) {
+		this.subjectDAO = subjectDAO;
 	}
-	
-	
-
 }
