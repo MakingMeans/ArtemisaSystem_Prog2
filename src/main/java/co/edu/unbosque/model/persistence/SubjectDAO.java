@@ -2,17 +2,17 @@ package co.edu.unbosque.model.persistence;
 
 import java.util.ArrayList;
 
-import co.edu.unbosque.model.User;
+import co.edu.unbosque.model.Subject;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 
-public class UserDAO implements CRUDOperation<User> {
+public class SubjectDAO implements CRUDOperation<Subject> {
 
 	public EntityManagerFactory emf;
 	public EntityManager em;
 
-	public UserDAO() {
+	public SubjectDAO() {
 		emf = Persistence.createEntityManagerFactory("default");
 		em = emf.createEntityManager();
 	}
@@ -25,7 +25,7 @@ public class UserDAO implements CRUDOperation<User> {
 	}
 
 	@Override
-	public void create(User obj) {
+	public void create(Subject obj) {
 
 		try {
 			open();
@@ -51,7 +51,7 @@ public class UserDAO implements CRUDOperation<User> {
 		try {
 			// Delete
 			em.getTransaction().begin();
-			em.remove(em.find(User.class, id));
+			em.remove(em.find(Subject.class, id));
 			em.getTransaction().commit();
 			return true;
 		} catch (Exception ex) {
@@ -68,20 +68,17 @@ public class UserDAO implements CRUDOperation<User> {
 	}
 
 	@Override
-	public boolean update(long id, User obj) {
+	public boolean update(long id, Subject obj) {
 		open();
 		try {
 			// Update
 			em.getTransaction().begin();
-			User selected = em.find(User.class, id);
+			Subject selected = em.find(Subject.class, id);
 
 			selected.setId(obj.getId());
-			selected.setUsername(obj.getUsername());
-			selected.setPassword(obj.getPassword());
-			selected.setEmail(obj.getEmail());
-			selected.setSemester(obj.getSemester());
-			selected.setCareer(obj.getCareer());
-			selected.setHasAdmin(obj.isHasAdmin());
+			selected.setName(obj.getName());
+			selected.setDesc(obj.getDesc());
+			selected.setCodes(obj.getCodes());
 			em.persist(selected);
 			em.getTransaction().commit();
 			return true;
@@ -101,11 +98,11 @@ public class UserDAO implements CRUDOperation<User> {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public ArrayList<User> readAll() {
+	public ArrayList<Subject> readAll() {
 		open();
 		try {
 			// usando JPQL
-			return (ArrayList<User>) em.createQuery("select p from User p").getResultList();
+			return (ArrayList<Subject>) em.createQuery("select p from Subject p").getResultList();
 		} catch (Exception ex) {
 			System.out.println(ex.getMessage());
 		} finally {
@@ -116,16 +113,16 @@ public class UserDAO implements CRUDOperation<User> {
 				em.close();
 			}
 		}
-		return new ArrayList<User>();
+		return new ArrayList<Subject>();
 
 	}
 
 	@Override
-	public User findOne(long id) {
+	public Subject findOne(long id) {
 		open();
 		try {
 			// Find
-			User selected = em.find(User.class, id);
+			Subject selected = em.find(Subject.class, id);
 			return selected;
 		} catch (Exception ex) {
 			System.out.println(ex.getMessage());
