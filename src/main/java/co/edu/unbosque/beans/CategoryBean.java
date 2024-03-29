@@ -117,5 +117,32 @@ public class CategoryBean implements Serializable{
         PrimeFaces.current().executeScript("PF('dtCodes').clearFilters()");
     }
 
+	public List<CategoryDTO> getCategories() {
+		return categoriesInTable;
+	}
+
+	public void setCategories(List<CategoryDTO> categoriesInTable) {
+		this.categoriesInTable = categoriesInTable;
+	}
+
+	public CategoryDTO getSelectedCategory() {
+		return selectedCategories;
+	}
+
+	public void setSelectedCategory(CategoryDTO selectedCategories) {
+		this.selectedCategories = selectedCategories;
+	}
+
+	public List<CategoryDTO> getSelectedCategories() {
+		return selectedCategoriesVarious;
+	}
+
+	public void setSelectedCategories(List<CategoryDTO> selectedCategoriesVarious) {
+		this.selectedCategoriesVarious = selectedCategoriesVarious;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
 
 }
