@@ -1,32 +1,30 @@
 package co.edu.unbosque.model.persistence;
 
-import java.util.ArrayList;
-
-import co.edu.unbosque.model.Code;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
+import java.util.ArrayList;
+import co.edu.unbosque.model.Category;
 
-public class CodeDAO implements CRUDOperation<Code> {
 
+public class CategoryDAO implements CRUDOperation<Category>{
 	public EntityManagerFactory emf;
 	public EntityManager em;
-
-	public CodeDAO() {
-		emf = Persistence.createEntityManagerFactory("default");
+	
+	public CategoryDAO() {
+		emf = Persistence.createEntityManagerFactory("defualt");
 		em = emf.createEntityManager();
 	}
-
+	
 	public void open() {
 		if (!emf.isOpen() || !em.isOpen()) {
 			emf = Persistence.createEntityManagerFactory("default");
 			em = emf.createEntityManager();
 		}
 	}
-
+	
 	@Override
-	public void create(Code obj) {
-
+	public void create(Category obj) {
 		try {
 			open();
 			em.getTransaction().begin();
@@ -42,16 +40,15 @@ public class CodeDAO implements CRUDOperation<Code> {
 				em.close();
 			}
 		}
-
+		
 	}
-
 	@Override
 	public boolean delete(long id) {
 		open();
 		try {
 			// Delete
 			em.getTransaction().begin();
-			em.remove(em.find(Code.class, id));
+			em.remove(em.find(Category.class, id));
 			em.getTransaction().commit();
 			return true;
 		} catch (Exception ex) {
@@ -66,18 +63,17 @@ public class CodeDAO implements CRUDOperation<Code> {
 		}
 		return false;
 	}
-
 	@Override
-	public boolean update(long id, Code obj) {
+	public boolean update(long id, Category obj) {
 		open();
 		try {
 			// Update
 			em.getTransaction().begin();
-			Code selected = em.find(Code.class, id);
+			Category selected = em.find(Category.class, id);
 
 			selected.setId(obj.getId());
-			selected.setLanguage(obj.getLanguage());
-			selected.setContent(obj.getContent());
+			selected.setSubjects(obj.getSubjects());
+			selected.setTitle(obj.getTitle());
 		
 			em.persist(selected);
 			em.getTransaction().commit();
@@ -95,14 +91,13 @@ public class CodeDAO implements CRUDOperation<Code> {
 		}
 		return false;
 	}
-
 	@SuppressWarnings("unchecked")
 	@Override
-	public ArrayList<Code> readAll() {
+	public ArrayList<Category> readAll() {
 		open();
 		try {
 			// usando JPQL
-			return (ArrayList<Code>) em.createQuery("select p from User p").getResultList();
+			return (ArrayList<Category>) em.createQuery("select p from User p").getResultList();
 		} catch (Exception ex) {
 			System.out.println(ex.getMessage());
 		} finally {
@@ -113,17 +108,16 @@ public class CodeDAO implements CRUDOperation<Code> {
 				em.close();
 			}
 		}
-		return new ArrayList<Code>();
+		return new ArrayList<Category>();
 
 	}
-
 	@Override
-	public Code findOne(long id) {
+	public Category findOne(long id) {
 		open();
 		try {
 			// Find
-			Code selectedCode = em.find(Code.class, id);
-			return selectedCode;
+			Category selectedCategory = em.find(Category.class, id);
+			return selectedCategory;
 		} catch (Exception ex) {
 			System.out.println(ex.getMessage());
 		} finally {
@@ -136,11 +130,12 @@ public class CodeDAO implements CRUDOperation<Code> {
 		}
 		return null;
 	}
-
 	@Override
 	public int count() {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+	
+	
 
 }
