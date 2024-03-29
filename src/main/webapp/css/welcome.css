@@ -1,0 +1,94 @@
+
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: radial-gradient(
+    circle,
+    rgba(67, 69, 112, 1) 3%,
+    rgba(35, 36, 57, 1) 100%
+  );
+}
+
+.typing.animate {
+  background-image: linear-gradient(
+    90deg,
+    rgb(118, 167, 63) 0%,
+    rgb(51, 143, 118) 40%,
+    rgb(55, 141, 167) 50%,
+    rgb(117, 152, 242) 70%,
+    rgb(144, 118, 236) 100%
+  );
+  color: transparent;
+  background-size: contain;
+  background-clip: text;
+  -webkit-background-clip: text;
+  
+  width: 21ch;
+  border-right: 0.1em solid black;
+  font-family: monospace;
+  font-size: 3.5em;
+  animation: type 2.5s steps(19), writer 1s infinite alternate, type3 3s steps(25, end) 3.2s forwards;
+  overflow: hidden;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.typing.animate::before { 
+  content: "Hola, soy artemisa.";
+  animation: type2 1s steps(4) 3s forwards, type3 3s steps(25, end) 3.2s forwards;
+}
+
+@keyframes type {
+  from {
+    width: 0;
+  }
+  to {
+    width: 21ch;
+  }
+}
+
+@keyframes type2 {
+  from {
+    width: 16ch;
+    content: "Hola, soy artemisa. "
+  }
+  to {
+    width: 20ch;
+    content: "Hola, soy artemisa. "
+  }
+}
+
+@keyframes type3 {
+  from {
+    width: 23ch;
+    content: "Hola, soy artemisa. Bienvenido a esta aventura."
+  }
+  to {
+    width: 45ch;
+    content: "Hola, soy artemisa. Bienvenido a esta aventura."
+  }
+}
+
+@keyframes writer {
+  50% {
+    border-color: transparent;
+  }
+}
+
+@keyframes delete {
+  from {
+    width: 21ch;
+  }
+  to {
+    width: 16ch;
+  }
+}
