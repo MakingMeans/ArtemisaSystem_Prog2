@@ -16,20 +16,19 @@
     <section class="home">
       <div class="description">
         <h1 class="title">
-          <span class="gradient-text">Entrena programación competitiva
+          <span class="gradient-text">Entrena programación competitiva</span>
         </h1>
         <p class="paragraph">
           Mejora tus capacidades de solución de problemas con logica de programación y matematica. Entrena tus habilidades para ser mejor programador! Registrate
         </p>
-        <form id="form" autocomplete="off">
+        <form id="form" autocomplete="off" onsubmit="return checkEmail()">
           <input
             type="email"
             id="email-id"
             name="email_address"
-            aria-label="email adress"
-            placeholder=""
-            required
-            oninput="checkEmpty()" />
+            aria-label="email address"
+            placeholder="user@unbosque.edu.co"
+            required="required"/>
           <button type="submit" class="btn" aria-label="submit" onclick="window.location.href = 'welcome.html'">
             <span>Ingresa tu correo</span>
             <ion-icon name="arrow-forward-outline"></ion-icon>
@@ -69,7 +68,7 @@
     
     <div class="corner-text">
       <button type="submit" class="btn1" aria-label="submit"
-       onclick="window.location.href = 'logIn.html'"" >
+       onclick="window.location.href = 'logIn.html'" >
         <span>¡Ingresa!</span>
         <ion-icon name="arrow-forward-outline"></ion-icon>
       </button>
