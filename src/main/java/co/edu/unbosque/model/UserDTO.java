@@ -1,5 +1,12 @@
 package co.edu.unbosque.model;
 
+/**
+ * 
+ * Data Transfer Object de User.
+ * 
+ * @author SantiagoR
+ *
+ */
 public class UserDTO{
 	/**
      * Identificador único del usuario.

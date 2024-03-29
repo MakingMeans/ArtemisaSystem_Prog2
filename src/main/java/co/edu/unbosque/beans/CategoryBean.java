@@ -15,6 +15,13 @@ import jakarta.faces.context.FacesContext;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
 
+/**
+ * 
+ * Bean de Category.
+ * 
+ * @author SantiagoR
+ *
+ */
 @Named("categoryBean")
 @SessionScoped
 public class CategoryBean implements Serializable{

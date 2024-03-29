@@ -7,6 +7,13 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
+/**
+ * 
+ * Entidad de Code.
+ * 
+ * @author WilmerR
+ *
+ */
 @Entity
 @Table(name="code")
 public class Code {

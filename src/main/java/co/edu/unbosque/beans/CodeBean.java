@@ -15,6 +15,13 @@ import jakarta.faces.context.FacesContext;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
 
+/**
+ * 
+ * Bean de Code.
+ * 
+ * @author WilmerR
+ *
+ */
 @Named("codeBean")
 @SessionScoped
 public class CodeBean implements Serializable {

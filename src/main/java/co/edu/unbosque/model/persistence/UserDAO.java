@@ -7,6 +7,13 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 
+/**
+ * 
+ * Data Access Object de User.
+ * 
+ * @author SantiagoR
+ *
+ */
 public class UserDAO implements CRUDOperation<User> {
 
 	public EntityManagerFactory emf;

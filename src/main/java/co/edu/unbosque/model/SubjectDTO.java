@@ -2,6 +2,13 @@ package co.edu.unbosque.model;
 
 import java.util.ArrayList;
 
+/**
+ * 
+ * Data Transfer Object de Subject.
+ * 
+ * @author DavidG
+ *
+ */
 public class SubjectDTO {
 	/**
      * Identificador único del tema.

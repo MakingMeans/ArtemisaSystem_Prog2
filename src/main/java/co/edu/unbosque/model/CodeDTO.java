@@ -1,5 +1,12 @@
 package co.edu.unbosque.model;
 
+/**
+ * 
+ * Data Transfer Object de Code.
+ * 
+ * @author WilmerR
+ *
+ */
 public class CodeDTO {
 	
 	 /**

@@ -15,6 +15,13 @@ import jakarta.faces.context.FacesContext;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
 
+/**
+ * 
+ * Bean de Subject.
+ * 
+ * @author DavidG
+ *
+ */
 @Named("subjectBean")
 @SessionScoped
 public class SubjectBean implements Serializable {

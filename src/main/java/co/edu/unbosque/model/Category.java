@@ -9,6 +9,13 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
+/**
+ * 
+ * Entidad de Category.
+ * 
+ * @author SantiagoR
+ *
+ */
 @Entity
 @Table(name="category")
 public class Category {

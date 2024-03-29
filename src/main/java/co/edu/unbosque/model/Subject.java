@@ -9,6 +9,13 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
+/**
+ * 
+ * Entidad de Subject.
+ * 
+ * @author DavidG
+ *
+ */
 @Entity
 @Table(name="subject")
 public class Subject{

@@ -6,9 +6,10 @@ import co.edu.unbosque.model.Code;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
+
 /**
  * 
- * Data Access Object de CodeDTO.
+ * Data Access Object de Code.
  * 
  * @author WilmerR
  *

@@ -8,7 +8,7 @@ import co.edu.unbosque.model.Category;
 
 /**
  * 
- * Data Access Object de CodeDTO.
+ * Data Access Object de Category.
  * 
  * @author SantiagoR
  *

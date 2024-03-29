@@ -2,9 +2,16 @@ package co.edu.unbosque.model;
 
 import java.util.ArrayList;
 
+/**
+ * 
+ * Data Transfer Object de Category.
+ * 
+ * @author SantiagoR
+ *
+ */
 public class CategoryDTO {
 	
-	   /**
+	 /**
      * Identificador único de la categoría.
      */
     private long id;

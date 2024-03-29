@@ -9,6 +9,7 @@ import co.edu.unbosque.model.persistence.CategoryDAO;
 import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Named;
+
 /**
  * 
  * Service de Category.

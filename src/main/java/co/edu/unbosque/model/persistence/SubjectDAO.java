@@ -6,9 +6,10 @@ import co.edu.unbosque.model.Subject;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
+
 /**
  * 
- * Data Access Object de SubjectDTO.
+ * Data Access Object de Subject.
  * 
  * @author DavidG
  *
