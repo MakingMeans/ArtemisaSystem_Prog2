@@ -1,89 +1,167 @@
 package co.edu.unbosque.model;
 
 public class UserDTO{
-	private long id;
-	private String username;
-	private String password;
-	private String email;
-	private int semester;
-	private String career;
-	private boolean hasAdmin;
-	
-	public UserDTO() {
-		// TODO Auto-generated constructor stub
-	}
+	/**
+     * Identificador único del usuario.
+     */
+    private long id;
+    
+    /**
+     * Nombre de usuario.
+     */
+    private String username;
+    
+    /**
+     * Contraseña del usuario.
+     */
+    private String password;
+    
+    /**
+     * Dirección de correo electrónico del usuario.
+     */
+    private String email;
+    
+    /**
+     * Semestre del usuario.
+     */
+    private int semester;
+    
+    /**
+     * Carrera del usuario.
+     */
+    private String career;
+    
+    /**
+     * Indicador de si el usuario es administrador o no.
+     */
+    private boolean hasAdmin;
+    
+    /**
+     * Constructor por defecto de la clase UserDTO.
+     */
+    public UserDTO() {
+        // TODO Auto-generated constructor stub
+    }
 
-	public UserDTO(long id, String username, String password, String email, int semester, String career,
-			boolean hasAdmin) {
-		super();
-		this.id = id;
-		this.username = username;
-		this.password = password;
-		this.email = email;
-		this.semester = semester;
-		this.career = career;
-		this.hasAdmin = hasAdmin;
-	}
+    /**
+     * Constructor de la clase UserDTO con parámetros.
+     */
+    public UserDTO(long id, String username, String password, String email, int semester, String career,
+            boolean hasAdmin) {
+        super();
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.semester = semester;
+        this.career = career;
+        this.hasAdmin = hasAdmin;
+    }
 
-	public long getId() {
-		return id;
-	}
+    /**
+     * Obtiene el identificador del usuario.
+     */
+    public long getId() {
+        return id;
+    }
 
-	public void setId(long id) {
-		this.id = id;
-	}
+    /**
+     * Establece el identificador del usuario.
+     */
+    public void setId(long id) {
+        this.id = id;
+    }
 
-	public String getUsername() {
-		return username;
-	}
+    /**
+     * Obtiene el nombre de usuario.
+     */
+    public String getUsername() {
+        return username;
+    }
 
-	public void setUsername(String username) {
-		this.username = username;
-	}
+    /**
+     * Establece el nombre de usuario.
+     */
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
-	public String getPassword() {
-		return password;
-	}
+    /**
+     * Obtiene la contraseña del usuario.
+     */
+    public String getPassword() {
+        return password;
+    }
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
+    /**
+     * Establece la contraseña del usuario.
+     */
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
-	public String getEmail() {
-		return email;
-	}
+    /**
+     * Obtiene la dirección de correo electrónico del usuario.
+     */
+    public String getEmail() {
+        return email;
+    }
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
+    /**
+     * Establece la dirección de correo electrónico del usuario.
+     */
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-	public int getSemester() {
-		return semester;
-	}
+    /**
+     * Obtiene el semestre del usuario.
+     */
+    public int getSemester() {
+        return semester;
+    }
 
-	public void setSemester(int semester) {
-		this.semester = semester;
-	}
+    /**
+     * Establece el semestre del usuario.
+     */
+    public void setSemester(int semester) {
+        this.semester = semester;
+    }
 
-	public String getCareer() {
-		return career;
-	}
+    /**
+     * Obtiene la carrera del usuario.
+     */
+    public String getCareer() {
+        return career;
+    }
 
-	public void setCareer(String career) {
-		this.career = career;
-	}
+    /**
+     * Establece la carrera del usuario.
+     */
+    public void setCareer(String career) {
+        this.career = career;
+    }
 
-	public boolean isHasAdmin() {
-		return hasAdmin;
-	}
+    /**
+     * Verifica si el usuario es administrador.
+     */
+    public boolean isHasAdmin() {
+        return hasAdmin;
+    }
 
-	public void setHasAdmin(boolean hasAdmin) {
-		this.hasAdmin = hasAdmin;
-	}
+    /**
+     * Establece si el usuario es administrador o no.
+     */
+    public void setHasAdmin(boolean hasAdmin) {
+        this.hasAdmin = hasAdmin;
+    }
 
-	@Override
-	public String toString() {
-		return "UserDTO [id=" + id + ", username=" + username + ", password=" + password + ", email=" + email
-				+ ", semester=" + semester + ", career=" + career + ", hasAdmin=" + hasAdmin + "]";
-	}
+    /**
+     * Método toString para representar el usuario como una cadena de texto.
+     */
+    @Override
+    public String toString() {
+        return "UserDTO [id=" + id + ", username=" + username + ", password=" + password + ", email=" + email
+                + ", semester=" + semester + ", career=" + career + ", hasAdmin=" + hasAdmin + "]";
+    }
 }

@@ -10,97 +10,175 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name="user")
 public class User{
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
-	@Column(name = "Nombre de usuario", nullable=false)
-	private String username;
-	@Column(name = "Contraseña", nullable=false)
-	private String password;
-	@Column(name = "Email", nullable=false)
-	private String email;
-	@Column(name = "Semestre", nullable=false)
-	private int semester;
-	@Column(name = "Carrera", nullable=false)
-	private String career;
-	@Column(name = "EsAdmin", nullable=false)
-	private boolean hasAdmin;
-	
-	public User() {
-		// TODO Auto-generated constructor stub
-	}
+	/**
+     * Identificador único del usuario.
+     */
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+    
+    /**
+     * Nombre de usuario del usuario.
+     */
+    @Column(name = "Nombre de usuario", nullable=false)
+    private String username;
+    
+    /**
+     * Contraseña del usuario.
+     */
+    @Column(name = "Contraseña", nullable=false)
+    private String password;
+    
+    /**
+     * Correo electrónico del usuario.
+     */
+    @Column(name = "Email", nullable=false)
+    private String email;
+    
+    /**
+     * Semestre del usuario.
+     */
+    @Column(name = "Semestre", nullable=false)
+    private int semester;
+    
+    /**
+     * Carrera del usuario.
+     */
+    @Column(name = "Carrera", nullable=false)
+    private String career;
+    
+    /**
+     * Indica si el usuario es administrador o no.
+     */
+    @Column(name = "EsAdmin", nullable=false)
+    private boolean hasAdmin;
+    
+    /**
+     * Constructor por defecto de la clase User.
+     */
+    public User() {
+        // TODO Auto-generated constructor stub
+    }
 
-	public User(long id, String username, String password, String email, int semester, String career,
-			boolean hasAdmin) {
-		super();
-		this.id = id;
-		this.username = username;
-		this.password = password;
-		this.email = email;
-		this.semester = semester;
-		this.career = career;
-		this.hasAdmin = hasAdmin;
-	}
+    /**
+     * Constructor de la clase User con parámetros.
+     */
+    public User(long id, String username, String password, String email, int semester, String career,
+            boolean hasAdmin) {
+        super();
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.semester = semester;
+        this.career = career;
+        this.hasAdmin = hasAdmin;
+    }
 
-	public long getId() {
-		return id;
-	}
+    /**
+     * Obtiene el identificador del usuario.
+     */
+    public long getId() {
+        return id;
+    }
 
-	public void setId(long id) {
-		this.id = id;
-	}
+    /**
+     * Establece el identificador del usuario.
+     */
+    public void setId(long id) {
+        this.id = id;
+    }
 
-	public String getUsername() {
-		return username;
-	}
+    /**
+     * Obtiene el nombre de usuario del usuario.
+     */
+    public String getUsername() {
+        return username;
+    }
 
-	public void setUsername(String username) {
-		this.username = username;
-	}
+    /**
+     * Establece el nombre de usuario del usuario.
+     */
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
-	public String getPassword() {
-		return password;
-	}
+    /**
+     * Obtiene la contraseña del usuario.
+     */
+    public String getPassword() {
+        return password;
+    }
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
+    /**
+     * Establece la contraseña del usuario.
+     */
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
-	public String getEmail() {
-		return email;
-	}
+    /**
+     * Obtiene el correo electrónico del usuario.
+     */
+    public String getEmail() {
+        return email;
+    }
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
+    /**
+     * Establece el correo electrónico del usuario.
+     */
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-	public int getSemester() {
-		return semester;
-	}
+    /**
+     * Obtiene el semestre del usuario.
+     */
+    public int getSemester() {
+        return semester;
+    }
 
-	public void setSemester(int semester) {
-		this.semester = semester;
-	}
+    /**
+     * Establece el semestre del usuario.
+     */
+    public void setSemester(int semester) {
+        this.semester = semester;
+    }
 
-	public String getCareer() {
-		return career;
-	}
+    /**
+     * Obtiene la carrera del usuario.
+     */
+    public String getCareer() {
+        return career;
+    }
 
-	public void setCareer(String career) {
-		this.career = career;
-	}
+    /**
+     * Establece la carrera del usuario.
+     */
+    public void setCareer(String career) {
+        this.career = career;
+    }
 
-	public boolean isHasAdmin() {
-		return hasAdmin;
-	}
+    /**
+     * Indica si el usuario es administrador o no.
+     */
+    public boolean isHasAdmin() {
+        return hasAdmin;
+    }
 
-	public void setHasAdmin(boolean hasAdmin) {
-		this.hasAdmin = hasAdmin;
-	}
+    /**
+     * Establece si el usuario es administrador o no.
+     */
+    public void setHasAdmin(boolean hasAdmin) {
+        this.hasAdmin = hasAdmin;
+    }
 
-	@Override
-	public String toString() {
-		return "User [id=" + id + ", username=" + username + ", password=" + password + ", email=" + email
-				+ ", semester=" + semester + ", career=" + career + ", hasAdmin=" + hasAdmin + "]";
-	}
+    /**
+     * Método toString para representar el usuario como una cadena de texto.
+     */
+    @Override
+    public String toString() {
+        return "User [id=" + id + ", username=" + username + ", password=" + password + ", email=" + email
+                + ", semester=" + semester + ", career=" + career + ", hasAdmin=" + hasAdmin + "]";
+    }
 }

@@ -23,6 +23,9 @@ public class CodeBean implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	
+	/**
+     * Servicio para la gestión de codigos.
+     */
     @Inject
     private CodeService codeService;
 

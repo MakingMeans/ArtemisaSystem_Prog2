@@ -18,8 +18,14 @@ import jakarta.inject.Named;
 @Named("categoryBean")
 @SessionScoped
 public class CategoryBean implements Serializable{
+	/**
+	 * Corresponde al serialVersionUID
+	 */
 	private static final long serialVersionUID = 1L;
 	
+	/**
+     * Servicio para la gestión de categorias.
+     */
 	@Inject
     private CategoryService categoryService;
 

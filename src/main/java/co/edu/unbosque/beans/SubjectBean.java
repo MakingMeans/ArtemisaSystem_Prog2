@@ -19,28 +19,52 @@ import jakarta.inject.Named;
 @SessionScoped
 public class SubjectBean implements Serializable {
 
+	/**
+	 * Corresponde al serialVersionUID
+	 */
     private static final long serialVersionUID = 1L;
 
+    /**
+     * Servicio para la gestión de temas.
+     */
     @Inject
     private SubjectService subjectService;
-
+    
+    /**
+     * Lista de temas mostrados en la tabla.
+     */
     private List<SubjectDTO> temasEnTabla;
-
+    
+    /**
+     * Tema seleccionado actualmente.
+     */
     private SubjectDTO temaSeleccionado;
-
+    
+    /**
+     * Lista de temas seleccionados.
+     */
     private List<SubjectDTO> temasSeleccionadosVarios;
-
+    
+    /**
+     * Inicializa el bean. Carga la lista de temas al iniciar la sesión.
+     */
     @PostConstruct
     public void init() {
         this.temasEnTabla = new ArrayList<>();
         this.temasEnTabla = subjectService.getSubjects();
         this.temasSeleccionadosVarios = new ArrayList<SubjectDTO>();
     }
-
+    
+    /**
+     * Abre un nuevo formulario para agregar un tema.
+     */
     public void openNew() {
         this.temaSeleccionado = new SubjectDTO();
     }
-
+    
+    /**
+     * Guarda un tema en la base de datos.
+     */
     public void saveSubject() {
         if (this.temaSeleccionado.getId() == 0) {
             this.temaSeleccionado.setId(0);
@@ -55,6 +79,9 @@ public class SubjectBean implements Serializable {
         PrimeFaces.current().ajax().update("form:messages", "form:dt-Subjects");
     }
 
+    /**
+     * Elimina un tema seleccionado.
+     */
     public void deleteSubject() {
         subjectService.delete(this.temaSeleccionado.getId());
         this.temasSeleccionadosVarios.remove(this.temaSeleccionado);
@@ -64,19 +91,28 @@ public class SubjectBean implements Serializable {
         PrimeFaces.current().ajax().update("form:messages", "form:dt-Subjects");
         PrimeFaces.current().executeScript("PF('dtSubjects').clearFilters()");
     }
-
+    
+    /**
+     * Obtiene el mensaje para el botón de eliminar.
+     */
     public String getDeleteButtonMessage() {
         if (hasSelectedSubjects()) {
             int size = this.temasSeleccionadosVarios.size();
-            return size > 1 ? size + " temas seleccionados" : "1 Tema seleccionado";
+            return size > 1 ? size + " temas seleccionados" : "1 tema seleccionado";
         }
         return "Eliminado";
     }
-
+    
+    /**
+     * Verifica si hay temas seleccionados.
+     */
     public boolean hasSelectedSubjects() {
         return this.temasSeleccionadosVarios != null && !this.temasSeleccionadosVarios.isEmpty();
     }
-
+    
+    /**
+     * Elimina varios temas seleccionados.
+     */
     public void deleteSelectedSubjects() {
         for (SubjectDTO p : temasSeleccionadosVarios) {
             subjectService.delete(p.getId());
@@ -87,31 +123,54 @@ public class SubjectBean implements Serializable {
         PrimeFaces.current().ajax().update("form:messages", "form:dt-Subjects");
         PrimeFaces.current().executeScript("PF('dtSubjects').clearFilters()");
     }
-
+    
+    // Métodos getters y setters
+    
+    /**
+     * Obtiene la lista de temas.
+     */
     public List<SubjectDTO> getSubjects() {
         return temasEnTabla;
     }
-
+    
+    /**
+     * Establece la lista de temas.
+     */
     public void setSubjects(List<SubjectDTO> Subjects) {
         this.temasEnTabla = Subjects;
     }
-
+    
+    /**
+     * Obtiene el tema seleccionado.
+     */
     public SubjectDTO getSelectedSubject() {
         return temaSeleccionado;
     }
-
+    
+    /**
+     * Establece el tema seleccionado.
+     */
     public void setSelectedSubject(SubjectDTO selectedSubject) {
         this.temaSeleccionado = selectedSubject;
     }
-
+    
+    /**
+     * Obtiene la lista de temas seleccionados.
+     */
     public List<SubjectDTO> getSelectedSubjects() {
         return temasSeleccionadosVarios;
     }
-
+    
+    /**
+     * Establece la lista de temas seleccionados.
+     */
     public void setSelectedSubjects(List<SubjectDTO> selectedSubjects) {
         this.temasSeleccionadosVarios = selectedSubjects;
     }
-
+    
+    /**
+     * Obtiene el serialVersionUID.
+     */
     public static long getSerialversionuid() {
         return serialVersionUID;
     }
