@@ -153,6 +153,21 @@ public class UserBean implements Serializable {
     public void setSelectedUser(UserDTO selectedUser) {
         this.usuarioSeleccionado = selectedUser;
     }
+    
+    /**
+     * Obtiene los usuarios seleccionados.
+     */
+    public List<UserDTO> getSelectedUsers() {
+        return usuariosSeleccionadosVarios;
+    }
+
+    /**
+     * Establece los usuarios seleccionados.
+     */
+    public void setSelectedUsers(List<UserDTO> selectedUsers) {
+        this.usuariosSeleccionadosVarios = selectedUsers;
+    }
+
 
     /**
      * Obtiene el serialVersionUID.
