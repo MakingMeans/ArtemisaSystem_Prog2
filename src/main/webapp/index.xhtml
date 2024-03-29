@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+    
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+  <title>replit</title>
+  <link href="css/style.css" rel="stylesheet" type="text/css" />
+</h:head>
+
+  <h:body>
+    <section class="home">
+      <div class="description">
+        <h1 class="title">
+          <span class="gradient-text">Entrena programación competitiva
+        </h1>
+        <p class="paragraph">
+          Mejora tus capacidades de solución de problemas con logica de programación y matematica. Entrena tus habilidades para ser mejor programador! Registrate
+        </p>
+        <form id="form" autocomplete="off">
+          <input
+            type="email"
+            id="email-id"
+            name="email_address"
+            aria-label="email adress"
+            placeholder=""
+            required
+            oninput="checkEmpty()" />
+          <button type="submit" class="btn" aria-label="submit" onclick="window.location.href = 'welcome.html'">
+            <span>Ingresa tu correo</span>
+            <ion-icon name="arrow-forward-outline"></ion-icon>
+          </button>
+        </form>
+      </div>
+
+      <div class="users-color-container">
+        <span class="item" style="--i: 1"></span>
+        <img
+          class="item"
+          src="https://github.com/ecemgo/mini-samples-great-tricks/assets/13468728/274f29ce-0d3f-4ac2-a2aa-f9b7bd188b2a"
+          style="--i: 2"
+          alt="" />
+        <span class="item" style="--i: 3"></span>
+        <img
+          class="item"
+          src="https://github.com/ecemgo/mini-samples-great-tricks/assets/13468728/b8a14493-3d9f-4b9b-b93a-56d0bc7243e9"
+          style="--i: 4"
+          alt="" />
+
+        <img
+          class="item"
+          src="https://github.com/ecemgo/mini-samples-great-tricks/assets/13468728/03e51e1e-9750-45a5-b75e-a1e341d4562a"
+          style="--i: 10"
+          alt="" />
+        <span class="item" style="--i: 11"></span>
+        <img class="item" src="https://github.com/ecemgo/mini-samples-great-tricks/assets/13468728/5eb50f89-3e5a-480e-860c-8d40d3ba9ffe" style="--i: 12" alt="" />
+        <span class="item" style="--i: 5"></span>
+
+        <span class="item" style="--i: 9"></span>
+        <img class="item" src="https://github.com/ecemgo/mini-samples-great-tricks/assets/13468728/86c71a79-2efe-4567-8665-b1e5a1fd9735" style="--i: 8" alt="" />
+        <span class="item" style="--i: 7"></span>
+        <img class="item" src="https://github.com/ecemgo/mini-samples-great-tricks/assets/13468728/97ef9643-5202-41aa-80f0-ceeabccdd099" style="--i: 6" alt="" />
+      </div>
+    </section>
+    
+    <div class="corner-text">
+      <button type="submit" class="btn1" aria-label="submit"
+       onclick="window.location.href = 'logIn.html'"" >
+        <span>¡Ingresa!</span>
+        <ion-icon name="arrow-forward-outline"></ion-icon>
+      </button>
+    </div>
+   
+    <script src="js/script.js"></script>
+  </h:body>
+
+</html>
