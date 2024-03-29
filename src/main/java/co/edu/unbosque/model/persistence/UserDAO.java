@@ -16,7 +16,10 @@ public class UserDAO implements CRUDOperation<User> {
 		emf = Persistence.createEntityManagerFactory("default");
 		em = emf.createEntityManager();
 	}
-
+	/**
+	 * Abre una conexión con la base de datos si aún no está abierta.
+	 * Si ya está abierta, no realiza ninguna acción.
+	 */
 	public void open() {
 		if (!emf.isOpen() || !em.isOpen()) {
 			emf = Persistence.createEntityManagerFactory("default");
@@ -24,6 +27,10 @@ public class UserDAO implements CRUDOperation<User> {
 		}
 	}
 
+	/**
+	 * Crea un nuevo usuario en la base de datos.
+	 * @param obj El objeto User que representa el usuario a crear.
+	 */
 	@Override
 	public void create(User obj) {
 
@@ -45,6 +52,11 @@ public class UserDAO implements CRUDOperation<User> {
 
 	}
 
+	/**
+	 * Elimina un usuario de la base de datos según su ID.
+	 * @param id El ID del usuario que se va a eliminar.
+	 * @return true si la eliminación se realizó correctamente, false de lo contrario.
+	 */
 	@Override
 	public boolean delete(long id) {
 		open();
@@ -66,7 +78,13 @@ public class UserDAO implements CRUDOperation<User> {
 		}
 		return false;
 	}
-
+	
+	/**
+	 * Actualiza los datos de un usuario en la base de datos.
+	 * @param id El ID del usuario que se va a actualizar.
+	 * @param obj El objeto User con los nuevos datos.
+	 * @return true si la actualización se realizó correctamente, false de lo contrario.
+	 */
 	@Override
 	public boolean update(long id, User obj) {
 		open();
@@ -99,6 +117,10 @@ public class UserDAO implements CRUDOperation<User> {
 		return false;
 	}
 
+	/**
+	 * Lee todos los usuarios almacenados en la base de datos.
+	 * @return Una lista de todos los usuarios almacenados.
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public ArrayList<User> readAll() {
@@ -120,6 +142,11 @@ public class UserDAO implements CRUDOperation<User> {
 
 	}
 
+	/**
+	 * Busca y devuelve un usuario específico de la base de datos según su ID.
+	 * @param id El ID del usuario que se va a buscar.
+	 * @return El usuario encontrado, o null si no se encuentra ningún usuario con ese ID.
+	 */
 	@Override
 	public User findOne(long id) {
 		open();
@@ -139,7 +166,11 @@ public class UserDAO implements CRUDOperation<User> {
 		}
 		return null;
 	}
-
+	
+	/**
+	 * Devuelve el número total de usuarios almacenados en la base de datos.
+	 * @return El número total de usuarios almacenados.
+	 */
 	@Override
 	public int count() {
 		// TODO Auto-generated method stub
