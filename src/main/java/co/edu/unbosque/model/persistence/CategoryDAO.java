@@ -6,16 +6,28 @@ import jakarta.persistence.Persistence;
 import java.util.ArrayList;
 import co.edu.unbosque.model.Category;
 
-
+/**
+ * 
+ * Data Access Object de CodeDTO.
+ * 
+ * @author SantiagoR
+ *
+ */
 public class CategoryDAO implements CRUDOperation<Category>{
 	public EntityManagerFactory emf;
 	public EntityManager em;
 	
+	/**
+	 * Constructor que inicializa la lista de objetos CategoryDAO.
+	 */
 	public CategoryDAO() {
 		emf = Persistence.createEntityManagerFactory("defualt");
 		em = emf.createEntityManager();
 	}
-	
+	/**
+	 * Abre una conexión con la base de datos si aún no está abierta.
+	 * Si ya está abierta, no realiza ninguna acción.
+	 */
 	public void open() {
 		if (!emf.isOpen() || !em.isOpen()) {
 			emf = Persistence.createEntityManagerFactory("default");
@@ -23,6 +35,10 @@ public class CategoryDAO implements CRUDOperation<Category>{
 		}
 	}
 	
+	/**
+	 * Crea una nueva categoría en la base de datos.
+	 * @param obj La categoría que se va a crear.
+	 */
 	@Override
 	public void create(Category obj) {
 		try {
@@ -42,6 +58,11 @@ public class CategoryDAO implements CRUDOperation<Category>{
 		}
 		
 	}
+	/**
+	 * Elimina una categoría de la base de datos según su ID.
+	 * @param id El ID de la categoría que se va a eliminar.
+	 * @return true si la eliminación se realizó correctamente, false de lo contrario.
+	 */
 	@Override
 	public boolean delete(long id) {
 		open();
@@ -63,6 +84,13 @@ public class CategoryDAO implements CRUDOperation<Category>{
 		}
 		return false;
 	}
+	
+	/**
+	 * Actualiza los datos de una categoría en la base de datos.
+	 * @param id El ID de la categoría que se va a actualizar.
+	 * @param obj La categoría con los nuevos datos.
+	 * @return true si la actualización se realizó correctamente, false de lo contrario.
+	 */
 	@Override
 	public boolean update(long id, Category obj) {
 		open();
@@ -91,6 +119,11 @@ public class CategoryDAO implements CRUDOperation<Category>{
 		}
 		return false;
 	}
+	
+	/**
+	 * Lee todas las categorías almacenadas en la base de datos.
+	 * @return Una lista de todas las categorías almacenadas.
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public ArrayList<Category> readAll() {
@@ -111,6 +144,12 @@ public class CategoryDAO implements CRUDOperation<Category>{
 		return new ArrayList<Category>();
 
 	}
+	
+	/**
+	 * Busca y devuelve una categoría específica de la base de datos según su ID.
+	 * @param id El ID de la categoría que se va a buscar.
+	 * @return La categoría encontrada, o null si no se encuentra ninguna categoría con ese ID.
+	 */
 	@Override
 	public Category findOne(long id) {
 		open();
@@ -130,12 +169,15 @@ public class CategoryDAO implements CRUDOperation<Category>{
 		}
 		return null;
 	}
+	
+	/**
+	 * Devuelve el número total de categorías almacenadas en la base de datos.
+	 * @return El número total de categorías almacenadas.
+	 */
 	@Override
 	public int count() {
 		// TODO Auto-generated method stub
 		return 0;
 	}
-	
-	
 
 }
