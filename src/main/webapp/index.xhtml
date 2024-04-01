@@ -25,13 +25,31 @@
 		<h:form id="form" autocomplete="off" onsubmit="return checkEmail()">
 			<h:inputText id="email-id" value="#{loginBean.tempEmail}"
 				styleClass="input" required="true" aria-label="email address"
-				placeholder="user@unbosque.edu.co" />
+				placeholder="user@unbosque.edu.co"
+				style="
+				padding-inline-end: 10px;
+  				padding-inline-start: 10px;
+  				background-color: transparent;
+  				outline: transparent;
+  				border: 0;
+  				border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+  				margin-right: 10px;
+  				transition: all 0.3s ease-in;
+  				-webkit-transition: all 0.3s ease-in;		
+ 				 color: rgb(117, 152, 242);
+ 				 opacity: 0.5;
+ 				 font-weight: 500;
+ 				 color: rgba(255, 255, 255, 0.7);
+  				font-weight: 500;
+ 				 font-size: 1rem;
+				  border: transparent;
+				  outline: 2px dotted rgb(117, 152, 242);
+				  outline-offset: -3px;		" />
 			<h:commandButton type="submit" value="Ingresa tu correo"
 				styleClass="btn" aria-label="submit">
 				<ion-icon name="arrow-forward-outline"></ion-icon>
 			</h:commandButton>
 		</h:form>
-
 	</div>
 
 	<div class="users-color-container">

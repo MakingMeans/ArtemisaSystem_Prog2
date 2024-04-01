@@ -23,12 +23,12 @@
 			<div class="inputBx">
 			<h:form id="form">
 				<div class="inputBx">
-					<h:inputText type="text" placeholder="Usuario o correo"
-						id="usernameOrEmail" value="#{loginBean.usernameOrEmail}" />
+					<h:inputText type="text" title="Usuario o correo"
+						id="usernameOrEmail" value="#{loginBean.usernameOrEmail}" style="margin-bottom: 30px"/>
 				</div>
 				<div class="inputBx">
-					<h:inputSecret type="password" placeholder="Contraseña" id="password"
-						value="#{loginBean.password}" />
+					<h:inputSecret type="password" title="Contraseña" id="password"
+						value="#{loginBean.password}" style="margin-bottom: 30px" />
 				</div>
 				<div class="inputBx">
 					<h:commandButton value="Ingresar" action="#{loginBean.login}" />
