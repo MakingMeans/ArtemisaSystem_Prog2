@@ -28,7 +28,6 @@
 			<!--"create" solamente la primera vez que se arranque el aplicativo, luego 
 				cambiar a none "none" -->
 
-
 		</properties>
 
 	</persistence-unit>

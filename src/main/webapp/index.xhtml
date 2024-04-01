@@ -10,6 +10,7 @@
 <h:head>
 	<title>Artemisa - Main</title>
 	<link href="css/style.css" rel="stylesheet" type="text/css" />
+	<link rel="icon" href="/assets/logo.png" type="image/png" />
 </h:head>
 
 <h:body>
@@ -21,15 +22,15 @@
 		<p class="paragraph">Mejora tus capacidades de solución de
 			problemas con logica de programación y matematica. Entrena tus
 			habilidades para ser mejor programador! Registrate</p>
-		<form id="form" autocomplete="off" onsubmit="return checkEmail()">
-			<input type="email" id="email-id" name="email_address"
-				aria-label="email address" placeholder="user@unbosque.edu.co"
-				required="required" />
-			<button type="submit" class="btn" aria-label="submit">
-				<span>Ingresa tu correo</span>
+		<h:form id="form" autocomplete="off" onsubmit="return checkEmail()">
+			<h:inputText id="email-id" value="#{loginBean.tempEmail}"
+				styleClass="input" required="true" aria-label="email address"
+				placeholder="user@unbosque.edu.co" />
+			<h:commandButton type="submit" value="Ingresa tu correo"
+				styleClass="btn" aria-label="submit">
 				<ion-icon name="arrow-forward-outline"></ion-icon>
-			</button>
-		</form>
+			</h:commandButton>
+		</h:form>
 
 	</div>
 

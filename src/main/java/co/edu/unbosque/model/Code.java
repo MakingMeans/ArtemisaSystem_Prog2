@@ -27,13 +27,13 @@ public class Code {
     /**
      * Lenguaje de programación del código.
      */
-    @Column(name = "Lenguaje De Programacion", nullable=false)
+    @Column(name = "lenguajeProgramacion", nullable=false)
     private String language;
     
     /**
      * Contenido del código.
      */
-    @Column(name = "Contenido", nullable=false)
+    @Column(name = "contenido", nullable=false)
     private String content;
     
     /**

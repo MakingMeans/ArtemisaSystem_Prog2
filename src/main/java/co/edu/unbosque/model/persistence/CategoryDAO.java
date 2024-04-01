@@ -130,7 +130,7 @@ public class CategoryDAO implements CRUDOperation<Category>{
 		open();
 		try {
 			// usando JPQL
-			return (ArrayList<Category>) em.createQuery("select p from User p").getResultList();
+			return (ArrayList<Category>) em.createQuery("select p from Category p").getResultList();
 		} catch (Exception ex) {
 			System.out.println(ex.getMessage());
 		} finally {

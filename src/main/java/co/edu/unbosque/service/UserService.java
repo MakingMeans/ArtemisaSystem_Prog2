@@ -162,4 +162,28 @@ public class UserService implements ServiceOperation<UserDTO> {
 	public void setUserDAO(UserDAO userDAO) {
 		this.userDAO = userDAO;
 	}
+	
+	public int login(String usernameOrEmail, String password) {
+	    UserDTO user = findUserByUsernameOrEmail(usernameOrEmail);
+	    if(user != null && user.getPassword().equals(password) && user.isHasAdmin()) {
+	    	return 0;
+	    }else if (user != null && user.getPassword().equals(password)) {
+	        // Usuario encontrado y contraseña coincide
+	        // Realizar cualquier otra lógica de inicio de sesión necesaria
+	        return 1;
+	    } else {
+	        return 2;
+	    }
+	}
+	
+	public UserDTO findUserByUsernameOrEmail(String usernameOrEmail) {
+	    for (UserDTO user : getUsers()) {
+	        if (user.getUsername().equals(usernameOrEmail) || user.getEmail().equals(usernameOrEmail)) {
+	            return user;
+	        }
+	    }
+	    return null;
+	}
+
+
 }

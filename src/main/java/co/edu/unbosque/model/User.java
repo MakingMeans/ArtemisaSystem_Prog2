@@ -15,7 +15,7 @@ import jakarta.persistence.Table;
  *
  */
 @Entity
-@Table(name="user")
+@Table(name="userAccount")
 public class User{
 	/**
      * Identificador único del usuario.
@@ -27,37 +27,37 @@ public class User{
     /**
      * Nombre de usuario del usuario.
      */
-    @Column(name = "Nombre de usuario", nullable=false)
+    @Column(name = "nombreUsuario", nullable=false, unique = true)
     private String username;
     
     /**
      * Contraseña del usuario.
      */
-    @Column(name = "Contraseña", nullable=false)
+    @Column(name = "contraseña", nullable=false)
     private String password;
     
     /**
      * Correo electrónico del usuario.
      */
-    @Column(name = "Email", nullable=false)
+    @Column(name = "email", nullable=false, unique = true)
     private String email;
     
     /**
      * Semestre del usuario.
      */
-    @Column(name = "Semestre", nullable=false)
+    @Column(name = "semestre", nullable=false)
     private int semester;
     
     /**
      * Carrera del usuario.
      */
-    @Column(name = "Carrera", nullable=false)
+    @Column(name = "carrera", nullable=false)
     private String career;
     
     /**
      * Indica si el usuario es administrador o no.
      */
-    @Column(name = "EsAdmin", nullable=false)
+    @Column(name = "esAdmin", nullable=false)
     private boolean hasAdmin;
     
     /**

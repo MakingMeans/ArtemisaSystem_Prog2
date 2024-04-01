@@ -29,19 +29,19 @@ public class Subject{
     /**
      * Nombre del tema.
      */
-    @Column(name = "Tema", nullable=false)
+    @Column(name = "tema", nullable=false)
     private String name;
     
     /**
      * Descripción del tema.
      */
-    @Column(name = "Descripcion", nullable=false)
+    @Column(name = "descripcion", nullable=false)
     private String desc;
     
     /**
      * Lista de códigos asociados al tema.
      */
-    @Column(name = "Codigos", nullable=false)
+    @Column(name = "codigos", nullable=false)
     private ArrayList<CodeDTO> codes;
     
     /**

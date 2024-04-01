@@ -63,37 +63,42 @@ function checkEmpty() {
 	}
 }
 
+function submitForm() {
+	document.getElementById("registerForm:email").value = "#{userBean.tempEmail}";
+	document.getElementById("registerForm").submit();
+}
+
 function checkEmail() {
-    var emailInput = document.getElementById('email-id');
-    var email = emailInput.value;
-    var emailRegex = /^[a-zA-Z0-9._-]+@unbosque\.edu\.co$/;
+	var emailInput = document.getElementById('email-id');
+	var email = emailInput.value;
+	var emailRegex = /^[a-zA-Z0-9._-]+@unbosque\.edu\.co$/;
 
-    // Verificar si el campo está vacío
-    if (email.trim() === "") {
-        alert('Por favor, introduce una dirección de correo electrónico.');
-        emailInput.focus();
-        return false;
-    }
+	// Verificar si el campo está vacío
+	if (email.trim() === "") {
+		alert('Por favor, introduce una dirección de correo electrónico.');
+		emailInput.focus();
+		return false;
+	}
 
-    // Verificar si hay al menos un @ en el correo electrónico
-    if (email.indexOf('@') === -1) {
-        alert('Por favor, introduce una dirección de correo electrónico válida.');
-        emailInput.focus();
-        return false;
-    }
+	// Verificar si hay al menos un @ en el correo electrónico
+	if (email.indexOf('@') === -1) {
+		alert('Por favor, introduce una dirección de correo electrónico válida.');
+		emailInput.focus();
+		return false;
+	}
 
-    // Validar el formato del correo electrónico
-    if (!emailRegex.test(email)) {
-        alert('Por favor, introduce una dirección de correo electrónico válida con el dominio @unbosque.edu.co');
-        emailInput.focus();
-        return false;
-    }
+	// Validar el formato del correo electrónico
+	if (!emailRegex.test(email)) {
+		alert('Por favor, introduce una dirección de correo electrónico válida con el dominio @unbosque.edu.co');
+		emailInput.focus();
+		return false;
+	}
 
-    // Redireccionar a la página de bienvenida si el correo es válido
-    window.location.href = 'welcome.xhtml';
+	// Redireccionar a la página de bienvenida si el correo es válido
+	window.location.href = 'welcome.xhtml';
 
-    // Retorna false para evitar que el formulario se envíe
-    return false;
+	// Retorna false para evitar que el formulario se envíe
+	return false;
 }
 
 

@@ -135,7 +135,7 @@ public class CodeDAO implements CRUDOperation<Code> {
 		open();
 		try {
 			// usando JPQL
-			return (ArrayList<Code>) em.createQuery("select p from User p").getResultList();
+			return (ArrayList<Code>) em.createQuery("select p from Code p").getResultList();
 		} catch (Exception ex) {
 			System.out.println(ex.getMessage());
 		} finally {
