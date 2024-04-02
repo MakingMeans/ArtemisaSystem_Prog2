@@ -3,6 +3,8 @@ package co.edu.unbosque.beans;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.primefaces.PrimeFaces;
 
@@ -53,6 +55,14 @@ public class UserBean implements Serializable {
     private List<UserDTO> usuariosSeleccionadosVarios;
     
     /**
+     * Email temporal del index.
+     */
+    private String tempEmail;
+    
+    private String usernameOrEmail;
+    private String password;
+    
+    /**
      * Inicializa el bean. Carga la lista de usuarios al iniciar la sesión.
      */
     @PostConstruct
@@ -67,6 +77,72 @@ public class UserBean implements Serializable {
      */
     public void openNew() {
         this.usuarioSeleccionado = new UserDTO();
+    }
+    
+    /**
+     * Guarda un usuario en la base de datos.
+     */
+    public void saveUserOnRegister() {
+        if (this.usuarioSeleccionado.getId() == 0) {
+            this.usuarioSeleccionado.setId(0);
+            this.usuarioSeleccionado.setEmail(tempEmail);
+            this.usuarioSeleccionado.setHasAdmin(false);
+            int taken = userService.takenUserOrEmail(this.usuarioSeleccionado.getUsername());
+            if (taken==0) {
+                // faker
+            	FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Error", "Nombre de usuario ya en uso."));
+            }else {
+            	userService.create(usuarioSeleccionado);
+                FacesContext.getCurrentInstance().getApplication().getNavigationHandler().handleNavigation(FacesContext.getCurrentInstance(), null, "login.xhtml");
+                this.usuariosEnTabla = userService.getUsers();
+            }
+        }
+    }
+    
+    public void checkEmail() {
+    	Pattern emailPattern = Pattern.compile("^[a-zA-Z0-9._-]+@unbosque\\.edu\\.co$");
+        Matcher matcher = emailPattern.matcher(tempEmail);
+        // Verificar si el campo está vacío
+        if (tempEmail.trim().isEmpty()) {
+            // Mostrar mensaje de alerta o manejar el error de alguna otra manera
+        	FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Error", "Por favor, introduce una dirección de correo electrónico."));
+        }
+
+        // Verificar si hay al menos un @ en el correo electrónico
+        else if (tempEmail.indexOf('@') == -1) {
+            // Mostrar mensaje de alerta o manejar el error de alguna otra manera
+        	FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Error", "Por favor, introduce una dirección de correo electrónico válida."));
+        }
+
+        // Validar el formato del correo electrónico
+        else if (!matcher.matches()) {
+            // Mostrar mensaje de alerta o manejar el error de alguna otra manera
+        	FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Error", "Por favor, introduce una dirección de correo electrónico válida con el dominio @unbosque.edu.co"));
+        } else {
+        	int taken = userService.takenUserOrEmail(tempEmail);
+            if (taken==1) {
+                // faker
+            	FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Error", "Email ya en uso."));
+            }else {
+                // original
+            	FacesContext.getCurrentInstance().getApplication().getNavigationHandler().handleNavigation(FacesContext.getCurrentInstance(), null, "welcome.xhtml");
+            }
+        }
+    }
+    
+ // Método para el inicio de sesión
+    public void login() {
+        int loggedIn = userService.login(usernameOrEmail, password);
+        if (loggedIn == 0) {
+            // admin
+            FacesContext.getCurrentInstance().getApplication().getNavigationHandler().handleNavigation(FacesContext.getCurrentInstance(), null, "index.xhtml");
+        } else if (loggedIn == 1) {
+            // plebeyo
+            FacesContext.getCurrentInstance().getApplication().getNavigationHandler().handleNavigation(FacesContext.getCurrentInstance(), null, "welcome.xhtml");
+        } else {
+            // intruder
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Error", "Nombre de usuario, correo o contraseña incorrectos."));
+        }
     }
     
     /**
@@ -181,5 +257,35 @@ public class UserBean implements Serializable {
      */
     public static long getSerialversionuid() {
         return serialVersionUID;
+    }
+    
+    /**
+     * Obtiene el email temporal.
+     */
+	public String getTempEmail() {
+		return tempEmail;
+	}
+
+	/**
+	 * Establece el email temporal.
+	 */
+	public void setTempEmail(String tempEmail) {
+		this.tempEmail = tempEmail;
+	}
+	
+	public String getUsernameOrEmail() {
+        return usernameOrEmail;
+    }
+
+    public void setUsernameOrEmail(String usernameOrEmail) {
+        this.usernameOrEmail = usernameOrEmail;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

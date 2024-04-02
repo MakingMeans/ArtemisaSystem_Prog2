@@ -70,11 +70,11 @@ body {
 @keyframes type3 {
   from {
     width: 23ch;
-    content: "Hola, soy artemisa. Bienvenido a esta aventura."
+    content: "Hola, soy artemisa. Bienvenido a la aventura."
   }
   to {
     width: 45ch;
-    content: "Hola, soy artemisa. Bienvenido a esta aventura."
+    content: "Hola, soy artemisa. Bienvenido a la aventura."
   }
 }
 

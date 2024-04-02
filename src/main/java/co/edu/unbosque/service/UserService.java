@@ -176,6 +176,18 @@ public class UserService implements ServiceOperation<UserDTO> {
 	    }
 	}
 	
+	public int takenUserOrEmail(String usernameOrEmail) {
+	    for (UserDTO user : getUsers()) {
+	        if (user.getUsername().equals(usernameOrEmail)) {
+	            return 0;
+	        }
+	        else if (user.getEmail().equals(usernameOrEmail)) {
+	            return 1;
+	        }
+	    }
+	    return 2;
+	}
+	
 	public UserDTO findUserByUsernameOrEmail(String usernameOrEmail) {
 	    for (UserDTO user : getUsers()) {
 	        if (user.getUsername().equals(usernameOrEmail) || user.getEmail().equals(usernameOrEmail)) {

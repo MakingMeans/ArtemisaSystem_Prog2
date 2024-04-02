@@ -14,6 +14,7 @@
 </h:head>
 
 <h:body>
+<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" style="position: absolute; top: 10px; right: 10px;" />
 	<section class="home">
 	<div class="description">
 		<h1 class="title">
@@ -22,8 +23,8 @@
 		<p class="paragraph">Mejora tus capacidades de solución de
 			problemas con logica de programación y matematica. Entrena tus
 			habilidades para ser mejor programador! Registrate</p>
-		<h:form id="form" autocomplete="off" onsubmit="return checkEmail()">
-			<h:inputText id="email-id" value="#{loginBean.tempEmail}"
+		<h:form id="form">
+			<h:inputText id="email-id" value="#{userBean.tempEmail}"
 				styleClass="input" required="true" aria-label="email address"
 				placeholder="user@unbosque.edu.co"
 				style="
@@ -46,7 +47,8 @@
 				  outline: 2px dotted rgb(117, 152, 242);
 				  outline-offset: -3px;		" />
 			<h:commandButton type="submit" value="Ingresa tu correo"
-				styleClass="btn" aria-label="submit">
+				styleClass="btn" aria-label="submit" action="#{userBean.checkEmail()}"
+				actionListener="#{userBean.openNew}">
 				<ion-icon name="arrow-forward-outline"></ion-icon>
 			</h:commandButton>
 		</h:form>

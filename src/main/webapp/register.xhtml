@@ -10,31 +10,40 @@
 <h:head>
 	<title>Artemisa - Register</title>
 	<link href="css/logIn.css" rel="stylesheet" type="text/css" />
-	<link rel="icon" href="/assets/logo.png" type="image/png"/>
+	<link rel="icon" href="/assets/logo.png" type="image/png" />
 </h:head>
 
 <h:body>
+<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" style="position: absolute; top: 10px; right: 10px;" />
 	<div class="ring">
 		<i style="--clr: #6cc164;"></i> <i style="--clr: rgb(117, 152, 242);"></i>
 		<i style="--clr: #67d7e1;"></i>
 		<div class="login">
 			<h2>Registra tus datos</h2>
-			<div class="inputBx">
-				<input type="text" placeholder="Usuario"/>
-			</div>
-			<div class="inputBx">
-				<input type="password" placeholder="Contraseña"/>
-			</div>
-			<div class="inputBx">
-				<input type="text" placeholder="Semestre"/>
-			</div>
-			<div class="inputBx">
-				<input type="password" placeholder="Carrera"/>
-			</div>
-			<div class="inputBx">
-				<input type="submit" onclick="window.location.href ='courses.xhtml'"
-					value="Registrate"/>
-			</div>
+			<h:form id="registerForm">
+				<div class="inputBx">
+					<h:inputHidden id="userId" value="#{userBean.selectedUser.id}" />
+				</div>
+				<div class="inputBx">
+					<h:inputText value="#{userBean.selectedUser.username}"
+						placeholder="Usuario" />
+				</div>
+				<div class="inputBx">
+					<h:inputSecret value="#{userBean.selectedUser.password}"
+						placeholder="Contraseña" />
+				</div>
+				<div class="inputBx">
+					<h:inputText value="#{userBean.selectedUser.semester}"
+						placeholder="Semestre" />
+				</div>
+				<div class="inputBx">
+					<h:inputText value="#{userBean.selectedUser.career}"
+						placeholder="Carrera" />
+				</div>
+				<div class="inputBx">
+					<h:commandButton value="Registrate" action="#{userBean.saveUserOnRegister()}" />
+				</div>
+			</h:form>
 			<div class="links">
 				<a href="login.xhtml">¿Ya tienes cuenta? Ingresa</a>
 			</div>
