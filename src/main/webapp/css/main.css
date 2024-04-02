@@ -52,8 +52,10 @@ nav {
 
 .grid {
   position: absolute;
-  height: 100%;
-  weight: 100%;
+  height: 150%;
+  bottom: 40%;
+  top: 30%;
+  right: 220px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -171,13 +173,13 @@ span {
 }
 
 .button.first {
-  top: 22%;
-  right: 17%;
+  top: 36%;
+  right: 1%;
 }
 
 .button.sec {
-  bottom: 23%;
-  right: 11%;
+  bottom: 27%;
+  right: 1%;
 }
 
 .button.sec > button {
@@ -191,8 +193,8 @@ span {
 }
 
 .button.third {
-  bottom: 23%;
-  left: 15%;
+  bottom: 27%;
+  left: 4%;
 }
 
 .button.third > button {
@@ -202,22 +204,22 @@ span {
 }
 
 .button.third > span {
-  background-color: var(--secondaryHi);
+  background-color: var(--se	condaryHi);
 }
 
 .button.four {
-  top: 46%;
-  right: 10%;
+  top: 52%;
+  right: -10%;
 }
 
 .button.fifth {
-  top: 45%;
-  right: 82%;
+  top: 52%;
+  right: 90%;
 }
 
 .button.six {
-  top: 22%;
-  right: 77%;
+  top: 35%;
+  right: 80%;
 }
 
 .button.six > button {
@@ -232,8 +234,8 @@ span {
 
 
 .button.sev {
-  top: 80%;
-  right: 45%;
+  top: 75%;
+  right: 41%;
 }
 
 .top-right {
@@ -276,4 +278,8 @@ span {
     align-items: center;
   }
 
+}
+
+.product card{
+	height: 200%;
 }
