@@ -18,33 +18,33 @@
 		<i style="--clr: #6cc164;"></i> <i style="--clr: rgb(117, 152, 242);"></i>
 		<i style="--clr: #67d7e1;"></i>
 		<div class="login">
-			<h2>Registra tus datos</h2>
+			<h2  style="margin-bottom: 10px">Registra tus datos</h2>
 			<h:form id="registerForm">
 			<p:growl id="growl" showDetail="true" />
 				<div class="inputBx">
 					<h:inputHidden id="userId" value="#{userBean.selectedUser.id}" />
 				</div>
 				<div class="inputBx">
-					<h:inputText value="#{userBean.selectedUser.username}" required="true"
+					<h:inputText value="#{userBean.selectedUser.username}"  style="margin-bottom: 30px" required="true"
 						placeholder="Usuario" >
 						<f:passThroughAttribute name="placeholder" value="Usuario" />
 					</h:inputText>
 				</div>
 				<div class="inputBx">
-					<h:inputSecret value="#{userBean.selectedUser.password}" required="true"
+					<h:inputSecret value="#{userBean.selectedUser.password}" style="margin-bottom: 30px" required="true"
 						placeholder="Contraseña" >
 						<f:passThroughAttribute name="placeholder" value="Contraseña" />
 					</h:inputSecret>
 				</div>
 				<div class="inputBx">
-					<h:inputText value="#{userBean.selectedUser.semester}" required="true"
+					<h:inputText value="#{userBean.selectedUser.semester}"  style="margin-bottom: 30px" required="true"
 						placeholder="Semestre" >
 					<f:convertNumber integerOnly="true" />
 					<f:passThroughAttribute name="placeholder" value="Semestre" />
 					</h:inputText>
 				</div>
 				<div class="inputBx">
-					<h:inputText value="#{userBean.selectedUser.career}" required="true"
+					<h:inputText value="#{userBean.selectedUser.career}" style="margin-bottom: 30px"  required="true"
 						placeholder="Carrera" >
 						<f:passThroughAttribute name="placeholder" value="Carrera" />
 					</h:inputText>

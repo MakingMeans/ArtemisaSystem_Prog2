@@ -28,7 +28,7 @@ public class Code {
      * Lenguaje de programación del código.
      */
     @Column(name = "lenguajeProgramacion", nullable=false)
-    private String language;
+    private String language;	
     
     /**
      * Contenido del código.

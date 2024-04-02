@@ -104,13 +104,15 @@ nav {
 }
 
 .title > p:nth-child(2){
-  color: var(--primary);
+  color: var(--text);
   align-self: flex-end;
 }
 
 .title > p:nth-child(3){
+  color: var(--text);
   align-self: flex-end;
 }
+
 
 .material-icons {
   display: none;
@@ -254,9 +256,6 @@ span {
   opacity: 50%;
 }
 
-
-
-
 @media screen and (max-width: 1000px) {
 
 
@@ -283,3 +282,19 @@ span {
 .product card{
 	height: 200%;
 }
+.table-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 500vh; 
+   
+}
+.product.card {
+    max-width: 800px; 
+    width: 100%; 
+    overflow-x: auto; 
+}
+
+
+
+
