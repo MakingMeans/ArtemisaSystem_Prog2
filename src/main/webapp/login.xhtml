@@ -14,7 +14,6 @@
 </h:head>
 
 <h:body>
-<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" style="position: absolute; top: 10px; right: 10px;" />
 	<div class="ring">
 		<i style="--clr: #6cc164;"></i> <i style="--clr: rgb(117, 152, 242);"></i>
 		<i style="--clr: #67d7e1;"></i>
@@ -22,16 +21,21 @@
 			<h2>Login</h2>
 			<div class="inputBx">
 			<h:form id="form">
+			<p:growl id="growl" showDetail="true" />
 				<div class="inputBx">
-					<h:inputText type="text" title="Usuario o correo"
-						id="usernameOrEmail" value="#{userBean.usernameOrEmail}" style="margin-bottom: 30px"/>
+					<h:inputText type="text"
+						id="usernameOrEmail" value="#{userBean.usernameOrEmail}" style="margin-bottom: 30px">
+						<f:passThroughAttribute name="placeholder" value="Usuario o Correo" />
+					</h:inputText>
 				</div>
 				<div class="inputBx">
-					<h:inputSecret type="password" title="Contraseña" id="password"
-						value="#{userBean.password}" style="margin-bottom: 30px" />
+					<h:inputSecret type="password" id="password"
+						value="#{userBean.password}" style="margin-bottom: 30px" >
+						<f:passThroughAttribute name="placeholder" value="Contraseña" />
+					</h:inputSecret>
 				</div>
 				<div class="inputBx">
-					<h:commandButton value="Ingresar" action="#{userBean.login}" />
+					<h:commandButton value="Ingresar" update="growl" actionListener="#{userBean.login}" />
 				</div>
 			</h:form>
 			</div>

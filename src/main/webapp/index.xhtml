@@ -14,7 +14,6 @@
 </h:head>
 
 <h:body>
-<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" style="position: absolute; top: 10px; right: 10px;" />
 	<section class="home">
 	<div class="description">
 		<h1 class="title">
@@ -24,32 +23,31 @@
 			problemas con logica de programación y matematica. Entrena tus
 			habilidades para ser mejor programador! Registrate</p>
 		<h:form id="form">
+		<p:growl id="growl" showDetail="true" autoUpdate="true"/>
 			<h:inputText id="email-id" value="#{userBean.tempEmail}"
 				styleClass="input" required="true" aria-label="email address"
 				placeholder="user@unbosque.edu.co"
 				style="
-				padding-inline-end: 10px;
-  				padding-inline-start: 10px;
-  				background-color: transparent;
-  				outline: transparent;
-  				border: 0;
-  				border-bottom: 2px solid rgba(255, 255, 255, 0.3);
-  				margin-right: 10px;
-  				transition: all 0.3s ease-in;
-  				-webkit-transition: all 0.3s ease-in;		
- 				 color: rgb(117, 152, 242);
- 				 opacity: 0.5;
- 				 font-weight: 500;
- 				 color: rgba(255, 255, 255, 0.7);
-  				font-weight: 500;
- 				 font-size: 1rem;
-				  border: transparent;
-				  outline: 2px dotted rgb(117, 152, 242);
-				  outline-offset: -3px;		" />
-			<h:commandButton type="submit" value="Ingresa tu correo"
-				styleClass="btn" aria-label="submit" action="#{userBean.checkEmail()}"
-				actionListener="#{userBean.openNew}">
-				<ion-icon name="arrow-forward-outline"></ion-icon>
+        padding-inline-end: 10px;
+        padding-inline-start: 10px;
+        background-color: transparent;
+        outline: transparent;
+        border: 0;
+        border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+        margin-right: 10px;
+        transition: all 0.3s ease-in;
+        -webkit-transition: all 0.3s ease-in;
+        color: #ffffff; 
+        font-weight: 500;
+        font-size: 1rem;
+        border: transparent;
+        outline: 2px dotted rgb(117, 152, 242); 
+        outline-offset: -3px;">
+        <f:passThroughAttribute name="placeholder" value="user@unbosque.edu.co" />
+        </h:inputText>
+			<h:commandButton type="submit" value="Ingresa tu correo" update="growl"
+				styleClass="btn" aria-label="submit"
+				actionListener="#{userBean.checkEmail}">
 			</h:commandButton>
 		</h:form>
 	</div>
@@ -78,7 +76,7 @@
 
 	<div class="corner-text">
 		<button type="submit" class="btn1" aria-label="submit"
-			onclick="window.location.href = 'main.xhtml'">
+			onclick="window.location.href = 'login.xhtml'">
 			<span>¡Ingresa!</span>
 			<ion-icon name="arrow-forward-outline"></ion-icon>
 		</button>
