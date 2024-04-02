@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-<html xmlns="http://www.w3.org/1999/xhtml" 
+<html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
@@ -19,22 +19,24 @@
 </h:head>
 
 <h:body>
-     <section class="hero">
-      <h1>Bienvenido al menu de admin</h1>
-      <div class="btn-group">
-          <button class="btn-filled-dark" onclick="scrollToSection('otros')"><span class="material-symbols-outlined">
-                  Inserte teto chido
-              </span></button>
-          <button class="btn-outline-dark btn-hover-color" onclick="scrollToSection('this')"><span class="material-symbols-outlined">
-                  Dejo esto por si lo necesitan
-              </span></button>
-      </div>
+	<section class="hero">
+	<h1>Bienvenido al menu de admin</h1>
+	<div class="btn-group">
+		<button class="btn-filled-dark" onclick="scrollToSection('otros')">
+			<span class="material-symbols-outlined"> Inserte teto chido </span>
+		</button>
+		<button class="btn-outline-dark btn-hover-color"
+			onclick="scrollToSection('this')">
+			<span class="material-symbols-outlined"> Dejo esto por si lo
+				necesitan </span>
+		</button>
+	</div>
 
-    </section>
-     <section id="this">
-      <h2>Administra codigo</h2>
+	</section>
+	<section id="this">
+	<h2>Administra codigo</h2>
 
-      <div class="card crud-demo">
+	<div class="card crud-demo">
 		<h:form id="form">
 			<p:growl id="messages" showDetail="true" />
 
@@ -47,14 +49,12 @@
 						styleClass="ui-button-success" style="margin-right: .5rem">
 						<p:resetInput target=":dialogs:manage-subject-content" />
 					</p:commandButton>
-					
+
 					<p:commandButton id="delete-subjects-button"
-						value="#{SubjectBean.deleteButtonMessage}"
-						icon="pi pi-trash"
+						value="#{SubjectBean.deleteButtonMessage}" icon="pi pi-trash"
 						actionListener="#{SubjectBean.deleteSelectedSubjects}"
 						styleClass="ui-button-danger"
-						disabled="#{!SubjectBean.hasSelectedSubject()}"
-						update="@this">
+						disabled="#{!SubjectBean.hasSelectedSubject()}" update="@this">
 						<p:confirm header="Confirmation"
 							message="Delete the selected subjects?"
 							icon="pi pi-exclamation-triangle" />
@@ -62,18 +62,18 @@
 				</p:toolbarGroup>
 			</p:toolbar>
 
-			<p:dataTable id="dt-subjects" widgetVar="dtsubjects" var="subject"
+			<p:dataTable id="dt-subjects" widgetVar="dtSubjects" var="subject"
 				value="#{subjectBean.subjects}" reflow="true"
 				styleClass="subjects-table"
-				selection="#{subjectBean.selectedsubjects}"
-				rowKey="#{subject.id}" paginator="true" rows="10"
-				rowSelectMode="add" paginatorPosition="bottom">
+				selection="#{subjectBean.selectedSubjects}" rowKey="#{subject.id}"
+				paginator="true" rows="10" rowSelectMode="add"
+				paginatorPosition="bottom">
 				<f:facet name="header">
 					<div class="subjects-table-header">
-						<span style="font-weight: bold">subjects</span> <span
+						<span style="font-weight: bold">SUBJECTS</span> <span
 							class="filter-container ui-input-icon-left"> <i
 							class="pi pi-search"></i> <p:inputText id="globalFilter"
-								onkeyup="PF('dtsubjects').filter()" placeholder="Search" />
+								onkeyup="PF('dtSubjects').filter()" placeholder="Search" />
 						</span>
 					</div>
 				</f:facet>
@@ -92,26 +92,22 @@
 					filterBy="#{subject.id}">
 					<h:outputText value="#{subject.id}" />
 				</p:column>
-				<p:column headerText="Nombre Tema"
-					sortBy="#{subject.name}"
+				<p:column headerText="Nombre Tema" sortBy="#{subject.name}"
 					filterBy="#{subject.name}">
 					<h:outputText value="#{subject.name}" />
 				</p:column>
-				<p:column headerText="Descripcion"
-					sortBy="#{subject.desc}"
+				<p:column headerText="Descripcion" sortBy="#{subject.desc}"
 					filterBy="#{subject.desc}">
 					<h:outputText value="#{subject.desc}" />
 				</p:column>
 
-				<p:column headerText="Codigos"
-					sortBy="#{subject.codes}">
-					<h:outputText value="#{subject.codes}"
-						style="font-weight: 700">
+				<p:column headerText="Codigos" sortBy="#{subject.codes}">
+					<h:outputText value="#{subject.codes}" style="font-weight: 700">
 						<f:convertNumber currencySymbol="$" type="currency" />
 					</h:outputText>
 				</p:column>
-				
-					</h:outputText>
+
+				</h:outputText>
 				</p:column>
 
 				<p:column exportable="false">
@@ -136,15 +132,14 @@
 		</h:form>
 
 		<h:form id="dialogs">
-			<p:dialog header="Detalles del tema" showEffect="fade"
-				modal="true" widgetVar="manageSubjectDialog" responsive="true">
+			<p:dialog header="Detalles del tema" showEffect="fade" modal="true"
+				widgetVar="manageSubjectDialog" responsive="true">
 				<p:outputPanel id="manage-subject-content" class="ui-fluid">
-					<p:outputPanel
-						rendered="#{not empty SubjectBean.selectedSubject}">
+					<p:outputPanel rendered="#{not empty SubjectBean.selectedSubject}">
 						<div class="field">
 							<p:outputLabel for="id">ID</p:outputLabel>
-							<p:inputText id="id"
-								value="#{SubjectBean.selectedSubject.id}" required="true" readonly="true" />
+							<p:inputText id="id" value="#{SubjectBean.selectedSubject.id}"
+								required="true" readonly="true" />
 						</div>
 						<div class="field">
 							<p:outputLabel for="name">Nombre</p:outputLabel>
@@ -160,16 +155,15 @@
 
 						<div class="formgrid grid">
 							<div class="field col">
-								<p:outputLabel for="costoProd">Codigos</p:outputLabel>
-								<p:inputNumber id="costoProd"
-									value="#{SubjectBean.selectedSubject.codes}"
-							 />
+								<p:outputLabel for="codes">Codigos</p:outputLabel>
+								<p:inputNumber id="codes"
+									value="#{SubjectBean.selectedSubject.codes}" />
 							</div>
-						
+
 						</div>
 
-						
-					</p:outputPanel>	
+
+					</p:outputPanel>
 				</p:outputPanel>
 
 				<f:facet name="footer">
@@ -178,7 +172,7 @@
 						update="manage-subject-content"
 						process="manage-subject-content @this" />
 					<p:commandButton value="Cancel" icon="pi pi-times"
-						onclick="PF('managesubjectDialog').hide()"
+						onclick="PF('manageSubjectDialog').hide()"
 						class="ui-button-secondary" type="button" />
 				</f:facet>
 			</p:dialog>
@@ -187,8 +181,8 @@
 				width="300" message="Delete the subject?" header="Confirm"
 				severity="warn">
 				<p:commandButton value="Yes" icon="pi pi-check"
-					actionListener="#{subjectBean.deleteSubject}"
-					process="@this" update=":form:delete-subjects-button"
+					actionListener="#{subjectBean.deleteSubject}" process="@this"
+					update=":form:delete-subjects-button"
 					oncomplete="PF('deleteSubjectDialog').hide()" />
 				<p:commandButton value="No" type="button"
 					styleClass="ui-button-secondary" icon="pi pi-times"
@@ -204,7 +198,7 @@
 			</p:confirmDialog>
 		</h:form>
 	</div>
-  
-   <script src="js/script.js"></script>
+
+	<script src="js/script.js"></script>
 </h:body>
 </html>
