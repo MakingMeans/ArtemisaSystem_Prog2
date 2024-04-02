@@ -5,6 +5,9 @@
   box-sizing: border-box;
   font-family: "Quicksand", sans-serif;
 }
+#growl p {
+  color: inherit; /* Utiliza el color heredado */
+}
 body {
   display: flex;
   justify-content: center;
