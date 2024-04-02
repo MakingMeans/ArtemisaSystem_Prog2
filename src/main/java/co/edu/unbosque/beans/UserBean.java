@@ -138,7 +138,7 @@ public class UserBean implements Serializable {
             FacesContext.getCurrentInstance().getApplication().getNavigationHandler().handleNavigation(FacesContext.getCurrentInstance(), null, "index.xhtml");
         } else if (loggedIn == 1) {
             // plebeyo
-            FacesContext.getCurrentInstance().getApplication().getNavigationHandler().handleNavigation(FacesContext.getCurrentInstance(), null, "welcome.xhtml");
+            FacesContext.getCurrentInstance().getApplication().getNavigationHandler().handleNavigation(FacesContext.getCurrentInstance(), null, "admin.xhtml");
         } else {
             // intruder
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Error", "Nombre de usuario, correo o contraseña incorrectos."));
