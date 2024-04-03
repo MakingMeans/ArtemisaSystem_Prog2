@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-<html xmlns="http://www.w3.org/1999/xhtml" 
+<html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
@@ -15,15 +15,14 @@
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 	<title>Tienda de codeos</title>
-	<link href="css/style.css" rel="stylesheet" type="text/css" />
 </h:head>
 
 <h:body>
 
-     <section id="this">
-      <h2>Elige tus codeos</h2>
+	<section id="this">
+	<h2>Elige tus codeos</h2>
 
-      <div class="card crud-demo">
+	<div class="card crud-demo">
 		<h:form id="form">
 			<p:growl id="messages" showDetail="true" />
 
@@ -37,12 +36,10 @@
 						<p:resetInput target=":dialogs:manage-code-content" />
 					</p:commandButton>
 					<p:commandButton id="delete-codes-button"
-						value="#{codeBean.deleteButtonMessage}"
-						icon="pi pi-trash"
+						value="#{codeBean.deleteButtonMessage}" icon="pi pi-trash"
 						actionListener="#{codeBean.deleteSelectedCodes}"
 						styleClass="ui-button-danger"
-						disabled="#{!codeBean.hasSelectedCodes()}"
-						update="@this">
+						disabled="#{!codeBean.hasSelectedCodes()}" update="@this">
 						<p:confirm header="Confirmation"
 							message="Delete the selected codes?"
 							icon="pi pi-exclamation-triangle" />
@@ -51,14 +48,13 @@
 			</p:toolbar>
 
 			<p:dataTable id="dt-codes" widgetVar="dtCodes" var="code"
-				value="#{codeBean.codes}" reflow="true"
-				styleClass="codes-table"
-				selection="#{codeBean.selectedCodes}"
-				rowKey="#{code.id}" paginator="true" rows="10"
-				rowSelectMode="add" paginatorPosition="bottom">
+				value="#{codeBean.codes}" reflow="true" styleClass="codes-table"
+				selection="#{codeBean.selectedCodes}" rowKey="#{code.id}"
+				paginator="true" rows="10" rowSelectMode="add"
+				paginatorPosition="bottom">
 				<f:facet name="header">
 					<div class="codes-table-header">
-						<span style="font-weight: bold">codes</span> <span
+						<span style="font-weight: bold">Codigos</span> <span
 							class="filter-container ui-input-icon-left"> <i
 							class="pi pi-search"></i> <p:inputText id="globalFilter"
 								onkeyup="PF('dtCodes').filter()" placeholder="Search" />
@@ -68,29 +64,28 @@
 
 				<p:ajax event="rowSelect" update=":form:delete-codes-button" />
 				<p:ajax event="rowUnselect" update=":form:delete-codes-button" />
-				<p:ajax event="rowSelectCheckbox"
-					update=":form:delete-codes-button" />
+				<p:ajax event="rowSelectCheckbox" update=":form:delete-codes-button" />
 				<p:ajax event="rowUnselectCheckbox"
 					update=":form:delete-codes-button" />
 				<p:ajax event="toggleSelect" update=":form:delete-codes-button" />
 
 				<p:column selectionMode="multiple" exportable="false"></p:column>
 
-				<p:column headerText="ID" sortBy="#{code.id}"
-					filterBy="#{code.id}">
+				<p:column headerText="ID" sortBy="#{code.id}" filterBy="#{code.id}">
 					<h:outputText value="#{code.id}" />
 				</p:column>
-				<p:column headerText="Lenguaje"
-					sortBy="#{code.language}"
+				<p:column headerText="Lenguaje" sortBy="#{code.language}"
 					filterBy="#{code.language}">
 					<h:outputText value="#{code.language}" />
 				</p:column>
-				<p:column headerText="Contenido"
-					sortBy="#{code.content}"
+				<p:column headerText="Contenido" sortBy="#{code.content}"
 					filterBy="#{code.content}">
 					<h:outputText value="#{code.content}" />
 				</p:column>
-
+				<p:column headerText="Tema" sortBy="#{code.subjectOf}"
+					filterBy="#{code.subjectOf}">
+					<h:outputText value="#{code.subjectOf}" />
+				</p:column>
 
 				<p:column exportable="false">
 					<p:commandButton icon="pi pi-pencil"
@@ -109,77 +104,76 @@
 							target="#{codeBean.selectedCode}" />
 					</p:commandButton>
 				</p:column>
-
 			</p:dataTable>
+
 		</h:form>
 
 		<h:form id="dialogs">
-			<p:dialog header="Detalles del codeo" showEffect="fade"
-				modal="true" widgetVar="manageCodeDialog" responsive="true">
+			<p:dialog header="Detalles del codeo" showEffect="fade" modal="true"
+				widgetVar="manageCodeDialog" responsive="true">
 				<p:outputPanel id="manage-code-content" class="ui-fluid">
-					<p:outputPanel
-						rendered="#{not empty codeBean.selectedCode}">
+					<p:outputPanel rendered="#{not empty codeBean.selectedCode}">
 						<div class="field">
 							<p:outputLabel for="id">ID</p:outputLabel>
-							<p:inputText id="id"
-								value="#{codeBean.selectedCode.id}" required="true" readonly="true" />
+							<p:inputText id="id" value="#{codeBean.selectedCode.id}"
+								required="true" readonly="true" />
 						</div>
-				           <div class="field">
-                           <p:outputLabel for="language">Lenguaje</p:outputLabel>
-                           <p:selectOneMenu id="language" value="#{codeBean.selectedCode.language}">
-                           <f:selectItem itemLabel="Java" itemValue="Java" />
-                           <f:selectItem itemLabel="C++" itemValue="C++" />
-                           <f:selectItem itemLabel="Python" itemValue="Python" />
-                           </p:selectOneMenu>
-                           </div>
-
+						<div class="field">
+							<p:outputLabel for="language">Lenguaje</p:outputLabel>
+							<p:selectOneMenu id="language"
+								value="#{codeBean.selectedCode.language}">
+								<f:selectItem itemLabel="Java" itemValue="Java" />
+								<f:selectItem itemLabel="C++" itemValue="C++" />
+								<f:selectItem itemLabel="Python" itemValue="Python" />
+							</p:selectOneMenu>
+						</div>
 						<div class="field">
 							<p:outputLabel for="content">Contenido</p:outputLabel>
-							<p:inputText id="content"
+							<p:inputTextarea id="content"
 								value="#{codeBean.selectedCode.content}" />
 						</div>
-						
-						
-					</p:outputPanel>	
+						<div class="field">
+							<p:outputLabel for="subjectOf">Tema</p:outputLabel>
+							<p:inputText id="subjectOf"
+								value="#{codeBean.selectedCode.subjectOf}" />
+						</div>
+					</p:outputPanel>
 				</p:outputPanel>
-
 				<f:facet name="footer">
-					<p:commandButton value="Save" icon="pi pi-check"
-						actionListener="#{codeBean.saveCode}"
-						update="manage-code-content"
+					<p:commandButton value="Guardar" icon="pi pi-check"
+						actionListener="#{codeBean.saveCode}" update="manage-code-content"
 						process="manage-code-content @this" />
-					<p:commandButton value="Cancel" icon="pi pi-times"
+					<p:commandButton value="Cancelar" icon="pi pi-times"
 						onclick="PF('manageCodeDialog').hide()"
 						class="ui-button-secondary" type="button" />
 				</f:facet>
 			</p:dialog>
-
 			<p:confirmDialog widgetVar="deleteCodeDialog" showEffect="fade"
-				width="300" message="Delete the code?" header="Confirm"
+				width="300" message="¿Eliminar el código?" header="Confirmar"
 				severity="warn">
-				<p:commandButton value="Yes" icon="pi pi-check"
-					actionListener="#{codeBean.deleteCode}"
-					process="@this" update=":form:delete-codes-button"
+				<p:commandButton value="Sí" icon="pi pi-check"
+					actionListener="#{codeBean.deleteCode}" process="@this"
+					update=":form:delete-codes-button"
 					oncomplete="PF('deleteCodeDialog').hide()" />
 				<p:commandButton value="No" type="button"
 					styleClass="ui-button-secondary" icon="pi pi-times"
 					onclick="PF('deleteCodeDialog').hide()" />
 			</p:confirmDialog>
-
 			<p:confirmDialog global="true" showEffect="fade" width="300">
-				<p:commandButton value="Yes" type="button"
+				<p:commandButton value="Sí" type="button"
 					styleClass="ui-confirmdialog-yes" icon="pi pi-check" />
 				<p:commandButton value="No" type="button"
 					styleClass="ui-confirmdialog-no ui-button-secondary"
 					icon="pi pi-times" />
 			</p:confirmDialog>
 		</h:form>
-	</div>
-    </section>
 
-  
-     
-   <script src="js/script.js"></script>
+	</div>
+	</section>
+
+
+
+	<script src="js/script.js"></script>
 </h:body>
 </html>
 

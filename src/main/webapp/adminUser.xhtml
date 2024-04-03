@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-<html xmlns="http://www.w3.org/1999/xhtml" 
+<html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
@@ -18,10 +18,10 @@
 </h:head>
 
 <h:body>
-     <section id="this">
-      <h2>Elige un usuario</h2>
+	<section id="this">
+	<h2>Elige un usuario</h2>
 
-      <div class="card crud-demo">
+	<div class="card crud-demo">
 		<h:form id="form">
 			<p:growl id="messages" showDetail="true" />
 
@@ -35,12 +35,10 @@
 						<p:resetInput target=":dialogs:manage-user-content" />
 					</p:commandButton>
 					<p:commandButton id="delete-users-button"
-						value="#{userBean.deleteButtonMessage}"
-						icon="pi pi-trash"
+						value="#{userBean.deleteButtonMessage}" icon="pi pi-trash"
 						actionListener="#{userBean.deleteSelectedUsers}"
 						styleClass="ui-button-danger"
-						disabled="#{!userBean.hasSelectedUsers()}"
-						update="@this">
+						disabled="#{!userBean.hasSelectedUsers()}" update="@this">
 						<p:confirm header="Confirmation"
 							message="Delete the selected users?"
 							icon="pi pi-exclamation-triangle" />
@@ -49,11 +47,10 @@
 			</p:toolbar>
 
 			<p:dataTable id="dt-users" widgetVar="dtUsers" var="user"
-				value="#{userBean.users}" reflow="true"
-				styleClass="users-table"
-				selection="#{userBean.selectedUsers}"
-				rowKey="#{user.id}" paginator="true" rows="10"
-				rowSelectMode="add" paginatorPosition="bottom">
+				value="#{userBean.users}" reflow="true" styleClass="users-table"
+				selection="#{userBean.selectedUsers}" rowKey="#{user.id}"
+				paginator="true" rows="10" rowSelectMode="add"
+				paginatorPosition="bottom">
 				<f:facet name="header">
 					<div class="users-table-header">
 						<span style="font-weight: bold">users</span> <span
@@ -66,57 +63,52 @@
 
 				<p:ajax event="rowSelect" update=":form:delete-users-button" />
 				<p:ajax event="rowUnselect" update=":form:delete-users-button" />
-				<p:ajax event="rowSelectCheckbox"
-					update=":form:delete-users-button" />
+				<p:ajax event="rowSelectCheckbox" update=":form:delete-users-button" />
 				<p:ajax event="rowUnselectCheckbox"
 					update=":form:delete-users-button" />
 				<p:ajax event="toggleSelect" update=":form:delete-users-button" />
 
 				<p:column selectionMode="multiple" exportable="false"></p:column>
 
-				<p:column headerText="ID" sortBy="#{user.id}"
-					filterBy="#{user.id}">
+				<p:column headerText="ID" sortBy="#{user.id}" filterBy="#{user.id}">
 					<h:outputText value="#{user.id}" />
 				</p:column>
-				<p:column headerText="Usuario"
-					sortBy="#{user.usernamename}"
+				<p:column headerText="Usuario" sortBy="#{user.usernamename}"
 					filterBy="#{user.username}">
 					<h:outputText value="#{user.username}" />
 				</p:column>
-				<p:column headerText="Contrasena"
-					sortBy="#{user.password}"
+				<p:column headerText="Contrasena" sortBy="#{user.password}"
 					filterBy="#{user.password}">
 					<h:outputText value="#{user.password}" />
 				</p:column>
 
-				<p:column headerText="Email"
-					sortBy="#{user.email}">
+				<p:column headerText="Email" sortBy="#{user.email}"
+					filterBy="#{user.email}">
 					<h:outputText value="#{user.email}">
-						
+
 					</h:outputText>
 				</p:column>
-				
-				<p:column headerText="Semestre"
-					sortBy="#{user.semester}">
-					<h:outputText value="#{user.semester}"
-						style="font-weight: 700">
-						
+
+				<p:column headerText="Semestre" sortBy="#{user.semester}"
+					filterBy="#{user.semester}">
+					<h:outputText value="#{user.semester}" style="font-weight: 700">
+
 					</h:outputText>
 				</p:column>
-				
-				<p:column headerText="Carrera"
-					sortBy="#{user.career}">
+
+				<p:column headerText="Carrera" sortBy="#{user.career}"
+					filterBy="#{user.career}">
 					<h:outputText value="#{user.career}">
-						
+
 					</h:outputText>
 				</p:column>
-				
-				<p:column headerText="¿Es Admin?"
-					sortBy="#{user.hasAdmin}">
-					
+
+				<p:column headerText="¿Es Admin?" sortBy="#{user.hasAdmin}"
+					filterBy="#{user.hasAdmin}">
+
 					<h:outputText value="#{user.hasAdmin?'si':'no'}"
-						style="font-weight: 700" > 
-						
+						style="font-weight: 700">
+
 					</h:outputText>
 				</p:column>
 
@@ -145,12 +137,11 @@
 			<p:dialog header="Detalles del usuario" showEffect="fade"
 				modal="true" widgetVar="manageUserDialog" responsive="true">
 				<p:outputPanel id="manage-user-content" class="ui-fluid">
-					<p:outputPanel
-						rendered="#{not empty userBean.selectedUser}">
+					<p:outputPanel rendered="#{not empty userBean.selectedUser}">
 						<div class="field">
 							<p:outputLabel for="id">ID</p:outputLabel>
-							<p:inputText id="id"
-								value="#{userBean.selectedUser.id}" required="true" readonly="true" />
+							<p:inputText id="id" value="#{userBean.selectedUser.id}"
+								required="true" readonly="true" />
 						</div>
 						<div class="field">
 							<p:outputLabel for="username">Usuario</p:outputLabel>
@@ -162,49 +153,48 @@
 							<p:inputText id="password"
 								value="#{userBean.selectedUser.password}" />
 						</div>
-						
+
 						<div class="formgrid grid">
 							<div class="field col">
 								<p:outputLabel for="email">Email</p:outputLabel>
-								<p:inputText id="email"
-								value="#{userBean.selectedUser.email}" />
+								<p:inputText id="email" value="#{userBean.selectedUser.email}" />
 							</div>
-							
+
 						</div>
-						
+
 						<div class="field">
 							<div class="field col">
 								<p:outputLabel for="codes">Semestre</p:outputLabel>
 								<p:inputNumber id="codes"
-									value="#{userBean.selectedUser.semester}"/>
+									value="#{userBean.selectedUser.semester}" />
 							</div>
-							
+
 						</div>
-						
-							<div class="formgrid grid">
+
+						<div class="formgrid grid">
 							<div class="field col">
 								<p:outputLabel for="career">Carrera</p:outputLabel>
-								<p:inputText id="career"
-								value="#{userBean.selectedUser.career}" />
+								<p:inputText id="career" value="#{userBean.selectedUser.career}" />
 							</div>
-							
+
 						</div>
-						
+
 						<div class="field">
 							<p:outputLabel for="hasAdmin">¿Es admin?</p:outputLabel>
 							<p:selectBooleanButton id="hasAdmin"
-								value="#{userBean.selectedUser.hasAdmin}"
-								onLabel="Sí" offLabel="No" />
+								value="#{userBean.selectedUser.hasAdmin}" onLabel="Sí"
+								offLabel="No" />
 						</div>
 
-					</p:outputPanel>	
+					</p:outputPanel>
 				</p:outputPanel>
 
 				<f:facet name="footer">
 					<p:commandButton value="Save" icon="pi pi-check"
 						actionListener="#{userBean.saveUser}"
-						update="manage-user-content"
+						update=":form:dt-users manage-user-content"
 						process="manage-user-content @this" />
+
 					<p:commandButton value="Cancel" icon="pi pi-times"
 						onclick="PF('manageUserDialog').hide()"
 						class="ui-button-secondary" type="button" />
@@ -215,8 +205,8 @@
 				width="300" message="Delete the user?" header="Confirm"
 				severity="warn">
 				<p:commandButton value="Yes" icon="pi pi-check"
-					actionListener="#{userBean.deleteUser}"
-					process="@this" update=":form:delete-users-button"
+					actionListener="#{userBean.deleteUser}" process="@this"
+					update=":form:delete-users-button"
 					oncomplete="PF('deleteUserDialog').hide()" />
 				<p:commandButton value="No" type="button"
 					styleClass="ui-button-secondary" icon="pi pi-times"
@@ -232,10 +222,10 @@
 			</p:confirmDialog>
 		</h:form>
 	</div>
-    </section>
+	</section>
 
-  
-     
-   <script src="js/script.js"></script>
+
+
+	<script src="js/script.js"></script>
 </h:body>
 </html>

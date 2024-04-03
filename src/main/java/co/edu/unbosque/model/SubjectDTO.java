@@ -31,7 +31,7 @@ public class SubjectDTO {
     /**
      * Categoria a la que pertenece.
      */
-    private int categoryOf;
+    private String categoryOf;
     
     /**
      * Constructor por defecto de la clase SubjectDTO.
@@ -43,7 +43,7 @@ public class SubjectDTO {
     /**
      * Constructor de la clase SubjectDTO con parámetros.
      */
-    public SubjectDTO(long id, String name, String desc, int diff, int categoryOf) {
+    public SubjectDTO(long id, String name, String desc, int diff, String categoryOf) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -111,14 +111,14 @@ public class SubjectDTO {
 	/**
      * Obtiene la categoria del tema.
      */
-	public int getCategoryOf() {
+	public String getCategoryOf() {
 		return categoryOf;
 	}
 
 	/**
      * Establece la categoria del tema.
      */
-	public void setCategoryOf(int categoryOf) {
+	public void setCategoryOf(String categoryOf) {
 		this.categoryOf = categoryOf;
 	}
 

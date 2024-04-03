@@ -5,6 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Lob;
 import jakarta.persistence.Table;
 
 /**
@@ -33,6 +34,7 @@ public class Subject{
     /**
      * Descripción del tema.
      */
+    @Lob
     @Column(name = "descripcion", nullable=false)
     private String desc;
     
@@ -46,7 +48,7 @@ public class Subject{
      * Categoria a la que pertenece.
      */
     @Column(name = "categoria", nullable=false)
-    private int categoryOf;
+    private String categoryOf;
     
     /**
      * Constructor por defecto de la clase Subject.
@@ -58,7 +60,7 @@ public class Subject{
     /**
      * Constructor de la clase Subject con parámetros.
      */
-    public Subject(long id, String name, String desc, int diff, int categoryOf) {
+    public Subject(long id, String name, String desc, int diff, String categoryOf) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -126,14 +128,14 @@ public class Subject{
 	/**
      * Obtiene la categoria del tema.
      */
-	public int getCategoryOf() {
+	public String getCategoryOf() {
 		return categoryOf;
 	}
 
 	/**
      * Establece la categoria del tema.
      */
-	public void setCategoryOf(int categoryOf) {
+	public void setCategoryOf(String categoryOf) {
 		this.categoryOf = categoryOf;
 	}
 

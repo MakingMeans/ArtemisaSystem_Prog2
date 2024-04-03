@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-<html xmlns="http://www.w3.org/1999/xhtml" 
+<html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
@@ -14,16 +14,15 @@
 		rel="stylesheet"></h:link>
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
-	<title>Admin de subjectos</title>
-	<link href="css/style.css" rel="stylesheet" type="text/css" />
+	<title>Admin de temas</title>
 </h:head>
 
 <h:body>
 
-     <section id="this">
-      <h2>Elige tus subjectos</h2>
+	<section id="this">
+	<h2>Elige tus temas</h2>
 
-      <div class="card crud-demo">
+	<div class="card crud-demo">
 		<h:form id="form">
 			<p:growl id="messages" showDetail="true" />
 
@@ -37,12 +36,10 @@
 						<p:resetInput target=":dialogs:manage-subject-content" />
 					</p:commandButton>
 					<p:commandButton id="delete-subjects-button"
-						value="#{subjectBean.deleteButtonMessage}"
-						icon="pi pi-trash"
+						value="#{subjectBean.deleteButtonMessage}" icon="pi pi-trash"
 						actionListener="#{subjectBean.deleteSelectedSubjects}"
 						styleClass="ui-button-danger"
-						disabled="#{!subjectBean.hasSelectedSubjects()}"
-						update="@this">
+						disabled="#{!subjectBean.hasSelectedSubjects()}" update="@this">
 						<p:confirm header="Confirmation"
 							message="Delete the selected subjects?"
 							icon="pi pi-exclamation-triangle" />
@@ -53,12 +50,13 @@
 			<p:dataTable id="dt-subjects" widgetVar="dtSubjects" var="subject"
 				value="#{subjectBean.subjects}" reflow="true"
 				styleClass="subjects-table"
-				selection="#{subjectBean.selectedSubjects}"
-				rowKey="#{subject.id}" paginator="true" rows="10"
-				rowSelectMode="add" paginatorPosition="bottom">
+				selection="#{subjectBean.selectedSubjects}" rowKey="#{subject.id}"
+				paginator="true" rows="10" rowSelectMode="add"
+				paginatorPosition="bottom">
+
 				<f:facet name="header">
 					<div class="subjects-table-header">
-						<span style="font-weight: bold">subjects</span> <span
+						<span style="font-weight: bold">Temas</span> <span
 							class="filter-container ui-input-icon-left"> <i
 							class="pi pi-search"></i> <p:inputText id="globalFilter"
 								onkeyup="PF('dtSubjects').filter()" placeholder="Search" />
@@ -80,23 +78,23 @@
 					filterBy="#{subject.id}">
 					<h:outputText value="#{subject.id}" />
 				</p:column>
-				<p:column headerText="Nombre"
-					sortBy="#{subject.name}"
+				<p:column headerText="Nombre" sortBy="#{subject.name}"
 					filterBy="#{subject.name}">
 					<h:outputText value="#{subject.name}" />
 				</p:column>
-				<p:column headerText="Descripcion"
-					sortBy="#{subject.desc}"
+				<p:column headerText="Descripcion" sortBy="#{subject.desc}"
 					filterBy="#{subject.desc}">
 					<h:outputText value="#{subject.desc}" />
 				</p:column>
 
-				<p:column headerText="Codes"
-					sortBy="#{subject.codes}">
-					<h:outputText value="#{subject.codes}"
-						style="font-weight: 700">
-						<f:convertNumber currencySymbol="$" type="currency" />
-					</h:outputText>
+				<p:column headerText="Dificultad" sortBy="#{subject.diff}"
+					filterBy="#{subject.diff}">
+					<h:outputText value="#{subject.diff}" />
+				</p:column>
+
+				<p:column headerText="Categoría" sortBy="#{subject.categoryOf}"
+					filterBy="#{subject.categoryOf}">
+					<h:outputText value="#{subject.categoryOf}" />
 				</p:column>
 
 				<p:column exportable="false">
@@ -116,20 +114,19 @@
 							target="#{subjectBean.selectedSubject}" />
 					</p:commandButton>
 				</p:column>
-
 			</p:dataTable>
+
 		</h:form>
 
 		<h:form id="dialogs">
-			<p:dialog header="Detalles del subjecto" showEffect="fade"
-				modal="true" widgetVar="manageSubjectDialog" responsive="true">
+			<p:dialog header="Detalles del tema" showEffect="fade" modal="true"
+				widgetVar="manageSubjectDialog" responsive="true">
 				<p:outputPanel id="manage-subject-content" class="ui-fluid">
-					<p:outputPanel
-						rendered="#{not empty subjectBean.selectedSubject}">
+					<p:outputPanel rendered="#{not empty subjectBean.selectedSubject}">
 						<div class="field">
 							<p:outputLabel for="id">ID</p:outputLabel>
-							<p:inputText id="id"
-								value="#{subjectBean.selectedSubject.id}" required="true" readonly="true" />
+							<p:inputText id="id" value="#{subjectBean.selectedSubject.id}"
+								required="true" readonly="true" />
 						</div>
 						<div class="field">
 							<p:outputLabel for="name">Nombre Tema</p:outputLabel>
@@ -137,42 +134,56 @@
 								value="#{subjectBean.selectedSubject.name}" />
 						</div>
 						<div class="field">
-							<p:outputLabel for="desc">Descripcion</p:outputLabel>
-							<p:inputText id="desc"
-								value="#{subjectBean.selectedSubject.desc}" />
+							<p:outputLabel for="desc">Descripción</p:outputLabel>
+							<p:inputTextarea id="desc"
+								value="#{subjectBean.selectedSubject.desc}" rows="5" />
 						</div>
-						
-						<div class="formgrid grid">
-							<div class="field col">
-								<p:outputLabel for="codes">Codes</p:outputLabel>
-							<p:selectOneMenu id="codes" value="#{subjectBean.selectedSubject.codes}">
-                            <f:selectItem itemLabel="Selecciona un código" itemValue="" />
-                            <f:selectItems value = "xd" />
-                            </p:selectOneMenu>
-							</div>
-							
+						<div class="field">
+							<p:outputLabel for="diff">Dificultad</p:outputLabel>
+							<p:inputText id="diff"
+								value="#{subjectBean.selectedSubject.diff}" />
 						</div>
-
-					</p:outputPanel>	
+						<div class="field">
+							<p:outputLabel for="categoryOf">Categoría</p:outputLabel>
+							<p:selectOneMenu id="categoryOf"
+								value="#{subjectBean.selectedSubject.categoryOf}">
+								<f:selectItem itemLabel="Algoritmos de búsqueda"
+									itemValue="Algoritmos de búsqueda" />
+								<f:selectItem itemLabel="Algoritmos de ordenamiento"
+									itemValue="Algoritmos de ordenamiento" />
+								<f:selectItem itemLabel="Estructuras de datos"
+									itemValue="Estructuras de datos" />
+								<f:selectItem itemLabel="Manejo binario y bitwise"
+									itemValue="Manejo binario y bitwise" />
+								<f:selectItem itemLabel="Teoría de grafos"
+									itemValue="Teoría de grafos" />
+								<f:selectItem itemLabel="Programación dinámica"
+									itemValue="Programación dinámica" />
+								<f:selectItem itemLabel="Programación eurística"
+									itemValue="Programación eurística" />
+							</p:selectOneMenu>
+						</div>
+					</p:outputPanel>
 				</p:outputPanel>
 
 				<f:facet name="footer">
-					<p:commandButton value="Save" icon="pi pi-check"
+					<p:commandButton value="Guardar" icon="pi pi-check"
 						actionListener="#{subjectBean.saveSubject}"
-						update="manage-subject-content"
+						update=":form:dt-subjects manage-subject-content"
 						process="manage-subject-content @this" />
-					<p:commandButton value="Cancel" icon="pi pi-times"
+
+					<p:commandButton value="Cancelar" icon="pi pi-times"
 						onclick="PF('manageSubjectDialog').hide()"
 						class="ui-button-secondary" type="button" />
 				</f:facet>
 			</p:dialog>
 
 			<p:confirmDialog widgetVar="deleteSubjectDialog" showEffect="fade"
-				width="300" message="Delete the subject?" header="Confirm"
+				width="300" message="¿Eliminar el tema?" header="Confirmar"
 				severity="warn">
-				<p:commandButton value="Yes" icon="pi pi-check"
-					actionListener="#{subjectBean.deleteSubject}"
-					process="@this" update=":form:delete-subjects-button"
+				<p:commandButton value="Sí" icon="pi pi-check"
+					actionListener="#{subjectBean.deleteSubject}" process="@this"
+					update=":form:delete-subjects-button"
 					oncomplete="PF('deleteSubjectDialog').hide()" />
 				<p:commandButton value="No" type="button"
 					styleClass="ui-button-secondary" icon="pi pi-times"
@@ -180,18 +191,19 @@
 			</p:confirmDialog>
 
 			<p:confirmDialog global="true" showEffect="fade" width="300">
-				<p:commandButton value="Yes" type="button"
+				<p:commandButton value="Sí" type="button"
 					styleClass="ui-confirmdialog-yes" icon="pi pi-check" />
 				<p:commandButton value="No" type="button"
 					styleClass="ui-confirmdialog-no ui-button-secondary"
 					icon="pi pi-times" />
 			</p:confirmDialog>
 		</h:form>
-	</div>
-    </section>
 
-  
-     
-   <script src="js/script.js"></script>
+	</div>
+	</section>
+
+
+
+	<script src="js/script.js"></script>
 </h:body>
 </html>
