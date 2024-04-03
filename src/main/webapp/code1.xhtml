@@ -14,7 +14,7 @@
 		rel="stylesheet"></h:link>
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
-	<title>ARtemisa - codes</title>
+	<title>Artemisa - codes</title>
 	<link href="css/code.css" rel="stylesheet" type="text/css" />
 </h:head>
 
@@ -45,34 +45,34 @@
 
 			<p:toolbar>
 				<p:toolbarGroup>
-					<h:commandButton id="delete-products-button">
+					<h:commandButton id="delete-codes-button">
 						
 					</h:commandButton>
 				</p:toolbarGroup>
 			</p:toolbar>
 
-			<p:dataTable id="dt-products" widgetVar="dtProducts" var="product"
+			<p:dataTable id="dt-codes" widgetVar="dtcodes" var="product"
 				value="#{codeBean.codes}" reflow="true"
-				styleClass="products-table"
+				styleClass="codes-table"
 				selection="#{codeBean.selectedCodes}"
-				rowKey="#{Code.id}" paginator="true" rows="10"
+				rowKey="#{code.id}" paginator="true" rows="10"
 				rowSelectMode="add" paginatorPosition="bottom">
 				<f:facet name="header">
 					
 				</f:facet>
-				<p:column headerText="ID" sortBy="#{Code.id}"
+				<p:column headerText="ID" sortBy="#{code.id}"
 					>
-					<h:outputText value="#{Code.id}" />
+					<h:outputText value="#{code.id}" />
 				</p:column>
 				<p:column headerText="Lenguaje"
-					sortBy="#{Code.language}"
+					sortBy="#{code.language}"
 					>
-					<h:outputText value="#{Code.language}" />
+					<h:outputText value="#{code.language}" />
 				</p:column>
 				<p:column headerText="Contenido"
-					sortBy="#{Code.content}"
+					sortBy="#{code.content}"
 					>
-					<h:outputText value="#{Code.content}" />
+					<h:outputText value="#{code.content}" />
 				</p:column>
 			</p:dataTable>
 		</h:form>
