@@ -1,7 +1,5 @@
 package co.edu.unbosque.model;
 
-import java.util.ArrayList;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -39,10 +37,16 @@ public class Subject{
     private String desc;
     
     /**
-     * Lista de códigos asociados al tema.
+     * Dificultad Numerica del Tema.
      */
-    @Column(name = "codigos", nullable=false)
-    private ArrayList<CodeDTO> codes;
+    @Column(name = "dificultad", nullable=false)
+    private int diff;
+    
+    /**
+     * Categoria a la que pertenece.
+     */
+    @Column(name = "categoria", nullable=false)
+    private int categoryOf;
     
     /**
      * Constructor por defecto de la clase Subject.
@@ -54,13 +58,14 @@ public class Subject{
     /**
      * Constructor de la clase Subject con parámetros.
      */
-    public Subject(long id, String name, String desc, ArrayList<CodeDTO> codes) {
-        super();
-        this.id = id;
-        this.name = name;
-        this.desc = desc;
-        this.codes = codes;
-    }
+    public Subject(long id, String name, String desc, int diff, int categoryOf) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.desc = desc;
+		this.diff = diff;
+		this.categoryOf = categoryOf;
+	}
 
     /**
      * Obtiene el identificador del tema.
@@ -69,7 +74,7 @@ public class Subject{
         return id;
     }
 
-    /**
+	/**
      * Establece el identificador del tema.
      */
     public void setId(long id) {
@@ -103,27 +108,42 @@ public class Subject{
     public void setDesc(String desc) {
         this.desc = desc;
     }
-
+    
     /**
-     * Obtiene la lista de códigos asociados al tema.
+     * Obtiene la dificultad del tema.
      */
-    public ArrayList<CodeDTO> getCodes() {
-        return codes;
-    }
+    public int getDiff() {
+		return diff;
+	}
 
     /**
-     * Establece la lista de códigos asociados al tema.
+     * Establece la dificultad del tema.
      */
-    public void setCodes(ArrayList<CodeDTO> codes) {
-        this.codes = codes;
-    }
+	public void setDiff(int diff) {
+		this.diff = diff;
+	}
 
-    /**
+	/**
+     * Obtiene la categoria del tema.
+     */
+	public int getCategoryOf() {
+		return categoryOf;
+	}
+
+	/**
+     * Establece la categoria del tema.
+     */
+	public void setCategoryOf(int categoryOf) {
+		this.categoryOf = categoryOf;
+	}
+
+	/**
      * Método toString para representar el tema como una cadena de texto.
      */
     @Override
-    public String toString() {
-        return "Subject [id=" + id + ", name=" + name + ", desc=" + desc + ", codes=" + codes + "]";
-    }
+	public String toString() {
+		return "Subject [id=" + id + ", name=" + name + ", desc=" + desc + ", diff=" + diff + ", categoryOf="
+				+ categoryOf + "]";
+	}
 }
 

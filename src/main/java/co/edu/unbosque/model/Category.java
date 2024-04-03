@@ -1,7 +1,5 @@
 package co.edu.unbosque.model;
 
-import java.util.ArrayList;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -27,12 +25,6 @@ public class Category {
     private long id;
     
     /**
-     * Lista de temas asociados a la categoría.
-     */
-    @Column(name="tema", nullable = false)
-    private ArrayList<SubjectDTO> subjects;
-    
-    /**
      * Título de la categoría.
      */
     @Column(name="titulo", nullable = false)
@@ -48,10 +40,9 @@ public class Category {
     /**
      * Constructor de la categoría con parámetros.
      */
-    public Category(long id, ArrayList<SubjectDTO> subjects, String title) {
+    public Category(long id, String title) {
         super();
         this.id = id;
-        this.subjects = subjects;
         this.title = title;
     }
 
@@ -67,20 +58,6 @@ public class Category {
      */
     public void setId(long id) {
         this.id = id;
-    }
-
-    /**
-     * Obtiene la lista de temas asociados a la categoría.
-     */
-    public ArrayList<SubjectDTO> getSubjects() {
-        return subjects;
-    }
-
-    /**
-     * Establece la lista de temas asociados a la categoría
-     */
-    public void setSubjects(ArrayList<SubjectDTO> subjects) {
-        this.subjects = subjects;
     }
 
     /**
@@ -102,7 +79,7 @@ public class Category {
      */
     @Override
     public String toString() {
-        return "Category [id=" + id + ", subjects=" + subjects + ", title=" + title + "]";
+        return "Category [id=" + id + ", title=" + title + "]";
     }
 
 }

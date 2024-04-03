@@ -44,7 +44,6 @@ public class CategoryService implements ServiceOperation<CategoryDTO>{
 	public CategoryDTO toDto(Category category) {
 		CategoryDTO dto = new CategoryDTO();
 		dto.setId(category.getId());
-		dto.setSubjects(category.getSubjects());
 		dto.setTitle(category.getTitle());
 		return dto;
 	}
@@ -56,7 +55,6 @@ public class CategoryService implements ServiceOperation<CategoryDTO>{
 	public Category toEntity(CategoryDTO categoryDTO) {
 		Category entity = new Category();
 		entity.setId(categoryDTO.getId());
-		entity.setSubjects(categoryDTO.getSubjects());
 		entity.setTitle(categoryDTO.getTitle());
 		return entity;
 	}

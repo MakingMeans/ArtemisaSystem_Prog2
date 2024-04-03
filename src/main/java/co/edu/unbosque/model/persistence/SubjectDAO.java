@@ -105,7 +105,8 @@ public class SubjectDAO implements CRUDOperation<Subject> {
 			selected.setId(obj.getId());
 			selected.setName(obj.getName());
 			selected.setDesc(obj.getDesc());
-			selected.setCodes(obj.getCodes());
+			selected.setDiff(obj.getDiff());
+			selected.setCategoryOf(obj.getCategoryOf());
 			em.persist(selected);
 			em.getTransaction().commit();
 			return true;

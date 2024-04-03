@@ -44,6 +44,7 @@ public class CodeService implements ServiceOperation<CodeDTO> {
 	    dto.setId(code.getId());
 	    dto.setLanguage(code.getLanguage());
 	    dto.setContent(code.getContent());
+	    dto.setSubjectOf(code.getSubjectOf());
 
 	    return dto;
 	}
@@ -58,6 +59,7 @@ public class CodeService implements ServiceOperation<CodeDTO> {
 	    entity.setId(codeDTO.getId());
 	    entity.setLanguage(codeDTO.getLanguage());
 	    entity.setContent(codeDTO.getContent());
+	    entity.setSubjectOf(codeDTO.getSubjectOf());
 
 	    return entity;
 	}

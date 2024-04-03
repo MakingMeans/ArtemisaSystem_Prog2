@@ -44,7 +44,8 @@ public class SubjectService implements ServiceOperation<SubjectDTO> {
 	    dto.setId(subject.getId());
 	    dto.setName(subject.getName());
 	    dto.setDesc(subject.getDesc());
-	    dto.setCodes(subject.getCodes());
+	    dto.setDiff(subject.getDiff());
+	    dto.setCategoryOf(subject.getCategoryOf());
 	    return dto;
 	}
 
@@ -58,7 +59,8 @@ public class SubjectService implements ServiceOperation<SubjectDTO> {
 	    entity.setId(subjectDTO.getId());
 	    entity.setName(subjectDTO.getName());
 	    entity.setDesc(subjectDTO.getDesc());
-	    entity.setCodes(subjectDTO.getCodes());
+	    entity.setDiff(subjectDTO.getDiff());
+	    entity.setCategoryOf(subjectDTO.getCategoryOf());
 	    return entity;
 	}
 

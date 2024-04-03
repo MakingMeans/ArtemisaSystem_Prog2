@@ -100,7 +100,6 @@ public class CategoryDAO implements CRUDOperation<Category>{
 			Category selected = em.find(Category.class, id);
 
 			selected.setId(obj.getId());
-			selected.setSubjects(obj.getSubjects());
 			selected.setTitle(obj.getTitle());
 		
 			em.persist(selected);

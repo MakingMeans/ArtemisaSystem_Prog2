@@ -107,6 +107,7 @@ public class CodeDAO implements CRUDOperation<Code> {
 			selected.setId(obj.getId());
 			selected.setLanguage(obj.getLanguage());
 			selected.setContent(obj.getContent());
+			selected.setSubjectOf(obj.getSubjectOf());
 		
 			em.persist(selected);
 			em.getTransaction().commit();

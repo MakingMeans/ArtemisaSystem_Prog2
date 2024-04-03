@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-<html xmlns="http://www.w3.org/1999/xhtml" 
+<html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
@@ -19,62 +19,61 @@
 </h:head>
 
 <h:body>
-     <section class="hero">
-      <h1>Biblioteca de codigos de la mas alta calidad</h1>
-      <div class="btn-group">
-          <button class="btn-filled-dark" onclick="window.location.href='main.xhtml'"><span class="material-symbols-outlined">
-					Regresar al temario
-              </span></button>
-          <button class="btn-outline-dark btn-hover-color" onclick="window.location.href='index.xhtml'"><span class="material-symbols-outlined">
-                  	Log out
-              </span></button>
-      </div>
+	<section class="hero">
+	<h1>Biblioteca de codigos de la mas alta calidad</h1>
+	<div class="btn-group">
+		<button class="btn-filled-dark"
+			onclick="window.location.href='main.xhtml'">
+			<span class="material-symbols-outlined"> Regresar al temario </span>
+		</button>
+		<button class="btn-outline-dark btn-hover-color"
+			onclick="window.location.href='index.xhtml'">
+			<span class="material-symbols-outlined"> Log out </span>
+		</button>
+	</div>
 
-    </section>
-     <section id="this">
-      <h2>Elige tus codigos</h2>
+	</section>
+	<section id="this">
+	<h2>Elige tus codigos</h2>
 
-<div class="card crud-demo">
+	<div class="card crud-demo">
 		<h:form id="form">
 			<p:growl id="messages" showDetail="true" />
 
 			<p:toolbar>
 				<p:toolbarGroup>
-					<h:commandButton id="delete-codes-button">
-						
-					</h:commandButton>
+					<h:outputText value="Tu texto aquí" />
 				</p:toolbarGroup>
 			</p:toolbar>
 
+
 			<p:dataTable id="dt-codes" widgetVar="dtcodes" var="code"
-				value="#{codeBean.codes}" reflow="true"
-				styleClass="codes-table"
-				selection="#{codeBean.selectedCodes}"
-				rowKey="#{code.id}" paginator="true" rows="10"
-				rowSelectMode="add" paginatorPosition="bottom">
+				value="#{codeBean.codes}" reflow="true" styleClass="codes-table"
+				selection="#{codeBean.selectedCodes}" rowKey="#{code.id}"
+				paginator="true" rows="10" rowSelectMode="add"
+				paginatorPosition="bottom">
 				<f:facet name="header">
-					
+
 				</f:facet>
-				<p:column headerText="ID" sortBy="#{code.id}"
-					>
+				<p:column headerText="ID" sortBy="#{code.id}" style="width: 5%;">
 					<h:outputText value="#{code.id}" />
 				</p:column>
-				<p:column headerText="Lenguaje"
-					sortBy="#{code.language}"
-					>
-					<h:outputText value="#{code.language}" />
+				<p:column headerText="Lenguaje" sortBy="#{code.language}">
+					<h:graphicImage value="#{codeBean.getLanguageIcon(code.language)}"
+						style="width: 200px; height: 200px;" />
 				</p:column>
-				<p:column headerText="Contenido"
-					sortBy="#{code.content}"
-					>
-					<h:outputText value="#{code.content}" />
+				<p:column headerText="Contenido" sortBy="#{code.content}"
+					style="width: 70%;">
+					<pre>
+						<code>#{code.content}</code>
+					</pre>
 				</p:column>
 			</p:dataTable>
 		</h:form>
 
-		
+
 	</div>
 	</section>
-   <script src="js/script.js"></script>
+	<script src="js/script.js"></script>
 </h:body>
 </html>

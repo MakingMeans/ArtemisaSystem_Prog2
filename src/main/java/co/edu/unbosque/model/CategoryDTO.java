@@ -1,7 +1,5 @@
 package co.edu.unbosque.model;
 
-import java.util.ArrayList;
-
 /**
  * 
  * Data Transfer Object de Category.
@@ -15,11 +13,6 @@ public class CategoryDTO {
      * Identificador único de la categoría.
      */
     private long id;
-    
-    /**
-     * Lista de temas asociados a la categoría.
-     */
-    private ArrayList<SubjectDTO> subjects;
     
     /**
      * Título de la categoría.
@@ -36,10 +29,9 @@ public class CategoryDTO {
     /**
      * Constructor de la clase CategoryDTO con parámetros.
      */
-    public CategoryDTO(long id, ArrayList<SubjectDTO> subjects, String title) {
+    public CategoryDTO(long id, String title) {
         super();
         this.id = id;
-        this.subjects = subjects;
         this.title = title;
     }
 
@@ -55,20 +47,6 @@ public class CategoryDTO {
      */
     public void setId(long id) {
         this.id = id;
-    }
-
-    /**
-     * Obtiene la lista de temas asociados a la categoría.
-     */
-    public ArrayList<SubjectDTO> getSubjects() {
-        return subjects;
-    }
-
-    /**
-     * Establece la lista de temas asociados a la categoría.
-     */
-    public void setSubjects(ArrayList<SubjectDTO> subjects) {
-        this.subjects = subjects;
     }
 
     /**
@@ -90,7 +68,7 @@ public class CategoryDTO {
      */
     @Override
     public String toString() {
-        return "CategoryDTO [id=" + id + ", subjects=" + subjects + ", title=" + title + "]";
+        return "CategoryDTO [id=" + id + ", title=" + title + "]";
     }
 
 }

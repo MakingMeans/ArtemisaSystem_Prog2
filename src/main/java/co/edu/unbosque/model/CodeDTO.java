@@ -25,6 +25,11 @@ public class CodeDTO {
     private String content;
     
     /**
+     * Tema al que pertenece el codigo.
+     */
+    private String subjectOf;	
+    
+    /**
      * Constructor por defecto de la clase CodeDTO.
      */
     public CodeDTO() {
@@ -34,12 +39,13 @@ public class CodeDTO {
     /**
      * Constructor de la clase CodeDTO con parámetros.
      */
-    public CodeDTO(long id, String language, String content) {
-        super();
-        this.id = id;
-        this.language = language;
-        this.content = content;
-    }
+    public CodeDTO(long id, String language, String content, String subjectOf) {
+		super();
+		this.id = id;
+		this.language = language;
+		this.content = content;
+		this.subjectOf = subjectOf;
+	}
 
     /**
      * Obtiene el identificador del código.
@@ -82,12 +88,27 @@ public class CodeDTO {
     public void setContent(String content) {
         this.content = content;
     }
+    
+    /**
+     * Obtiene el tema del código.
+     */
+    public String getSubjectOf() {
+		return subjectOf;
+	}
+    
+    /**
+     * Establece el tema del código.
+     */
+	public void setSubjectOf(String subjectOf) {
+		this.subjectOf = subjectOf;
+	}
 
     /**
      * Método toString para representar el código como una cadena de texto.
      */
-    @Override
-    public String toString() {
-        return "CodeDTO [id=" + id + ", language=" + language + ", content=" + content + "]";
-    }
+	@Override
+	public String toString() {
+		return "CodeDTO [id=" + id + ", language=" + language + ", content=" + content + ", subjectOf=" + subjectOf
+				+ "]";
+	}
 }

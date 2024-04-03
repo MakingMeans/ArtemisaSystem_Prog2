@@ -39,6 +39,12 @@ public class Code {
     private String content;
     
     /**
+     * Tema al que pertenece el codigo.
+     */
+    @Column(name = "tema", nullable=false)
+    private String subjectOf;	
+    
+    /**
      * Constructor por defecto de la clase Code.
      */
     public Code() {
@@ -48,12 +54,13 @@ public class Code {
     /**
      * Constructor de la clase Code con parámetros.
      */
-    public Code(long id, String language, String content) {
-        super();
-        this.id = id;
-        this.language = language;
-        this.content = content;
-    }
+    public Code(long id, String language, String content, String subjectOf) {
+		super();
+		this.id = id;
+		this.language = language;
+		this.content = content;
+		this.subjectOf = subjectOf;
+	}
     
     /**
      * Obtiene el identificador del código.
@@ -61,8 +68,8 @@ public class Code {
     public long getId() {
         return id;
     }
-    
-    /**
+
+	/**
      * Establece el identificador del código.
      */
     public void setId(long id) {
@@ -98,10 +105,24 @@ public class Code {
     }
     
     /**
+     * Obtiene el tema del código.
+     */
+    public String getSubjectOf() {
+		return subjectOf;
+	}
+    
+    /**
+     * Establece el tema del código.
+     */
+	public void setSubjectOf(String subjectOf) {
+		this.subjectOf = subjectOf;
+	}
+
+	/**
      * Método toString para representar el código como una cadena de texto.
      */
-    @Override
-    public String toString() {
-        return "Code [id=" + id + ", language=" + language + ", content=" + content + "]";
-    }
+	@Override
+	public String toString() {
+		return "Code [id=" + id + ", language=" + language + ", content=" + content + ", subjectOf=" + subjectOf + "]";
+	}
 }

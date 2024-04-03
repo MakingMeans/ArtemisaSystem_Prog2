@@ -5,6 +5,9 @@
   box-sizing: border-box;
   font-family: "Quicksand", sans-serif;
 }
+.ui-growl-message-detail {
+        color: black !important;
+    }
 #growl p {
   color: inherit; /* Utiliza el color heredado */
 }

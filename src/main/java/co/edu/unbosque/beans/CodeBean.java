@@ -129,6 +129,20 @@ public class CodeBean implements Serializable {
         PrimeFaces.current().ajax().update("form:messages", "form:dt-Codes");
         PrimeFaces.current().executeScript("PF('dtCodes').clearFilters()");
     }
+    
+    public String getLanguageIcon(String language) {
+        if (language.equalsIgnoreCase("C++")) {
+            return "assets/c++_icon.png";
+        } else if (language.equalsIgnoreCase("Java")) {
+            return "assets/java_icon.png";
+        } else if (language.equalsIgnoreCase("Python")) {
+            return "assets/python_icon.png";
+        } else {
+            // En caso de que el lenguaje no esté en la lista, puedes devolver una imagen genérica
+            return "assets/generic_icon.png";
+        }
+    }
+
 
     /**
      * Obtiene la lista de codigos.
