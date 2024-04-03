@@ -145,10 +145,10 @@
 						<div class="formgrid grid">
 							<div class="field col">
 								<p:outputLabel for="codes">Codes</p:outputLabel>
-								<p:inputNumber id="codes"
-									value="#{subjectBean.selectedSubject.codes}"
-									symbol=" COP" symbolPosition="s" decimalSeparator="."
-									thousandSeparator="," />
+							<p:selectOneMenu id="codes" value="#{subjectBean.selectedSubject.codes}">
+                            <f:selectItem itemLabel="Selecciona un código" itemValue="" />
+                            <f:selectItems value = "xd" />
+                            </p:selectOneMenu>
 							</div>
 							
 						</div>

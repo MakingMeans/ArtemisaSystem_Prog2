@@ -124,11 +124,15 @@
 							<p:inputText id="id"
 								value="#{codeBean.selectedCode.id}" required="true" readonly="true" />
 						</div>
-						<div class="field">
-							<p:outputLabel for="language">Lenguaje</p:outputLabel>
-							<p:inputText id="language"
-								value="#{codeBean.selectedCode.language}" />
-						</div>
+				           <div class="field">
+                           <p:outputLabel for="language">Lenguaje</p:outputLabel>
+                           <p:selectOneMenu id="language" value="#{codeBean.selectedCode.language}">
+                           <f:selectItem itemLabel="Java" itemValue="Java" />
+                           <f:selectItem itemLabel="C++" itemValue="C++" />
+                           <f:selectItem itemLabel="Python" itemValue="Python" />
+                           </p:selectOneMenu>
+                           </div>
+
 						<div class="field">
 							<p:outputLabel for="content">Contenido</p:outputLabel>
 							<p:inputText id="content"
