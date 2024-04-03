@@ -349,8 +349,7 @@ footer {
 
 section.hero {
 	height: auto;
-	background: var(--brand-02) url('https://cdn.icon-icons.com/icons2/3559/PNG/512/grocery_bag_shopping_bag_marketplace_icon_225165.png') no-repeat center right;
-
+	background: var(--brand-02) url('https://images.vexels.com/media/users/3/192723/isolated/preview/05db3d4b02b3209ea8d9ab70dcf70881-dibujado-a-mano-tarro-de-miel.png') no-repeat center right;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -788,4 +787,4 @@ footer ul li {
 		text-align: left;
 
 	}
-}
+}@charset "UTF-8";
