@@ -131,6 +131,14 @@ public class SubjectBean implements Serializable {
         PrimeFaces.current().executeScript("PF('dtSubjects').clearFilters()");
     }
     
+    public List<String> getAllSubjectNames() {
+        List<String> subjectNames = new ArrayList<>();
+        for (SubjectDTO subject : temasEnTabla) {
+            subjectNames.add(subject.getName());
+        }
+        return subjectNames;
+    }
+    
     // Métodos getters y setters
     
     /**

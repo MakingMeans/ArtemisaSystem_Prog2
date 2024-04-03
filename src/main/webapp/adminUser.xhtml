@@ -15,6 +15,7 @@
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 	<title>Admin user</title>
+	<link href="css/temp.css" rel="stylesheet" type="text/css" />
 </h:head>
 
 <h:body>
@@ -68,9 +69,9 @@
 					update=":form:delete-users-button" />
 				<p:ajax event="toggleSelect" update=":form:delete-users-button" />
 
-				<p:column selectionMode="multiple" exportable="false"></p:column>
+				<p:column selectionMode="multiple" exportable="false" style="width: 3%;"></p:column>
 
-				<p:column headerText="ID" sortBy="#{user.id}" filterBy="#{user.id}">
+				<p:column headerText="ID" sortBy="#{user.id}" filterBy="#{user.id}" style="width: 5%;">
 					<h:outputText value="#{user.id}" />
 				</p:column>
 				<p:column headerText="Usuario" sortBy="#{user.usernamename}"
@@ -83,14 +84,14 @@
 				</p:column>
 
 				<p:column headerText="Email" sortBy="#{user.email}"
-					filterBy="#{user.email}">
+					filterBy="#{user.email}" style="width: 20%;">
 					<h:outputText value="#{user.email}">
 
 					</h:outputText>
 				</p:column>
 
 				<p:column headerText="Semestre" sortBy="#{user.semester}"
-					filterBy="#{user.semester}">
+					filterBy="#{user.semester}" style="width: 5%;">
 					<h:outputText value="#{user.semester}" style="font-weight: 700">
 
 					</h:outputText>
@@ -104,7 +105,7 @@
 				</p:column>
 
 				<p:column headerText="¿Es Admin?" sortBy="#{user.hasAdmin}"
-					filterBy="#{user.hasAdmin}">
+					filterBy="#{user.hasAdmin}" style="width: 5%;">
 
 					<h:outputText value="#{user.hasAdmin?'si':'no'}"
 						style="font-weight: 700">
