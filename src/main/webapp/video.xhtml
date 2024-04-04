@@ -22,6 +22,7 @@
       <a onclick="window.location.href='index.xhtml'"><p class="menu">Log out</p></a>
       <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px"><path d="M0 0h24v24H0z" fill="none"/><path d="M19 9H5c-.55 0-1 .45-1 1s.45 1 1 1h14c.55 0 1-.45 1-1s-.45-1-1-1zM5 15h14c.55 0 1-.45 1-1s-.45-1-1-1H5c-.55 0-1 .45-1 1s.45 1 1 1z"/></svg>
     </nav>
+    
 
     <div class="grid">
       <svg class="grid-svg" xmlns="http://www.w3.org/2000/svg" width="982" height="786" viewBox="0 0 982 786" fill="none">
@@ -36,26 +37,18 @@
       <div class="blur"></div>
     </div>
 
-    <div class="title">
-      <p style="color: white;">Biblioteca</p>
-      <p style="color: hsl(155, 100%, 65%);">Artemisa</p>
-    </div>
+	<div class="card">
+		<p:video value="assets/spiders.mp4" player="mp4" controls="true"
+			width="800" height="450" style="margin-left: 50px; position: absolute; left: 150px; top: 300px; z-index: 999;"
+			onplay="console.log('MP4 Started Playing')"
+			onpause="console.log('MP4 Stopped Playing')">
+        Your browser does not support the video element.
+        See: <h:outputLink
+				value="https://www.w3schools.com/html/html5_video.asp">HTML5 Video</h:outputLink>
+		</p:video>
+	</div>
 
-    <a onclick="window.location.href='code1.xhtml'" target="_blank" class="button first"><button>Algoritmos de búsqueda</button><span></span></a>
-
-    <a onclick="window.location.href='code2.xhtml'" style="color: white;" target="_blank" class="button sec"><button>Algoritmos de ordenamiento</button><span></span></a>
-
-    <a onclick="window.location.href='code3.xhtml'" target="_blank" class="button third"><button>Estructuras de datos </button><span></span></a>
-
-    <a onclick="window.location.href='code4.xhtml'" target="_blank" class="button four"><button>Manejo binario y bitwise</button><span></span></a>
-
-    <a onclick="window.location.href='code5.xhtml'" target="_blank" class="button fifth"><button>Teoría de grafos</button><span></span></a>
-    
-    <a onclick="window.location.href='code6.xhtml'" style="color: white;" target="_blank" class="button six"><button>Programación dinámica</button><span></span></a>
-
-    <a onclick="window.location.href='code7.xhtml'" target="_blank" class="button sev"><button>Programación eurística</button><span></span></a>
-    
-    <svg class="top-right" width="219" height="147" viewBox="0 0 219 147" fill="none" xmlns="http://www.w3.org/2000/svg">
+	<svg class="top-right" width="219" height="147" viewBox="0 0 219 147" fill="none" xmlns="http://www.w3.org/2000/svg">
       <rect opacity="0.18" x="10.4252" y="75.8326" width="7.50168" height="7.50168" transform="rotate(110.283 10.4252 75.8326)" fill="#686868" stroke="white" stroke-width="1.22683" />
       <rect opacity="0.18" x="180.869" y="138.825" width="7.50168" height="7.50168" transform="rotate(110.283 180.869 138.825)" fill="#686868" stroke="white" stroke-width="1.22683" />
       <rect x="69.4713" y="-91.84" width="180.485" height="180.485" transform="rotate(20.2832 69.4713 -91.84)" stroke="white" stroke-opacity="0.1" stroke-width="1.22683" />

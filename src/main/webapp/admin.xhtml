@@ -33,8 +33,18 @@
 
 
   <section id="css">
-    <h2 style="margin-top: 260px">Bienvenido Admin</h2>
+    <h2 style="margin-top: 50px">Bienvenido Admin</h2>
     <p>Selecciona la infromación a consultar en los botones superiores</p>
+    <div class="card">
+		<p:video value="assets/spiders.mp4" player="mp4" controls="true"
+			width="800" height="450" style="margin-left: 50px; position: absolute; left: 300px; top: 235px; z-index: 999;"
+			onplay="console.log('MP4 Started Playing')"
+			onpause="console.log('MP4 Stopped Playing')">
+        Your browser does not support the video element.
+        See: <h:outputLink
+				value="https://www.w3schools.com/html/html5_video.asp">HTML5 Video</h:outputLink>
+		</p:video>
+	</div>
   </section>
 
   <script src="script.js"></script>
