@@ -2,8 +2,8 @@
 	--text-01: #45413E;
 	--light-01: #F9F9F9;
 	--light-02: #FFFFFF;
-	--brand-01: #DB7F67;
-	--brand-02: #F4CFC6;
+	--brand-01: #4EACB8;
+	--brand-02: #9FD9DD;
 	--card-hover: 0px 4px 24px rgba(0, 0, 0, 0.15);
 	--card-shadow: 0px 4px 16px rgba(0, 0, 0, 0.1);
 	--hover-timing: all 0.2s ease;
@@ -801,4 +801,4 @@ footer ul li {
 		text-align: left;
 
 	}
-}@charset "UTF-8";
+}

@@ -139,6 +139,11 @@ public class SubjectBean implements Serializable {
         return subjectNames;
     }
     
+    public List<String> getCertainSubjects(String category) {
+    	List<String> subjectNames = subjectService.getSubjectNamesByCategory(category);
+    	return subjectNames;
+    }
+    
     // Métodos getters y setters
     
     /**

@@ -81,29 +81,31 @@
 					update=":form:delete-codes-button" />
 				<p:ajax event="toggleSelect" update=":form:delete-codes-button" />
 				<p:column selectionMode="multiple" exportable="false"
-					style="width: 3%;"></p:column>
+					style="width: 10%;"></p:column>
 
 				<p:column headerText="ID" sortBy="#{code.id}" filterBy="#{code.id}"
-					style="width: 3%;">
+					style="width: 10%;">
 					<h:outputText value="#{code.id}" />
 				</p:column>
 
 				<p:column headerText="Tema" sortBy="#{code.subjectOf}"
-					filterBy="#{code.subjectOf}" style="width: 8%;">
+					filterBy="#{code.subjectOf}">
 					<h:outputText value="#{code.subjectOf}" />
 				</p:column>
 
-				<p:column headerText="Lenguaje" sortBy="#{code.language}"
-					style="width: 10%;">
+				<p:column headerText="Lenguaje" sortBy="#{code.language}">
 					<h:graphicImage value="#{codeBean.getLanguageIcon(code.language)}"
 						style="width: 150px; height: 150px;" />
 				</p:column>
-
-				<p:column headerText="Contenido" sortBy="#{code.content}"
-					style="width: 55%;">
-					<pre>
-						<code>#{code.content}</code>
-					</pre>
+				
+				<p:column headerText="Acción" style="width: 12%;">
+					<p:commandButton value="Ver Detalles"
+						update=":testing:manage-code-content"
+						oncomplete="PF('manageCodeTesting').show()" icon="fas fa-eye"
+						process="@this">
+						<f:setPropertyActionListener target="#{codeBean.selectedCode}"
+							value="#{code}" />
+					</p:commandButton>
 				</p:column>
 
 				<p:column exportable="false">
@@ -195,6 +197,29 @@
 					styleClass="ui-confirmdialog-no ui-button-secondary"
 					icon="pi pi-times" />
 			</p:confirmDialog>
+		</h:form>
+		<h:form id="testing">
+			<p:dialog header="Detalles del código" showEffect="fade" modal="true"
+				widgetVar="manageCodeTesting" responsive="true" style="width: 700px;">
+				<p:outputPanel id="manage-code-content" class="ui-fluid"
+					style="overflow: auto; max-height: 400px;">
+					<p:outputPanel rendered="#{not empty codeBean.selectedCode}">
+						<div class="field">
+							<p:column headerText="Contenido" style="width: 100%;">
+								<pre>
+									<code>#{codeBean.selectedCode.content}</code>
+								</pre>
+							</p:column>
+						</div>
+
+					</p:outputPanel>
+				</p:outputPanel>
+				<f:facet name="footer">
+					<p:commandButton value="Salir" icon="pi pi-times"
+						onclick="PF('manageCodeDialog').hide()"
+						class="ui-button-secondary" type="button" />
+				</f:facet>
+			</p:dialog>
 		</h:form>
 	</div>
 	</section>

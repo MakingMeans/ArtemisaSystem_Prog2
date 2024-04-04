@@ -16,11 +16,16 @@
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 	<title>Artemisa - Codes</title>
 	<link href="css/temp.css" rel="stylesheet" type="text/css" />
+	<f:metadata>
+		<f:event
+			listener="#{codeBean.filterCodesBySubjects(subjectBean.getCertainSubjects('Programación eurística'))}"
+			type="preRenderView" />
+	</f:metadata>
 </h:head>
 
 <h:body>
 	<section class="hero">
-	<h1>Biblioteca de codigos de la mas alta calidad</h1>
+	<h1>Programación eurística</h1>
 	<div class="btn-group">
 		<button class="btn-filled-dark"
 			onclick="window.location.href='main.xhtml'">
@@ -34,7 +39,7 @@
 
 	</section>
 	<section id="this">
-	<h2>Elige tus codigos</h2>
+
 
 	<div class="card crud-demo">
 		<h:form id="form">
@@ -42,33 +47,66 @@
 
 			<p:toolbar>
 				<p:toolbarGroup>
-					<h:outputText value="Tu texto aquí" />
+					<h:outputText
+						value="Enfoque para resolver problemas que se basa en la intuición, la experiencia y el conocimiento previo para encontrar soluciones aceptables, aunque no necesariamente óptimas. Estos algoritmos proporcionan soluciones aproximadas en un tiempo razonable para problemas complejos donde encontrar la solución óptima puede ser computacionalmente costoso." />
 				</p:toolbarGroup>
 			</p:toolbar>
 
 
 			<p:dataTable id="dt-codes" widgetVar="dtcodes" var="code"
-				value="#{codeBean.codes}" reflow="true" styleClass="codes-table"
-				selection="#{codeBean.selectedCodes}" rowKey="#{code.id}"
-				paginator="true" rows="10" rowSelectMode="add"
+				value="#{codeBean.certainCodesInTable}" reflow="true"
+				styleClass="codes-table" selection="#{codeBean.selectedCode}"
+				rowKey="#{code.id}" paginator="true" rows="10"
 				paginatorPosition="bottom">
 				<f:facet name="header">
 
 				</f:facet>
-				<p:column headerText="ID" sortBy="#{code.id}" style="width: 5%;">
+				<p:column headerText="ID" sortBy="#{code.id}" filterBy="#{code.id}"
+					style="width: 10%;">
 					<h:outputText value="#{code.id}" />
 				</p:column>
-				<p:column headerText="Lenguaje" sortBy="#{code.language}">
-					<h:graphicImage value="#{codeBean.getLanguageIcon(code.language)}"
-						style="width: 200px; height: 200px;" />
+				<p:column headerText="Tema" sortBy="#{code.subjectOf}"
+					filterBy="#{code.subjectOf}">
+					<h:outputText value="#{code.subjectOf}" style="" />
 				</p:column>
-				<p:column headerText="Contenido" sortBy="#{code.content}"
-					style="width: 70%;">
-					<pre>
-						<code>#{code.content}</code>
-					</pre>
+				<p:column headerText="Lenguaje" sortBy="#{code.language}"
+					filterBy="#{code.language}">
+					<h:graphicImage value="#{codeBean.getLanguageIcon(code.language)}"
+						style="width: 100px; height: 100px;" />
+				</p:column>
+				<p:column headerText="Acción" style="width: 12%;">
+					<p:commandButton value="Ver Detalles"
+						update=":dialogs:manage-code-content"
+						oncomplete="PF('manageCodeDialog').show()" icon="fas fa-eye"
+						process="@this">
+						<f:setPropertyActionListener target="#{codeBean.selectedCode}"
+							value="#{code}" />
+					</p:commandButton>
 				</p:column>
 			</p:dataTable>
+		</h:form>
+		<h:form id="dialogs">
+			<p:dialog header="Detalles del código" showEffect="fade" modal="true"
+				widgetVar="manageCodeDialog" responsive="true" style="width: 700px;">
+				<p:outputPanel id="manage-code-content" class="ui-fluid"
+					style="overflow: auto; max-height: 400px;">
+					<p:outputPanel rendered="#{not empty codeBean.selectedCode}">
+						<div class="field">
+							<p:column headerText="Contenido" style="width: 100%;">
+								<pre>
+									<code>#{codeBean.selectedCode.content}</code>
+								</pre>
+							</p:column>
+						</div>
+
+					</p:outputPanel>
+				</p:outputPanel>
+				<f:facet name="footer">
+					<p:commandButton value="Salir" icon="pi pi-times"
+						onclick="PF('manageCodeDialog').hide()"
+						class="ui-button-secondary" type="button" />
+				</f:facet>
+			</p:dialog>
 		</h:form>
 
 
