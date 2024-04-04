@@ -40,6 +40,11 @@ public class CodeBean implements Serializable {
      * Lista de codigos mostrados en la tabla.
      */
     private List<CodeDTO> codesInTable;
+    
+    /**
+     * Lista de codigos filtrados en la tabla.
+     */
+    private List<CodeDTO> certainCodesInTable;
 
     /**
      * Codigo seleccionado actualmente.
@@ -142,6 +147,19 @@ public class CodeBean implements Serializable {
             return "assets/generic_icon.png";
         }
     }
+    
+    public void filterCodesBySubjects(List<String> subjects) {
+        List<CodeDTO> filteredCodes = new ArrayList<>();
+        for (CodeDTO code : codeService.getCodes()) {
+            if (subjects.contains(code.getSubjectOf())) {
+                filteredCodes.add(code);
+            }
+        }
+        certainCodesInTable = filteredCodes;
+        FacesContext.getCurrentInstance().getApplication().getNavigationHandler()
+		.handleNavigation(FacesContext.getCurrentInstance(), null, "code.xhtml");
+    }
+
 
 
     /**
@@ -159,6 +177,20 @@ public class CodeBean implements Serializable {
     }
 
     /**
+     * Obtiene la lista de codigos filtrados.
+     */
+    public List<CodeDTO> getCertainCodesInTable() {
+		return certainCodesInTable;
+	}
+
+    /**
+     * Establece la lista de codigos filtrados.
+     */
+	public void setCertainCodesInTable(List<CodeDTO> certainCodesInTable) {
+		this.certainCodesInTable = certainCodesInTable;
+	}
+
+	/**
      * Obtiene el codigo seleccionado.
      */
     public CodeDTO getSelectedCode() {

@@ -141,6 +141,22 @@ public class SubjectService implements ServiceOperation<SubjectDTO> {
 	    SubjectDTO find = toDto(subjectDAO.findOne(id));
 	    return find;
 	}
+	
+	/**
+     * Obtiene una lista de nombres de asignaturas que pertenecen a una categoría específica.
+     * 
+     * @param category La categoría de las asignaturas que se quieren obtener.
+     * @return Una lista de nombres de asignaturas que pertenecen a la categoría especificada.
+     */
+    public List<String> getSubjectNamesByCategory(String category) {
+        List<String> subjectNames = new ArrayList<>();
+        for (SubjectDTO subject : subjects) {
+            if (subject.getCategoryOf().equals(category)) {
+                subjectNames.add(subject.getName());
+            }
+        }
+        return subjectNames;
+    }
 
 	public List<SubjectDTO> getSubjects() {
 		return subjects;

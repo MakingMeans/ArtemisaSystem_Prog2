@@ -16,16 +16,11 @@
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 	<title>Artemisa - Codes</title>
 	<link href="css/temp.css" rel="stylesheet" type="text/css" />
-	<f:metadata>
-		<f:event
-			listener="#{codeBean.filterCodesBySubjects(subjectBean.getCertainSubjects('Estructuras de datos'))}"
-			type="preRenderView" />
-	</f:metadata>
 </h:head>
 
 <h:body>
 	<section class="hero">
-	<h1>Estructuras de datos</h1>
+	<h1>Biblioteca de codigos de la mas alta calidad</h1>
 	<div class="btn-group">
 		<button class="btn-filled-dark"
 			onclick="window.location.href='main.xhtml'">
@@ -39,7 +34,7 @@
 
 	</section>
 	<section id="this">
-
+	<h2>Elige tus codigos</h2>
 
 	<div class="card crud-demo">
 		<h:form id="form">
@@ -47,17 +42,15 @@
 
 			<p:toolbar>
 				<p:toolbarGroup>
-					<h:outputText
-						value="Formas en que los datos se organizan y almacenan para facilitar su acceso, modificación y procesamiento eficiente. Ejemplos incluyen listas enlazadas, árboles, grafos, pilas, colas, conjuntos y mapas." />
+					<h:outputText value="Tu texto aquí" />
 				</p:toolbarGroup>
 			</p:toolbar>
 
 
 			<p:dataTable id="dt-codes" widgetVar="dtcodes" var="code"
-				value="#{codeBean.certainCodesInTable}" reflow="true"
-				styleClass="codes-table" selection="#{codeBean.selectedCode}"
-				rowKey="#{code.id}" paginator="true" rows="10"
-				paginatorPosition="bottom">
+				value="#{codeBean.codes}" reflow="true" styleClass="codes-table"
+				selection="#{codeBean.selectedCode}" rowKey="#{code.id}"
+				paginator="true" rows="10" paginatorPosition="bottom">
 				<f:facet name="header">
 
 				</f:facet>
@@ -67,7 +60,7 @@
 				</p:column>
 				<p:column headerText="Tema" sortBy="#{code.subjectOf}"
 					filterBy="#{code.subjectOf}">
-					<h:outputText value="#{code.subjectOf}" style="" />
+					<h:outputText value="#{code.subjectOf}" style=""/>
 				</p:column>
 				<p:column headerText="Lenguaje" sortBy="#{code.language}"
 					filterBy="#{code.language}">
@@ -75,10 +68,8 @@
 						style="width: 100px; height: 100px;" />
 				</p:column>
 				<p:column headerText="Acción" style="width: 12%;">
-					<p:commandButton value="Ver Detalles"
-						update=":dialogs:manage-code-content"
-						oncomplete="PF('manageCodeDialog').show()" icon="fas fa-eye"
-						process="@this">
+					<p:commandButton value="Ver Detalles" update=":dialogs:manage-code-content"
+						oncomplete="PF('manageCodeDialog').show()" icon="fas fa-eye" process="@this">
 						<f:setPropertyActionListener target="#{codeBean.selectedCode}"
 							value="#{code}" />
 					</p:commandButton>
