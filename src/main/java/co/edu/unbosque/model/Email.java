@@ -1,5 +1,12 @@
 package co.edu.unbosque.model;
 
+/**
+ * 
+ * Email class.
+ * 
+ * @author DavidG
+ *
+ */
 public class Email {
 
 	private String recipient;

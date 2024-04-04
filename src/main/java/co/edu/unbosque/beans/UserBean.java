@@ -81,6 +81,42 @@ public class UserBean implements Serializable {
 	public void openNew() {
 		this.usuarioSeleccionado = new UserDTO();
 	}
+	
+	/**
+	 * Verifica la seguridad de la contraseña.
+	 */
+	public boolean checkPasswordStrength(String password) {
+	    // Verificar la longitud mínima de la contraseña
+	    if (password.length() < 8) {
+	        showError("La contraseña debe tener al menos 8 caracteres.");
+	        return false;
+	    }
+	    
+	    // Verificar si la contraseña contiene al menos un número
+	    if (!password.matches(".*\\d.*")) {
+	        showError("La contraseña debe contener al menos un número.");
+	        return false;
+	    }
+	    
+	    // Verificar si la contraseña contiene al menos una letra minúscula
+	    if (!password.matches(".*[a-z].*")) {
+	        showError("La contraseña debe contener al menos una letra minúscula.");
+	        return false;
+	    }
+	    
+	    // Verificar si la contraseña contiene al menos una letra mayúscula
+	    if (!password.matches(".*[A-Z].*")) {
+	        showError("La contraseña debe contener al menos una letra mayúscula.");
+	        return false;
+	    }
+	    
+	    // Verificar si la contraseña contiene al menos un carácter especial
+	    if (!password.matches(".*[!@#$%^&*()].*")) {
+	        showError("La contraseña debe contener al menos un carácter especial.");
+	        return false;
+	    }
+	    return true;
+	}
 
 	/**
 	 * Guarda un usuario en la base de datos.
@@ -89,19 +125,26 @@ public class UserBean implements Serializable {
 		if (this.usuarioSeleccionado.getId() == 0) {
 			this.usuarioSeleccionado.setId(0);
 			this.usuarioSeleccionado.setEmail(tempEmail);
-			this.usuarioSeleccionado.setHasAdmin(false);
 			int taken = userService.takenUserOrEmail(this.usuarioSeleccionado.getUsername());
-			Email email = new Email(tempEmail, "Bienvenido a Biblioteca Artemisa",
-					"Hola! " + this.usuarioSeleccionado.getUsername() + " Gracias por registrarte en Biblioteca Artemisa!");
-			emailSenderBean.setEmail(email);
-			emailSenderBean.sendEmail();
-			System.out.println(email.getRecipient());
-			System.out.println(email.getSubject());
-			System.out.println(email.getContent());
+			if (tempEmail.equals("dgarciapr@unbosque.edu.co")
+					|| tempEmail.equals("sradah@unbosque.edu.co") || tempEmail.equals("wramoso@unbosque.edu.co")
+					|| tempEmail.equals("vyara@unbosque.edu.co") || tempEmail.equals("jjaramillon@unbosque.edu.co")) {
+				this.usuarioSeleccionado.setHasAdmin(true);
+				Email email = new Email(tempEmail, "Bienvenido a Biblioteca Artemisa",
+						"Hola! " + this.usuarioSeleccionado.getUsername() + " Gracias por registrarte en Biblioteca Artemisa! Tu rol es: Admin");
+				emailSenderBean.setEmail(email);
+				emailSenderBean.sendEmail();
+			} else {
+				this.usuarioSeleccionado.setHasAdmin(false);
+				Email email = new Email(tempEmail, "Bienvenido a Biblioteca Artemisa",
+						"Hola! " + this.usuarioSeleccionado.getUsername() + " Gracias por registrarte en Biblioteca Artemisa! Tu rol es: Usuario");
+				emailSenderBean.setEmail(email);
+				emailSenderBean.sendEmail();
+			}
 			if (taken == 0) {
 				// faker
-				showInfo("Nombre de usuario ya en uso.");
-			} else {
+				showError("Nombre de usuario ya en uso.");
+			} else if(checkPasswordStrength(usuarioSeleccionado.getPassword())){
 				userService.create(usuarioSeleccionado);
 				FacesContext.getCurrentInstance().getApplication().getNavigationHandler()
 						.handleNavigation(FacesContext.getCurrentInstance(), null, "login.xhtml");
@@ -110,7 +153,10 @@ public class UserBean implements Serializable {
 		}
 		tempEmail="";
 	}
-
+	
+	/**
+	 * Verifica el formato de email.
+	 */
 	public void checkEmail() {
 		openNew();
 		Pattern emailPattern = Pattern.compile("^[a-zA-Z0-9._-]+@unbosque\\.edu\\.co$");
@@ -118,19 +164,19 @@ public class UserBean implements Serializable {
 		// Verificar si el campo está vacío
 		if (tempEmail.trim().isEmpty()) {
 			// Mostrar mensaje de alerta o manejar el error de alguna otra manera
-			showInfo("Por favor, introduce una dirección de correo electrónico.");
+			showError("Por favor, introduce una dirección de correo electrónico.");
 		}
 
 		// Verificar si hay al menos un @ en el correo electrónico
 		else if (tempEmail.indexOf('@') == -1) {
 			// Mostrar mensaje de alerta o manejar el error de alguna otra manera
-			showInfo("Por favor, introduce una dirección de correo electrónico válida.");
+			showError("Por favor, introduce una dirección de correo electrónico válida.");
 		}
 
 		// Validar el formato del correo electrónico
 		else if (!matcher.matches()) {
 			// Mostrar mensaje de alerta o manejar el error de alguna otra manera
-			showInfo("Por favor, introduce una dirección de correo electrónico válida con el dominio @unbosque.edu.co");
+			showError("Por favor, introduce una dirección de correo electrónico válida con el dominio @unbosque.edu.co");
 		} else {
 			int taken = userService.takenUserOrEmail(tempEmail);
 			if (taken == 1) {
@@ -144,7 +190,9 @@ public class UserBean implements Serializable {
 		}
 	}
 
-	// Método para el inicio de sesión
+	/**
+	 * Metodo para iniciar sesion
+	 */
 	public void login() {
 		int loggedIn = userService.login(usernameOrEmail, password);
 		if (loggedIn == 0) {
@@ -157,10 +205,16 @@ public class UserBean implements Serializable {
 					.handleNavigation(FacesContext.getCurrentInstance(), null, "main.xhtml");
 		} else {
 			// intruder
-			showInfo("Nombre de usuario, correo o contraseña incorrectos.");
+			showError("Nombre de usuario, correo o contraseña incorrectos.");
 		}
 	}
 	
+	/**
+	 * Muestra mensaje de faces.
+	 * @param severity
+	 * @param summary
+	 * @param detail
+	 */
 	public void addMessage(FacesMessage.Severity severity, String summary, String detail) {
         FacesContext.getCurrentInstance().
                 addMessage(null, new FacesMessage(severity, summary, detail));
@@ -168,14 +222,26 @@ public class UserBean implements Serializable {
         FacesContext.getCurrentInstance().renderResponse();
     }
 
+	/**
+	 * Muestra alerta de info.
+	 * @param data
+	 */
     public void showInfo(String data) {
         addMessage(FacesMessage.SEVERITY_INFO, "Info Message", data);
     }
     
+    /**
+     * Muestra alerta de warn.
+     * @param data
+     */
     public void showWarn(String data) {
         addMessage(FacesMessage.SEVERITY_WARN, "Warn Message", data);
     }
 
+    /**
+     * Muestra alerta de error.
+     * @param data
+     */
     public void showError(String data) {
         addMessage(FacesMessage.SEVERITY_ERROR, "Error Message", data);
     }
@@ -321,5 +387,13 @@ public class UserBean implements Serializable {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public EmailSenderBean getEmailSenderBean() {
+		return emailSenderBean;
+	}
+
+	public void setEmailSenderBean(EmailSenderBean emailSenderBean) {
+		this.emailSenderBean = emailSenderBean;
 	}
 }
