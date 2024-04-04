@@ -20,32 +20,33 @@
 		<div class="login">
 			<h2>Login</h2>
 			<div class="inputBx">
-			<h:form id="form">
-			<p:growl id="growl" showDetail="true" />
-				<div class="inputBx">
-					<h:inputText type="text"
-						id="usernameOrEmail" value="#{userBean.usernameOrEmail}" style="margin-bottom: 30px">
-						<f:passThroughAttribute name="placeholder" value="Usuario o Correo" />
-					</h:inputText>
-				</div>
-				<div class="inputBx">
-					<h:inputSecret type="password" id="password"
-						value="#{userBean.password}" style="margin-bottom: 30px" >
-						<f:passThroughAttribute name="placeholder" value="Contraseña" />
-					</h:inputSecret>
-				</div>
-				<div class="inputBx">
-					<h:commandButton value="Ingresar" update="growl" actionListener="#{userBean.login}" />
-				</div>
-			</h:form>
+				<h:form id="form">
+					<p:growl id="growl" showDetail="true" />
+					<div class="inputBx">
+						<h:inputText type="text" id="usernameOrEmail"
+							value="#{userBean.usernameOrEmail}" style="margin-bottom: 30px">
+							<f:passThroughAttribute name="placeholder"
+								value="Usuario o Correo" />
+						</h:inputText>
+					</div>
+					<div class="inputBx">
+						<h:inputSecret type="password" id="password"
+							value="#{userBean.password}" style="margin-bottom: 30px">
+							<f:passThroughAttribute name="placeholder" value="Contraseña" />
+						</h:inputSecret>
+					</div>
+					<div class="inputBx">
+						<h:commandButton value="Ingresar" update="growl"
+							actionListener="#{userBean.login}" />
+					</div>
+				</h:form>
 			</div>
 			<div class="links">
 				<a href="index.xhtml">¿No tienes cuenta? Vuelve al inicio</a>
 			</div>
 		</div>
 	</div>
-	
-	
+
 </h:body>
 
 </html>

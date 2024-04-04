@@ -37,18 +37,44 @@
 					</h:inputSecret>
 				</div>
 				<div class="inputBx">
-					<h:inputText value="#{userBean.selectedUser.semester}"  style="margin-bottom: 30px" required="true"
-						placeholder="Semestre" >
-					<f:convertNumber integerOnly="true" />
-					<f:passThroughAttribute name="placeholder" value="Semestre" />
-					</h:inputText>
-				</div>
+    	<h:selectOneMenu value="#{userBean.selectedUser.semester}" style="margin-bottom: 30px;" styleClass="custom-dropdown" required="true">
+        	<f:selectItem itemLabel="Selecciona un semestre" itemValue="" />
+        	<f:selectItem itemLabel="1" itemValue="1" />
+        	<f:selectItem itemLabel="2" itemValue="2" />
+        	<f:selectItem itemLabel="3" itemValue="3" />
+        	<f:selectItem itemLabel="4" itemValue="4" />
+        	<f:selectItem itemLabel="5" itemValue="5" />
+        	<f:selectItem itemLabel="6" itemValue="6" />
+        	<f:selectItem itemLabel="7" itemValue="7" />
+        	<f:selectItem itemLabel="8" itemValue="8" />
+        	<f:selectItem itemLabel="9" itemValue="9" />
+        	<f:selectItem itemLabel="10" itemValue="10" />
+        	<f:selectItem itemLabel="11" itemValue="11" />
+        	<f:selectItem itemLabel="12" itemValue="12" />
+        	<f:selectItem itemLabel="13" itemValue="13" />
+        	<f:selectItem itemLabel="14" itemValue="14" />
+        	<f:selectItem itemLabel="15" itemValue="15" />
+   			 </h:selectOneMenu>
+			</div>
+			
 				<div class="inputBx">
-					<h:inputText value="#{userBean.selectedUser.career}" style="margin-bottom: 30px"  required="true"
-						placeholder="Carrera" >
-						<f:passThroughAttribute name="placeholder" value="Carrera" />
-					</h:inputText>
-				</div>
+    	<h:selectOneMenu value="#{userBean.selectedUser.semester}" style="margin-bottom: 30px;" styleClass="custom-dropdown" required="true">
+        	<f:selectItem itemLabel="Selecciona una carrera" itemValue="" />
+        	<f:selectItem itemLabel="Arquitectura" itemValue="Arquitectura" />
+            <f:selectItem itemLabel="Artes Plásticas" itemValue="Artes Plásticas" />
+            <f:selectItem itemLabel="Bioingeniería" itemValue="Bioingeniería" />
+            <f:selectItem itemLabel="Creación Digital" itemValue="Creación Digital" />
+            <f:selectItem itemLabel="Diseño Industrial" itemValue="Diseño Industrial" />
+            <f:selectItem itemLabel="Estadística" itemValue="Estadística" />
+            <f:selectItem itemLabel="Ingeniería Ambiental" itemValue="Ingeniería Ambiental" />
+            <f:selectItem itemLabel="Ingeniería Electrónica" itemValue="Ingeniería Electrónica" />
+            <f:selectItem itemLabel="Ingeniería Industrial" itemValue="Ingeniería Industrial" />
+            <f:selectItem itemLabel="Ingeniería de Sistemas" itemValue="Ingeniería de Sistemas" />
+            <f:selectItem itemLabel="Matemáticas" itemValue="Matemáticas" />
+            <f:selectItem itemLabel="Otra" itemValue="Otra" />
+   			 </h:selectOneMenu>
+			</div>
+				
 				<div class="inputBx">
 					<h:commandButton value="Registrate" update="growl" actionListener="#{userBean.saveUserOnRegister}" />
 				</div>

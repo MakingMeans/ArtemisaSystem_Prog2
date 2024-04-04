@@ -1,0 +1,231 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<script src="https://kit.fontawesome.com/8e9e769e03.js"></script>
+	<h:link
+		href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+		rel="stylesheet"></h:link>
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+	<title>Listado de temas</title>
+	<link href="css/admin.css" rel="stylesheet" type="text/css" />
+</h:head>
+
+<h:body>
+
+	<header>
+    <nav>
+      <a onclick="window.location.href='admin.xhtml'">Home</a>
+      <a onclick="window.location.href='adminUser.xhtml'">Usuarios</a>
+      <a onclick="window.location.href='adminCodes.xhtml'">Codigos</a>
+      <a onclick="window.location.href='adminTopics.xhtml'">Temas</a>
+       <a href="#sql">Graficos</a>
+      <a onclick="window.location.href='index.xhtml'">Log out</a>
+    </nav>
+  </header>
+  
+  <section id="php">
+    <section id="this">
+	<div class="card crud-demo" style="margin-top: 50px">
+		<h:form id="form">
+			<p:growl id="messages" showDetail="true" />
+			<p:toolbar>
+				<p:toolbarGroup>
+					<p:commandButton value="New" icon="pi pi-plus"
+						actionListener="#{subjectBean.openNew}"
+						update=":dialogs:manage-subject-content"
+						oncomplete="PF('manageSubjectDialog').show()"
+						styleClass="ui-button-success" style="margin-right: .5rem;  position: static;">
+						<p:resetInput target=":dialogs:manage-subject-content" />
+					</p:commandButton>
+					<p:commandButton id="delete-subjects-button"
+						value="#{subjectBean.deleteButtonMessage}" icon="pi pi-trash"
+						actionListener="#{subjectBean.deleteSelectedSubjects}"
+						styleClass="ui-button-danger"
+						disabled="#{!subjectBean.hasSelectedSubjects()}" update="@this">
+						<p:confirm header="Confirmation"
+							message="Delete the selected subjects?"
+							icon="pi pi-exclamation-triangle" />
+					</p:commandButton>
+					
+				</p:toolbarGroup>
+			</p:toolbar>
+
+			<p:dataTable id="dt-subjects" widgetVar="dtSubjects" var="subject"
+				value="#{subjectBean.subjects}" reflow="true"
+				styleClass="subjects-table"
+				selection="#{subjectBean.selectedSubjects}" rowKey="#{subject.id}"
+				paginator="true" rows="10" rowSelectMode="add"
+				paginatorPosition="bottom">
+
+				<f:facet name="header">
+					<div class="subjects-table-header">
+						<span style="font-weight: bold">Temas</span> <span
+							class="filter-container ui-input-icon-left"> <i
+							class="pi pi-search"></i> <p:inputText id="globalFilter"
+								onkeyup="PF('dtSubjects').filter()" placeholder="Search" />
+						</span>
+					</div>
+				</f:facet>
+
+				<p:ajax event="rowSelect" update=":form:delete-subjects-button" />
+				<p:ajax event="rowUnselect" update=":form:delete-subjects-button" />
+				<p:ajax event="rowSelectCheckbox"
+					update=":form:delete-subjects-button" />
+				<p:ajax event="rowUnselectCheckbox"
+					update=":form:delete-subjects-button" />
+				<p:ajax event="toggleSelect" update=":form:delete-subjects-button" />
+
+				<p:column selectionMode="multiple" exportable="false"
+					style="width: 3%;"></p:column>
+
+				<p:column headerText="ID" sortBy="#{subject.id}"
+					filterBy="#{subject.id}" style="width: 3%;">
+					<h:outputText value="#{subject.id}" />
+				</p:column>
+
+				<p:column headerText="Categoría" sortBy="#{subject.categoryOf}"
+					filterBy="#{subject.categoryOf}" style="width: 15%;">
+					<h:outputText value="#{subject.categoryOf}" />
+				</p:column>
+
+				<p:column headerText="Nombre" sortBy="#{subject.name}"
+					filterBy="#{subject.name}">
+					<h:outputText value="#{subject.name}" />
+				</p:column>
+
+				<p:column headerText="Dificultad" sortBy="#{subject.diff}"
+					filterBy="#{subject.diff}" style="width: %2;">
+					<h:outputText value="#{subject.diff}" />
+				</p:column>
+
+				<p:column headerText="Descripcion" sortBy="#{subject.desc}"
+					filterBy="#{subject.desc}" style="width: 45%;">
+					<div style="text-align: justify;">
+						<h:outputText value="#{subject.desc}"
+							style="white-space: pre-wrap;" />
+					</div>
+				</p:column>
+
+				<p:column exportable="false">
+					<p:commandButton icon="pi pi-pencil"
+						update=":dialogs:manage-subject-content"
+						oncomplete="PF('manageSubjectDialog').show()"
+						styleClass="edit-button rounded-button ui-button-success"
+						process="@this">
+						<f:setPropertyActionListener value="#{subject}"
+							target="#{subjectBean.selectedSubject}" />
+						<p:resetInput target=":dialogs:manage-subject-content" />
+					</p:commandButton>
+
+					<p:commandButton class="ui-button-warning rounded-button"
+						icon="pi pi-trash" process="@this"
+						oncomplete="PF('deleteSubjectDialog').show()">
+						<f:setPropertyActionListener value="#{subject}"
+							target="#{subjectBean.selectedSubject}" />
+					</p:commandButton>
+				</p:column>
+			</p:dataTable>
+
+		</h:form>
+
+		<h:form id="dialogs">
+			<p:dialog header="Detalles del tema" showEffect="fade" modal="true"
+				widgetVar="manageSubjectDialog" responsive="true">
+				<p:outputPanel id="manage-subject-content" class="ui-fluid"
+					style="overflow: auto; max-height: 400px;">
+					<p:outputPanel rendered="#{not empty subjectBean.selectedSubject}">
+						<div class="formgrid grid">
+							<div class="field col">
+								<p:outputLabel for="categoryOf">Categoría</p:outputLabel>
+								<p:selectOneMenu id="categoryOf"
+									value="#{subjectBean.selectedSubject.categoryOf}"
+									required="true">
+									<f:selectItem itemLabel="" itemValue="" />
+									<f:selectItem itemLabel="Algoritmos de búsqueda"
+										itemValue="Algoritmos de búsqueda" />
+									<f:selectItem itemLabel="Algoritmos de ordenamiento"
+										itemValue="Algoritmos de ordenamiento" />
+									<f:selectItem itemLabel="Estructuras de datos"
+										itemValue="Estructuras de datos" />
+									<f:selectItem itemLabel="Manejo binario y bitwise"
+										itemValue="Manejo binario y bitwise" />
+									<f:selectItem itemLabel="Teoría de grafos"
+										itemValue="Teoría de grafos" />
+									<f:selectItem itemLabel="Programación dinámica"
+										itemValue="Programación dinámica" />
+									<f:selectItem itemLabel="Programación eurística"
+										itemValue="Programación eurística" />
+								</p:selectOneMenu>
+							</div>
+						</div>
+
+						<div class="field">
+							<p:outputLabel for="name">Nombre del tema</p:outputLabel>
+							<p:inputText id="name"
+								value="#{subjectBean.selectedSubject.name}" required="true" />
+						</div>
+
+						<div class="field">
+							<p:outputLabel for="diff">Dificultad</p:outputLabel>
+							<p:inputText id="diff"
+								value="#{subjectBean.selectedSubject.diff}" required="true" />
+						</div>
+
+						<div class="field">
+							<p:outputLabel for="desc">Descripción</p:outputLabel>
+						</div>
+						<div class="field">
+							<p:inputTextarea id="desc"
+								value="#{subjectBean.selectedSubject.desc}" rows="5"
+								style="width: 800px;" required="true" />
+						</div>
+					</p:outputPanel>
+				</p:outputPanel>
+
+				<f:facet name="footer">
+					<p:commandButton value="Guardar" icon="pi pi-check"
+						actionListener="#{subjectBean.saveSubject}"
+						update=":form:dt-subjects manage-subject-content"
+						process="manage-subject-content @this" />
+
+					<p:commandButton value="Cancelar" icon="pi pi-times"
+						onclick="PF('manageSubjectDialog').hide()"
+						class="ui-button-secondary" type="button" />
+				</f:facet>
+			</p:dialog>
+			<p:confirmDialog widgetVar="deleteSubjectDialog" showEffect="fade"
+				width="300" message="¿Eliminar el tema?" header="Confirmar"
+				severity="warn">
+				<p:commandButton value="Sí" icon="pi pi-check"
+					actionListener="#{subjectBean.deleteSubject}" process="@this"
+					update=":form:delete-subjects-button"
+					oncomplete="PF('deleteSubjectDialog').hide()" />
+
+				<p:commandButton value="No" type="button"
+					styleClass="ui-button-secondary" icon="pi pi-times"
+					onclick="PF('deleteSubjectDialog').hide()" />
+			</p:confirmDialog>
+			<p:confirmDialog global="true" showEffect="fade" width="300">
+				<p:commandButton value="Sí" type="button"
+					styleClass="ui-confirmdialog-yes" icon="pi pi-check" />
+
+				<p:commandButton value="No" type="button"
+					styleClass="ui-confirmdialog-no ui-button-secondary"
+					icon="pi pi-times" />
+			</p:confirmDialog>
+		</h:form>
+	</div>
+	</section>
+  </section>
+	
+	<script src="js/script.js"></script>
+</h:body>
+</html>
