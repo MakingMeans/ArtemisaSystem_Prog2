@@ -56,6 +56,11 @@
 							icon="pi pi-exclamation-triangle" />
 					</p:commandButton>
 				</p:toolbarGroup>
+				<p:toolbarGroup align="right">
+                <p:commandButton value="Export" icon="pi pi-upload" styleClass="ui-button-help" ajax="false">
+                    <p:dataExporter type="pdf" target="dt-users" fileName="users" />
+                </p:commandButton>
+                </p:toolbarGroup>
 			</p:toolbar>
 
 			<p:dataTable id="dt-users" widgetVar="dtUsers" var="user"
