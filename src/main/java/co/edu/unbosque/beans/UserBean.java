@@ -8,6 +8,7 @@ import java.util.regex.Pattern;
 
 import org.primefaces.PrimeFaces;
 
+import co.edu.unbosque.model.Email;
 import co.edu.unbosque.model.UserDTO;
 import co.edu.unbosque.service.UserService;
 import jakarta.annotation.PostConstruct;
@@ -39,6 +40,8 @@ public class UserBean implements Serializable {
 	@Inject
 	private UserService userService;
 
+	@Inject
+	private EmailSenderBean emailSenderBean;
 	/**
 	 * Lista de usuarios mostrados en la tabla.
 	 */
@@ -88,6 +91,13 @@ public class UserBean implements Serializable {
 			this.usuarioSeleccionado.setEmail(tempEmail);
 			this.usuarioSeleccionado.setHasAdmin(false);
 			int taken = userService.takenUserOrEmail(this.usuarioSeleccionado.getUsername());
+			Email email = new Email(tempEmail, "Bienvenido a Biblioteca Artemisa",
+					"Hola! " + this.usuarioSeleccionado.getUsername() + " Gracias por registrarte en Biblioteca Artemisa!");
+			emailSenderBean.setEmail(email);
+			emailSenderBean.sendEmail();
+			System.out.println(email.getRecipient());
+			System.out.println(email.getSubject());
+			System.out.println(email.getContent());
 			if (taken == 0) {
 				// faker
 				showInfo("Nombre de usuario ya en uso.");

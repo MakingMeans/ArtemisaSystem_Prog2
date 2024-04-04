@@ -183,7 +183,9 @@ section p {
 #sql {
   background-color: var(--sect5);
 }
-
+#stt {
+  background-color: var(--sect6);
+}
 
 
 /*** SCROLLER ***/
