@@ -7,7 +7,9 @@
   --sect3: #8071a8;
   --sect4: #fe7519;
   --sect5: #f5bec3;
+  --sect6: #fcd659;
 }
+
 
 * { 
   box-sizing: border-box; 
@@ -25,7 +27,6 @@ body {
 }
 
 body:after {
-  content: "Progress Bar only in Chrome";
   position: fixed;
   bottom: 0;
   width: 100%;
@@ -37,12 +38,13 @@ body:after {
 
 header {
   width: 100%;
+  position: absolute;
 }
 
 nav {
   top: 0;
   left: 0;
-  position: fixed;
+  position: absolute;
   width: 100%;
   height: 65px;
   background: linear-gradient(0deg, #fff0 0px, var(--black) 1px 100%);
@@ -100,6 +102,9 @@ nav a:nth-child(4):hover {
 nav a:nth-child(5):hover {
   --clr: var(--sect5);
 }
+nav a:nth-child(6):hover {
+  --clr: var(--sect6);
+}
 
 
 nav:after {
@@ -120,7 +125,20 @@ nav:after {
   100% { width: 100%; }
 }
 
+pre {
+      background-color: #000;
+      color: #fff;
+      padding: 10px;
+      border-radius: 10px;
+      overflow: auto;
+      text-align: start;
+      white-space: pre-wrap;
+    }
 
+    code {
+      font-family: "Courier New", Courier, monospace;
+      display: block;
+    }
 
 /*** SECTIONS ***/
 section {
@@ -133,7 +151,7 @@ section {
   border-bottom: 4px solid #000;
   display: flex;
   flex-wrap: wrap;
-  align-content: center;
+  align-content: start;
 }
 
 section h2, section p {
