@@ -53,10 +53,10 @@ public class ChartJsView1Bean implements Serializable {
 		bgColors.add("rgb(255, 99, 132)");
 		bgColors.add("rgb(54, 162, 235)");
 		bgColors.add("rgb(255, 205, 86)");
-		bgColors.add("rgb(34, 99, 132)");
-		bgColors.add("rgb(88, 162, 235)");
-		bgColors.add("rgb(99, 205, 86)");
-		bgColors.add("rgb(12, 99, 132)");
+		bgColors.add("rgb(235, 64, 52)");
+		bgColors.add("rgb(39, 230, 32)");
+		bgColors.add("rgb(230, 32, 197)");
+		bgColors.add("rgb(224, 128, 18)");
 		bgColors.add("rgb(45, 162, 235)");
 		bgColors.add("rgb(67, 205, 86)");
 		bgColors.add("rgb(33, 99, 132)");
