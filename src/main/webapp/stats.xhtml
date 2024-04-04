@@ -20,25 +20,66 @@
 
 <h:body>
 
-	<header> <nav> <a
-		onclick="window.location.href='admin.xhtml'">Home</a> <a
-		onclick="window.location.href='adminUser.xhtml'">Usuarios</a> <a
-		onclick="window.location.href='adminCodes.xhtml'">Codigos</a> <a
-		onclick="window.location.href='adminTopics.xhtml'">Temas</a> <a
-		href="#sql">Graficos</a> <a
-		onclick="window.location.href='index.xhtml'">Log out</a> </nav> </header>
-	<section id="sql"> 
-	
-	<h:form>
-		<div class="grid">
-			<div class="col-12 lg:col-6 xl:col-4">
-				<div class="card">
-					<p:pieChart model="#{chartJsViewBean.pieModel}"
-						style="width: 100%; height: 300px; margin-top: 80px" />
-				</div>
-			</div>
-		</div>
-	</h:form>
-	</section>
+    <header> 
+        <nav> 
+            <a onclick="window.location.href='admin.xhtml'">Home</a> 
+            <a onclick="window.location.href='adminUser.xhtml'">Usuarios</a> 
+            <a onclick="window.location.href='adminCodes.xhtml'">Codigos</a> 
+            <a onclick="window.location.href='adminTopics.xhtml'">Temas</a> 
+            <a onclick="window.location.href='stats.xhtml'">Graficos</a>
+            <a onclick="window.location.href='index.xhtml'">Log out</a> 
+        </nav> 
+    </header>
+    
+    <section id="sql"> 
+        <h:form>
+            <div class="grid">
+                <div class="col-12 lg:col-6 xl:col-4">
+                    <div class="card">
+                        <h5 style="font-size: 28px;">  Estudiantes por Semestre  </h5> <!-- Título de la primera gráfica -->
+                        <p:pieChart model="#{chartJsView1Bean.pieModel}"
+                            style="width: 10%; height: 20px; margin-top: 2px" /> <!-- Reducir tamaño y ajustar margen -->
+                    </div>
+                </div>
+            </div>
+        </h:form>
+        
+        <h:form>
+            <div class="grid">
+                <div class="col-12 lg:col-6 xl:col-4">
+                    <div class="card">
+                        <h5 style="font-size: 28px;">  Contraseñas Seguras  </h5> <!-- Título de la segunda gráfica -->
+                        <p:pieChart model="#{chartJsView2Bean.pieModel}"
+                            style="width: 10%; height: 20px; margin-top: 2px" /> <!-- Reducir tamaño y ajustar margen -->
+                    </div>
+                </div>
+            </div>
+        </h:form>
+        
+        <h:form>
+            <div class="grid">
+                <div class="col-12 lg:col-6 xl:col-4">
+                    <div class="card">
+                        <h5 style="font-size: 28px;">  Lenguajes de Programación  </h5> <!-- Título de la tercera gráfica -->
+                        <p:pieChart model="#{chartJsView3Bean.pieModel}"
+                            style="width: 10%; height: 20px; margin-top: 2px" /> <!-- Reducir tamaño y ajustar margen -->
+                    </div>
+                </div>
+            </div>
+        </h:form>
+        
+        <h:form>
+            <div class="grid">
+                <div class="col-12 lg:col-6 xl:col-4">
+                    <div class="card">
+                        <h5 style="font-size: 28px;">  Objetos existentes  </h5> <!-- Título de la cuarta gráfica -->
+                        <p:pieChart model="#{chartJsView4Bean.pieModel}"
+                            style="width: 10%; height: 20px; margin-top: 2px" /> <!-- Reducir tamaño y ajustar margen -->
+                    </div>
+                </div>
+            </div>
+        </h:form>
+    </section>
 </h:body>
+
 </html>

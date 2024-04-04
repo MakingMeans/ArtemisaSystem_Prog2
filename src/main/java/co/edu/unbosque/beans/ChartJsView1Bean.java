@@ -17,9 +17,9 @@ import jakarta.faces.application.FacesMessage;
 import jakarta.faces.context.FacesContext;
 import jakarta.inject.Named;
 
-@Named("chartJsViewBean")
+@Named("chartJsView1Bean")
 @RequestScoped
-public class ChartJsViewBean implements Serializable {
+public class ChartJsView1Bean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
