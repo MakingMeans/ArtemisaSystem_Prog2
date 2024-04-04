@@ -10,6 +10,13 @@ import jakarta.mail.Transport;
 import jakarta.mail.internet.InternetAddress;
 import jakarta.mail.internet.MimeMessage;
 
+/**
+ * 
+ * Email sender.
+ * 
+ * @author DavidG
+ *
+ */
 public class EmailSender {
 
 	private static final String EMAIL_FROM = "bbitatyx@gmail.com";

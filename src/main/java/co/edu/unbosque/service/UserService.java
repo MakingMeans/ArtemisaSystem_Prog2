@@ -163,6 +163,12 @@ public class UserService implements ServiceOperation<UserDTO> {
 		this.userDAO = userDAO;
 	}
 	
+	/**
+	 * Login verify.
+	 * @param usernameOrEmail
+	 * @param password
+	 * @return
+	 */
 	public int login(String usernameOrEmail, String password) {
 	    UserDTO user = findUserByUsernameOrEmail(usernameOrEmail);
 	    if(user != null && user.getPassword().equals(password) && user.isHasAdmin()) {
@@ -176,6 +182,11 @@ public class UserService implements ServiceOperation<UserDTO> {
 	    }
 	}
 	
+	/**
+	 * Verifica si no se repite el email.
+	 * @param usernameOrEmail
+	 * @return
+	 */
 	public int takenUserOrEmail(String usernameOrEmail) {
 	    for (UserDTO user : getUsers()) {
 	        if (user.getUsername().equals(usernameOrEmail)) {
@@ -188,6 +199,11 @@ public class UserService implements ServiceOperation<UserDTO> {
 	    return 2;
 	}
 	
+	/**
+	 * Verifica si no se repite el username.
+	 * @param usernameOrEmail
+	 * @return
+	 */
 	public UserDTO findUserByUsernameOrEmail(String usernameOrEmail) {
 	    for (UserDTO user : getUsers()) {
 	        if (user.getUsername().equals(usernameOrEmail) || user.getEmail().equals(usernameOrEmail)) {
