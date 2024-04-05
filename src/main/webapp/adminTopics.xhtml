@@ -20,19 +20,15 @@
 
 <h:body>
 
-	<header>
-    <nav>
-      <a onclick="window.location.href='admin.xhtml'">Home</a>
-      <a onclick="window.location.href='adminUser.xhtml'">Usuarios</a>
-      <a onclick="window.location.href='adminCodes.xhtml'">Codigos</a>
-      <a onclick="window.location.href='adminTopics.xhtml'">Temas</a>
-      <a onclick="window.location.href='stats.xhtml'">Graficos</a>
-      <a onclick="window.location.href='index.xhtml'">Log out</a>
-    </nav>
-  </header>
-  
-  <section id="php">
-    <section id="this">
+	<header> <nav> <a
+		onclick="window.location.href='admin.xhtml'">Home</a> <a
+		onclick="window.location.href='adminUser.xhtml'">Usuarios</a> <a
+		onclick="window.location.href='adminCodes.xhtml'">Codigos</a> <a
+		onclick="window.location.href='adminTopics.xhtml'">Temas</a> <a
+		onclick="window.location.href='stats.xhtml'">Graficos</a> <a
+		onclick="window.location.href='index.xhtml'">Log out</a> </nav> </header>
+
+	<section id="php"> <section id="this">
 	<div class="card crud-demo" style="margin-top: 50px">
 		<h:form id="form">
 			<p:growl id="messages" showDetail="true" />
@@ -42,7 +38,8 @@
 						actionListener="#{subjectBean.openNew}"
 						update=":dialogs:manage-subject-content"
 						oncomplete="PF('manageSubjectDialog').show()"
-						styleClass="ui-button-success" style="margin-right: .5rem;  position: static;">
+						styleClass="ui-button-success"
+						style="margin-right: .5rem;  position: static;">
 						<p:resetInput target=":dialogs:manage-subject-content" />
 					</p:commandButton>
 					<p:commandButton id="delete-subjects-button"
@@ -54,13 +51,14 @@
 							message="Delete the selected subjects?"
 							icon="pi pi-exclamation-triangle" />
 					</p:commandButton>
-					
+
 				</p:toolbarGroup>
-				 <p:toolbarGroup align="right">
-                <p:commandButton value="Export" icon="pi pi-upload" styleClass="ui-button-help" ajax="false">
-                    <p:dataExporter type="pdf" target="dt-subjects" fileName="subjects" />
-                </p:commandButton>
-            </p:toolbarGroup>
+				<p:toolbarGroup align="right">
+					<p:commandButton value="Export" icon="pi pi-upload"
+						styleClass="ui-button-help" ajax="false"
+						actionListener="#{subjectBean.exportToPDF}">
+					</p:commandButton>
+				</p:toolbarGroup>
 			</p:toolbar>
 
 			<p:dataTable id="dt-subjects" widgetVar="dtSubjects" var="subject"
@@ -124,7 +122,9 @@
 						update=":dialogs:manage-subject-content"
 						oncomplete="PF('manageSubjectDialog').show()"
 						styleClass="edit-button rounded-button ui-button-success"
-						process="@this" actionListener="#{subjectBean.exportToPDF}">
+						process="@this">
+						<f:setPropertyActionListener value="#{subject}"
+							target="#{subjectBean.selectedSubject}" />
 						<p:resetInput target=":dialogs:manage-subject-content" />
 					</p:commandButton>
 
@@ -226,9 +226,8 @@
 			</p:confirmDialog>
 		</h:form>
 	</div>
-	</section>
-  </section>
-	
+	</section> </section>
+
 	<script src="js/script.js"></script>
 </h:body>
 </html>

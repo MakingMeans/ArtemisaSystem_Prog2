@@ -20,19 +20,15 @@
 
 <h:body>
 
-	<header>
-    <nav>
-     <a onclick="window.location.href='admin.xhtml'">Home</a>
-      <a onclick="window.location.href='adminUser.xhtml'">Usuarios</a>
-      <a onclick="window.location.href='adminCodes.xhtml'">Codigos</a>
-      <a onclick="window.location.href='adminTopics.xhtml'">Temas</a>
-      <a onclick="window.location.href='stats.xhtml'">Graficos</a>
-      <a onclick="window.location.href='index.xhtml'">Log out</a>
-    </nav>
-  </header>
+	<header> <nav> <a
+		onclick="window.location.href='admin.xhtml'">Home</a> <a
+		onclick="window.location.href='adminUser.xhtml'">Usuarios</a> <a
+		onclick="window.location.href='adminCodes.xhtml'">Codigos</a> <a
+		onclick="window.location.href='adminTopics.xhtml'">Temas</a> <a
+		onclick="window.location.href='stats.xhtml'">Graficos</a> <a
+		onclick="window.location.href='index.xhtml'">Log out</a> </nav> </header>
 
-  <section id="html">
-    <section id="this">
+	<section id="html"> <section id="this">
 	<div class="card crud-demo" style="margin-top: 50px; position: static;">
 		<h:form id="form">
 			<p:growl id="messages" />
@@ -42,7 +38,8 @@
 						actionListener="#{userBean.openNew}"
 						update=":dialogs:manage-user-content"
 						oncomplete="PF('manageUserDialog').show()"
-						styleClass="ui-button-success" style="margin-right: .5rem;  position: static;">
+						styleClass="ui-button-success"
+						style="margin-right: .5rem;  position: static;">
 						<p:resetInput target=":dialogs:manage-user-content" />
 					</p:commandButton>
 
@@ -50,17 +47,18 @@
 						value="#{userBean.deleteButtonMessage}" icon="pi pi-trash"
 						actionListener="#{userBean.deleteSelectedUsers}"
 						styleClass="ui-button-danger"
-						disabled="#{!userBean.hasSelectedUsers()}" update="@this" >
+						disabled="#{!userBean.hasSelectedUsers()}" update="@this">
 						<p:confirm header="Confirmation"
 							message="Delete the selected users?"
 							icon="pi pi-exclamation-triangle" />
 					</p:commandButton>
 				</p:toolbarGroup>
 				<p:toolbarGroup align="right">
-                <p:commandButton value="Export" icon="pi pi-upload" styleClass="ui-button-help" ajax="false">
-                    <p:dataExporter type="pdf" target="dt-users" fileName="users" />
-                </p:commandButton>
-                </p:toolbarGroup>
+					<p:commandButton value="Export" icon="pi pi-upload"
+						styleClass="ui-button-help" ajax="false"
+						actionListener="#{userBean.exportToPDF}">
+					</p:commandButton>
+				</p:toolbarGroup>
 			</p:toolbar>
 
 			<p:dataTable id="dt-users" widgetVar="dtUsers" var="user"
@@ -128,12 +126,14 @@
 					</h:outputText>
 				</p:column>
 
-				<p:column exportable="false" >
+				<p:column exportable="false">
 					<p:commandButton icon="pi pi-pencil"
 						update=":dialogs:manage-user-content"
 						oncomplete="PF('manageUserDialog').show()"
 						styleClass="edit-button rounded-button ui-button-success"
-						process="@this" actionListener="#{userBean.exportToPDF}">
+						process="@this">
+						<f:setPropertyActionListener value="#{user}"
+							target="#{userBean.selectedUser}" />
 						<p:resetInput target=":dialogs:manage-user-content" />
 					</p:commandButton>
 
@@ -269,9 +269,8 @@
 			</p:confirmDialog>
 		</h:form>
 	</div>
-	</section>
-  </section>
-	
+	</section> </section>
+
 	<script src="js/script.js"></script>
 </h:body>
 </html>

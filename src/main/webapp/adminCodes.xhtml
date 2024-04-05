@@ -20,20 +20,16 @@
 
 <h:body>
 
-	<header>
-    <nav>
-      <a onclick="window.location.href='admin.xhtml'">Home</a>
-      <a onclick="window.location.href='adminUser.xhtml'">Usuarios</a>
-      <a onclick="window.location.href='adminCodes.xhtml'">Codigos</a>
-      <a onclick="window.location.href='adminTopics.xhtml'">Temas</a>
-      <a onclick="window.location.href='stats.xhtml'">Graficos</a>
-      <a onclick="window.location.href='index.xhtml'">Log out</a>
-    </nav>
-  </header>
+	<header> <nav> <a
+		onclick="window.location.href='admin.xhtml'">Home</a> <a
+		onclick="window.location.href='adminUser.xhtml'">Usuarios</a> <a
+		onclick="window.location.href='adminCodes.xhtml'">Codigos</a> <a
+		onclick="window.location.href='adminTopics.xhtml'">Temas</a> <a
+		onclick="window.location.href='stats.xhtml'">Graficos</a> <a
+		onclick="window.location.href='index.xhtml'">Log out</a> </nav> </header>
 
 
-  <section id="js">
-   <section id="this">
+	<section id="js"> <section id="this">
 	<div class="card crud-demo" style="margin-top: 50px">
 		<h:form id="form">
 			<p:growl id="messages" />
@@ -57,11 +53,12 @@
 							icon="pi pi-exclamation-triangle" />
 					</p:commandButton>
 				</p:toolbarGroup>
-				 <p:toolbarGroup align="right">
-                <p:commandButton value="Export" icon="pi pi-upload" styleClass="ui-button-help" ajax="false">
-                    <p:dataExporter type="pdf" target="dt-codes" fileName="codes" />
-                </p:commandButton>
-            </p:toolbarGroup>
+				<p:toolbarGroup align="right">
+					<p:commandButton value="Export" icon="pi pi-upload"
+						styleClass="ui-button-help" ajax="false"
+						actionListener="#{codeBean.exportToPDF}">
+					</p:commandButton>
+				</p:toolbarGroup>
 			</p:toolbar>
 
 			<p:dataTable id="dt-codes" widgetVar="dtCodes" var="code"
@@ -102,7 +99,7 @@
 					<h:graphicImage value="#{codeBean.getLanguageIcon(code.language)}"
 						style="width: 150px; height: 150px;" />
 				</p:column>
-				
+
 				<p:column headerText="Acción" style="width: 12%;">
 					<p:commandButton value="Ver Detalles"
 						update=":testing:manage-code-content"
@@ -118,7 +115,9 @@
 						update=":dialogs:manage-code-content"
 						oncomplete="PF('manageCodeDialog').show()"
 						styleClass="edit-button rounded-button ui-button-success"
-						process="@this" actionListener="#{codeBean.exportToPDF}">
+						process="@this">
+						<f:setPropertyActionListener value="#{code}"
+							target="#{codeBean.selectedCode}" />
 						<p:resetInput target=":dialogs:manage-code-content" />
 					</p:commandButton>
 
@@ -203,7 +202,8 @@
 		</h:form>
 		<h:form id="testing">
 			<p:dialog header="Detalles del código" showEffect="fade" modal="true"
-				widgetVar="manageCodeTesting" responsive="true" style="width: 700px;">
+				widgetVar="manageCodeTesting" responsive="true"
+				style="width: 700px;">
 				<p:outputPanel id="manage-code-content" class="ui-fluid"
 					style="overflow: auto; max-height: 400px;">
 					<p:outputPanel rendered="#{not empty codeBean.selectedCode}">
@@ -225,9 +225,8 @@
 			</p:dialog>
 		</h:form>
 	</div>
-	</section>
-  </section>
-	
+	</section> </section>
+
 	<script src="js/script.js"></script>
 </h:body>
 </html>
