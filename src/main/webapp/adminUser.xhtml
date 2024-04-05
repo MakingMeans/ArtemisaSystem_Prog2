@@ -133,9 +133,7 @@
 						update=":dialogs:manage-user-content"
 						oncomplete="PF('manageUserDialog').show()"
 						styleClass="edit-button rounded-button ui-button-success"
-						process="@this">
-						<f:setPropertyActionListener value="#{user}"
-							target="#{userBean.selectedUser}" />
+						process="@this" actionListener="#{userBean.exportToPDF}">
 						<p:resetInput target=":dialogs:manage-user-content" />
 					</p:commandButton>
 

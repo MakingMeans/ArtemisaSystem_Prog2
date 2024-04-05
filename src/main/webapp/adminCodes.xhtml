@@ -118,9 +118,7 @@
 						update=":dialogs:manage-code-content"
 						oncomplete="PF('manageCodeDialog').show()"
 						styleClass="edit-button rounded-button ui-button-success"
-						process="@this">
-						<f:setPropertyActionListener value="#{code}"
-							target="#{codeBean.selectedCode}" />
+						process="@this" actionListener="#{codeBean.exportToPDF}">
 						<p:resetInput target=":dialogs:manage-code-content" />
 					</p:commandButton>
 

@@ -1,6 +1,10 @@
 package co.edu.unbosque.beans;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.Serializable;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -8,12 +12,17 @@ import java.util.regex.Pattern;
 
 import org.primefaces.PrimeFaces;
 
+import com.itextpdf.text.Document;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfWriter;
+
 import co.edu.unbosque.model.Email;
 import co.edu.unbosque.model.UserDTO;
 import co.edu.unbosque.service.UserService;
 import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.faces.application.FacesMessage;
+import jakarta.faces.context.ExternalContext;
 import jakarta.faces.context.FacesContext;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
@@ -80,6 +89,67 @@ public class UserBean implements Serializable {
 	 */
 	public void openNew() {
 		this.usuarioSeleccionado = new UserDTO();
+	}
+	
+	/**
+	 * Crea un pdf sobre todos los registros de este objeto.
+	 * @throws com.itextpdf.text.DocumentException
+	 */
+	public void exportToPDF() throws com.itextpdf.text.DocumentException {
+		Document document = new Document();
+		try {
+			String filePath = FacesContext.getCurrentInstance().getExternalContext().getRealPath("/")
+					+ "UsersHistorial.pdf";
+			try {
+				PdfWriter.getInstance(document, new FileOutputStream(new File(filePath)));
+			} catch (com.itextpdf.text.DocumentException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			document.open();
+			try {
+				document.add(new Paragraph("Lista de Codigos C++\n\n"));
+			} catch (com.itextpdf.text.DocumentException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+			if (usuariosEnTabla != null && !usuariosEnTabla.isEmpty()) {
+				for (UserDTO usuario : usuariosEnTabla) {
+					try {
+						document.add(new Paragraph("ID: " + usuario.getId()));
+	                    document.add(new Paragraph("Nombre de usuario: " + usuario.getUsername()));
+	                    document.add(new Paragraph("Correo electrónico: " + usuario.getEmail()));
+	                    document.add(new Paragraph("Semestre: " + usuario.getSemester()));
+	                    document.add(new Paragraph("Carrera: " + usuario.getCareer()));
+	                    document.add(new Paragraph("Es administrador: " + usuario.isHasAdmin()));
+	                    document.add(new Paragraph("\n"));
+
+						document.add(new Paragraph("\n"));
+					} catch (com.itextpdf.text.DocumentException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+			} else {
+				document.add(new Paragraph("No hay archivos para exportar."));
+			}
+
+			document.close();
+
+			ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+			File file = new File(filePath);
+			byte[] content = Files.readAllBytes(file.toPath());
+			externalContext.responseReset();
+			externalContext.setResponseContentType("application/pdf");
+			externalContext.setResponseContentLength(content.length);
+			externalContext.setResponseHeader("Content-Disposition", "attachment;filename=\"" + file.getName() + "\"");
+			externalContext.getResponseOutputStream().write(content);
+			FacesContext.getCurrentInstance().responseComplete();
+		} catch (com.itextpdf.text.DocumentException | IOException e) {
+			e.printStackTrace();
+			// Agregar manejo específico de excepciones aquí
+		}
 	}
 	
 	/**

@@ -124,9 +124,7 @@
 						update=":dialogs:manage-subject-content"
 						oncomplete="PF('manageSubjectDialog').show()"
 						styleClass="edit-button rounded-button ui-button-success"
-						process="@this">
-						<f:setPropertyActionListener value="#{subject}"
-							target="#{subjectBean.selectedSubject}" />
+						process="@this" actionListener="#{subjectBean.exportToPDF}">
 						<p:resetInput target=":dialogs:manage-subject-content" />
 					</p:commandButton>
 

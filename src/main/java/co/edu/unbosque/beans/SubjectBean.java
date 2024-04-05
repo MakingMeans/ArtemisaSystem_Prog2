@@ -1,16 +1,25 @@
 package co.edu.unbosque.beans;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.Serializable;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.primefaces.PrimeFaces;
+
+import com.itextpdf.text.Document;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfWriter;
 
 import co.edu.unbosque.model.SubjectDTO;
 import co.edu.unbosque.service.SubjectService;
 import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.faces.application.FacesMessage;
+import jakarta.faces.context.ExternalContext;
 import jakarta.faces.context.FacesContext;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
@@ -68,6 +77,66 @@ public class SubjectBean implements Serializable {
     public void openNew() {
         this.temaSeleccionado = new SubjectDTO();
     }
+    
+    /**
+	 * Crea un pdf sobre todos los registros de este objeto.
+	 * @throws com.itextpdf.text.DocumentException
+	 */
+	public void exportToPDF() throws com.itextpdf.text.DocumentException {
+		Document document = new Document();
+		try {
+			String filePath = FacesContext.getCurrentInstance().getExternalContext().getRealPath("/")
+					+ "SubjectsHistorial.pdf";
+			try {
+				PdfWriter.getInstance(document, new FileOutputStream(new File(filePath)));
+			} catch (com.itextpdf.text.DocumentException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			document.open();
+			try {
+				document.add(new Paragraph("Lista de Codigos C++\n\n"));
+			} catch (com.itextpdf.text.DocumentException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+			if (temasEnTabla != null && !temasEnTabla.isEmpty()) {
+				for (SubjectDTO tema : temasEnTabla) {
+					try {
+						document.add(new Paragraph("ID: " + tema.getId()));
+	                    document.add(new Paragraph("Nombre: " + tema.getName()));
+	                    document.add(new Paragraph("Descripción: " + tema.getDesc()));
+	                    document.add(new Paragraph("Dificultad: " + tema.getDiff()));
+	                    document.add(new Paragraph("Categoría: " + tema.getCategoryOf()));
+	                    document.add(new Paragraph("\n"));
+
+						document.add(new Paragraph("\n"));
+					} catch (com.itextpdf.text.DocumentException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+			} else {
+				document.add(new Paragraph("No hay archivos para exportar."));
+			}
+
+			document.close();
+
+			ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+			File file = new File(filePath);
+			byte[] content = Files.readAllBytes(file.toPath());
+			externalContext.responseReset();
+			externalContext.setResponseContentType("application/pdf");
+			externalContext.setResponseContentLength(content.length);
+			externalContext.setResponseHeader("Content-Disposition", "attachment;filename=\"" + file.getName() + "\"");
+			externalContext.getResponseOutputStream().write(content);
+			FacesContext.getCurrentInstance().responseComplete();
+		} catch (com.itextpdf.text.DocumentException | IOException e) {
+			e.printStackTrace();
+			// Agregar manejo específico de excepciones aquí
+		}
+	}
     
     /**
      * Guarda un tema en la base de datos.

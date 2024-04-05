@@ -1,16 +1,25 @@
 package co.edu.unbosque.beans;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.Serializable;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.primefaces.PrimeFaces;
+
+import com.itextpdf.text.Document;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfWriter;
 
 import co.edu.unbosque.model.CodeDTO;
 import co.edu.unbosque.service.CodeService;
 import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.faces.application.FacesMessage;
+import jakarta.faces.context.ExternalContext;
 import jakarta.faces.context.FacesContext;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
@@ -72,6 +81,65 @@ public class CodeBean implements Serializable {
     public void openNew() {
         this.selectedCodes = new CodeDTO();
     }
+    
+    /**
+	 * Crea un pdf sobre todos los registros de este objeto.
+	 * @throws com.itextpdf.text.DocumentException
+	 */
+	public void exportToPDF() throws com.itextpdf.text.DocumentException {
+		Document document = new Document();
+		try {
+			String filePath = FacesContext.getCurrentInstance().getExternalContext().getRealPath("/")
+					+ "CodesHistorial.pdf";
+			try {
+				PdfWriter.getInstance(document, new FileOutputStream(new File(filePath)));
+			} catch (com.itextpdf.text.DocumentException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			document.open();
+			try {
+				document.add(new Paragraph("Lista de Codigos C++\n\n"));
+			} catch (com.itextpdf.text.DocumentException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+			if (codesInTable != null && !codesInTable.isEmpty()) {
+				for (CodeDTO code : codesInTable) {
+					try {
+						document.add(new Paragraph("ID: " + code.getId()));
+	                    document.add(new Paragraph("Lenguaje de programación: " + code.getLanguage()));
+	                    document.add(new Paragraph("Contenido: " + code.getContent()));
+	                    document.add(new Paragraph("Tema: " + code.getSubjectOf()));
+	                    document.add(new Paragraph("\n"));
+
+						document.add(new Paragraph("\n"));
+					} catch (com.itextpdf.text.DocumentException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+			} else {
+				document.add(new Paragraph("No hay archivos para exportar."));
+			}
+
+			document.close();
+
+			ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+			File file = new File(filePath);
+			byte[] content = Files.readAllBytes(file.toPath());
+			externalContext.responseReset();
+			externalContext.setResponseContentType("application/pdf");
+			externalContext.setResponseContentLength(content.length);
+			externalContext.setResponseHeader("Content-Disposition", "attachment;filename=\"" + file.getName() + "\"");
+			externalContext.getResponseOutputStream().write(content);
+			FacesContext.getCurrentInstance().responseComplete();
+		} catch (com.itextpdf.text.DocumentException | IOException e) {
+			e.printStackTrace();
+			// Agregar manejo específico de excepciones aquí
+		}
+	}
 
     /**
      * Guarda un codigo en la base de datos.
