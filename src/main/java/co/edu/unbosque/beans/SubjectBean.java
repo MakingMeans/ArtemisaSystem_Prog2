@@ -95,7 +95,7 @@ public class SubjectBean implements Serializable {
 			}
 			document.open();
 			try {
-				document.add(new Paragraph("Lista de Codigos C++\n\n"));
+				document.add(new Paragraph("Lista de temas\n\n"));
 			} catch (com.itextpdf.text.DocumentException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
