@@ -19,68 +19,96 @@ import jakarta.faces.application.FacesMessage;
 import jakarta.faces.context.FacesContext;
 import jakarta.inject.Named;
 
+/**
+ * La clase ChartJsView4Bean es un bean de respaldo para la vista que utiliza la biblioteca Chart.js.
+ * 
+ * Este bean se encarga de generar un gráfico de pastel que muestra el número de usuarios, códigos y temas en la base de datos.
+ * 
+ * @author DavidG
+ * @version 1.0
+ */
 @Named("chartJsView4Bean")
 @RequestScoped
 public class ChartJsView4Bean implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	private PieChartModel pieModel;
-	private UserDAO userDAO;
-	private CodeDAO codeDAO;
-	private SubjectDAO subjectDAO;
+    private PieChartModel pieModel;
+    private UserDAO userDAO;
+    private CodeDAO codeDAO;
+    private SubjectDAO subjectDAO;
 
-	@PostConstruct
-	public void init() {
-		createPieModel();
-		
-	}
+    /**
+     * Inicializa el bean después de su construcción.
+     */
+    @PostConstruct
+    public void init() {
+        createPieModel();
+    }
 
-	private void createPieModel() {
-	    pieModel = new PieChartModel();
-	    ChartData data = new ChartData();
-	    userDAO = new UserDAO();
-	    codeDAO = new CodeDAO();
-	    subjectDAO = new SubjectDAO();
-	    PieChartDataSet dataSet = new PieChartDataSet();
-	    List<Number> values = new ArrayList<>();
-	    
-	    int countUsers = userDAO.readAll().size();
-	    int countCodes = codeDAO.readAll().size();
-	    int countSubjects = subjectDAO.readAll().size();
+    /**
+     * Crea el modelo de gráfico de pastel.
+     */
+    private void createPieModel() {
+        pieModel = new PieChartModel();
+        ChartData data = new ChartData();
+        userDAO = new UserDAO();
+        codeDAO = new CodeDAO();
+        subjectDAO = new SubjectDAO();
+        PieChartDataSet dataSet = new PieChartDataSet();
+        List<Number> values = new ArrayList<>();
+        
+        int countUsers = userDAO.readAll().size();
+        int countCodes = codeDAO.readAll().size();
+        int countSubjects = subjectDAO.readAll().size();
 
-	    values.add(countUsers);
-	    values.add(countCodes);
-	    values.add(countSubjects);
+        values.add(countUsers);
+        values.add(countCodes);
+        values.add(countSubjects);
 
-	    dataSet.setData(values);
+        dataSet.setData(values);
 
-	    List<String> bgColors = Arrays.asList("rgb(255, 99, 132)", "rgb(54, 162, 235)", "rgb(255, 205, 86)"); 
-	    dataSet.setBackgroundColor(bgColors);
+        List<String> bgColors = Arrays.asList("rgb(255, 99, 132)", "rgb(54, 162, 235)", "rgb(255, 205, 86)"); 
+        dataSet.setBackgroundColor(bgColors);
 
-	    data.addChartDataSet(dataSet);
-	    List<String> labels = new ArrayList<>();
-	    labels.add("Usuarios");
-	    labels.add("Códigos");
-	    labels.add("Temas");
-	    data.setLabels(labels);
+        data.addChartDataSet(dataSet);
+        List<String> labels = new ArrayList<>();
+        labels.add("Usuarios");
+        labels.add("Códigos");
+        labels.add("Temas");
+        data.setLabels(labels);
 
-	    pieModel.setData(data);
-	}
+        pieModel.setData(data);
+    }
 
-	public void itemSelect(ItemSelectEvent event) {
-		FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Item selected",
-				"Item Index: " + event.getItemIndex() + ", DataSet Index:" + event.getDataSetIndex());
+    /**
+     * Maneja el evento de selección de un ítem del gráfico de pastel.
+     * 
+     * @param event El evento de selección del ítem.
+     */
+    public void itemSelect(ItemSelectEvent event) {
+        FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Elemento seleccionado",
+                "Índice del ítem: " + event.getItemIndex() + ", Índice del conjunto de datos: " + event.getDataSetIndex());
 
-		FacesContext.getCurrentInstance().addMessage(null, msg);
-	}
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+    }
 
-	public PieChartModel getPieModel() {
-		return pieModel;
-	}
+    /**
+     * Obtiene el modelo de gráfico de pastel.
+     * 
+     * @return El modelo de gráfico de pastel.
+     */
+    public PieChartModel getPieModel() {
+        return pieModel;
+    }
 
-	public void setPieModel(PieChartModel pieModel) {
-		this.pieModel = pieModel;
-	}
+    /**
+     * Establece el modelo de gráfico de pastel.
+     * 
+     * @param pieModel El modelo de gráfico de pastel.
+     */
+    public void setPieModel(PieChartModel pieModel) {
+        this.pieModel = pieModel;
+    }
 
 }

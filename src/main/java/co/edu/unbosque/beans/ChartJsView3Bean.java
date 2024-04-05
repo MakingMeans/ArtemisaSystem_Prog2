@@ -18,74 +18,102 @@ import jakarta.faces.application.FacesMessage;
 import jakarta.faces.context.FacesContext;
 import jakarta.inject.Named;
 
+/**
+ * La clase ChartJsView3Bean es un bean de respaldo para la vista que utiliza la biblioteca Chart.js.
+ * 
+ * Este bean se encarga de generar un gráfico de pastel que muestra la distribución de lenguajes de programación.
+ * 
+ * @author DavidG
+ * @version 1.0
+ */
 @Named("chartJsView3Bean")
 @RequestScoped
 public class ChartJsView3Bean implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	private PieChartModel pieModel;
-	private CodeDAO codeDAO;
+    private PieChartModel pieModel;
+    private CodeDAO codeDAO;
 
-	@PostConstruct
-	public void init() {
-		createPieModel();
-		
-	}
+    /**
+     * Inicializa el bean después de su construcción.
+     */
+    @PostConstruct
+    public void init() {
+        createPieModel();
+    }
 
-	private void createPieModel() {
-	    pieModel = new PieChartModel();
-	    ChartData data = new ChartData();
-	    codeDAO = new CodeDAO();
-	    PieChartDataSet dataSet = new PieChartDataSet();
-	    List<Number> values = new ArrayList<>();
-	    int countJava = 0;
-	    int countCpp = 0;
-	    int countPython = 0;
+    /**
+     * Crea el modelo de gráfico de pastel.
+     */
+    private void createPieModel() {
+        pieModel = new PieChartModel();
+        ChartData data = new ChartData();
+        codeDAO = new CodeDAO();
+        PieChartDataSet dataSet = new PieChartDataSet();
+        List<Number> values = new ArrayList<>();
+        int countJava = 0;
+        int countCpp = 0;
+        int countPython = 0;
 
-	    for (Code obj : codeDAO.readAll()) {
-	        String language = obj.getLanguage();
-	        if (language.equalsIgnoreCase("Java")) {
-	            countJava++;
-	        } else if (language.equalsIgnoreCase("C++")) {
-	            countCpp++;
-	        } else if (language.equalsIgnoreCase("Python")) {
-	            countPython++;
-	        }
-	    }
+        for (Code obj : codeDAO.readAll()) {
+            String language = obj.getLanguage();
+            if (language.equalsIgnoreCase("Java")) {
+                countJava++;
+            } else if (language.equalsIgnoreCase("C++")) {
+                countCpp++;
+            } else if (language.equalsIgnoreCase("Python")) {
+                countPython++;
+            }
+        }
 
-	    values.add(countJava);
-	    values.add(countCpp);
-	    values.add(countPython);
+        values.add(countJava);
+        values.add(countCpp);
+        values.add(countPython);
 
-	    dataSet.setData(values);
+        dataSet.setData(values);
 
-	    List<String> bgColors = Arrays.asList("rgb(255, 99, 132)", "rgb(54, 162, 235)", "rgb(75, 192, 192)"); 
-	    dataSet.setBackgroundColor(bgColors);
+        List<String> bgColors = Arrays.asList("rgb(255, 99, 132)", "rgb(54, 162, 235)", "rgb(75, 192, 192)"); 
+        dataSet.setBackgroundColor(bgColors);
 
-	    data.addChartDataSet(dataSet);
-	    List<String> labels = new ArrayList<>();
-	    labels.add("Java");
-	    labels.add("C++");
-	    labels.add("Python");
-	    data.setLabels(labels);
+        data.addChartDataSet(dataSet);
+        List<String> labels = new ArrayList<>();
+        labels.add("Java");
+        labels.add("C++");
+        labels.add("Python");
+        data.setLabels(labels);
 
-	    pieModel.setData(data);
-	}
+        pieModel.setData(data);
+    }
 
-	public void itemSelect(ItemSelectEvent event) {
-		FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Item selected",
-				"Item Index: " + event.getItemIndex() + ", DataSet Index:" + event.getDataSetIndex());
+    /**
+     * Maneja el evento de selección de un ítem del gráfico de pastel.
+     * 
+     * @param event El evento de selección del ítem.
+     */
+    public void itemSelect(ItemSelectEvent event) {
+        FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Elemento seleccionado",
+                "Índice del ítem: " + event.getItemIndex() + ", Índice del conjunto de datos: " + event.getDataSetIndex());
 
-		FacesContext.getCurrentInstance().addMessage(null, msg);
-	}
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+    }
 
-	public PieChartModel getPieModel() {
-		return pieModel;
-	}
+    /**
+     * Obtiene el modelo de gráfico de pastel.
+     * 
+     * @return El modelo de gráfico de pastel.
+     */
+    public PieChartModel getPieModel() {
+        return pieModel;
+    }
 
-	public void setPieModel(PieChartModel pieModel) {
-		this.pieModel = pieModel;
-	}
+    /**
+     * Establece el modelo de gráfico de pastel.
+     * 
+     * @param pieModel El modelo de gráfico de pastel.
+     */
+    public void setPieModel(PieChartModel pieModel) {
+        this.pieModel = pieModel;
+    }
 
 }

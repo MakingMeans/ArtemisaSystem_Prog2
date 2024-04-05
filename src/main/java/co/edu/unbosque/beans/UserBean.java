@@ -151,7 +151,6 @@ public class UserBean implements Serializable {
 				this.usuariosEnTabla = userService.getUsers();
 			}
 		}
-		tempEmail="";
 	}
 	
 	/**
